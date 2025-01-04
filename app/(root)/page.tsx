@@ -1,11 +1,9 @@
-import Hero from "@/components/hero";
-import HomePage from "./HomePage";
+import HomePage from "./dashboard/DashboardPage";
 
 export default async function Home() {
   return (
     <>
-      {/* <Hero /> */}
-      <HomePage />
+      <h1>Home Page</h1>
     </>
   );
 }

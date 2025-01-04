@@ -3,11 +3,10 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
-import { Clock3, Plus, SquarePen, Star, Trash } from "lucide-react";
-import Link from "next/link";
+import { Plus } from "lucide-react";
 import LinkCard from "./LinkCard";
 
-export default function HomePage() {
+export default function DashboardPage() {
   return (
     <>
       <div className="flex justify-between items-center gap-5">

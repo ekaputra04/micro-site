@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function LinkCard() {
   return (
     <>
-      <div className="flex justify-between gap-4 bg-white dark:bg-primary p-4 border rounded-lg">
+      <div className="flex justify-between gap-4 p-4 border rounded-lg">
         <div className="flex gap-4">
           <img
             src="https://nwqvfawximjelnlolzei.supabase.co/storage/v1/object/public/images/Group%2093.png?t=2025-01-04T06%3A43%3A14.270Z"
@@ -23,14 +23,13 @@ export default function LinkCard() {
               <Star className="w-4 h-4" />
               <p>Star</p>
             </Button>
-            <Link
-              href={"/"}
-              className="flex items-center gap-2 bg-slate-100 hover:bg-slate-200 px-4 py-2 border rounded-lg"
-            >
-              <SquarePen className="w-4 h-4" />
-              <p>Edit</p>
+            <Link href={"/"}>
+              <Button className="flex gap-2" variant={"outline"}>
+                <SquarePen className="w-4 h-4" />
+                <p>Edit</p>
+              </Button>
             </Link>
-            <Button className="flex gap-2">
+            <Button className="flex gap-2" variant={"destructive"}>
               <Trash className="w-4 h-4" />
               <p>Delete</p>
             </Button>

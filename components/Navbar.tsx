@@ -6,8 +6,8 @@ import HeaderAuth from "@/components/header-auth";
 export default function Navbar() {
   return (
     <>
-      <nav className="flex justify-center w-full h-16">
-        <div className="flex justify-between items-center px-5 p-3 w-full max-w-5xl text-sm">
+      <nav className="flex justify-center px-8 md:px-16 lg:px-32 xl:px-48 w-full h-16">
+        <div className="flex justify-between items-center py-3 w-full text-sm">
           <div className="flex items-center gap-5 font-semibold">
             <Link href={"/"}>Micro Site</Link>
           </div>
