@@ -30,9 +30,11 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import ProfileSection from "./section-item/Profile";
 
 export default function ComponentView() {
-  const { items, moveUp, moveDown, removeItem } = useAccordionStore();
+  const { items, moveUp, moveDown, removeItem, toggleActive } =
+    useAccordionStore();
 
   return (
     <>
@@ -47,7 +49,10 @@ export default function ComponentView() {
             <div className="flex justify-between items-center">
               <AccordionTrigger>{item.title}</AccordionTrigger>
               <div className="flex items-center gap-4">
-                <Switch />
+                <Switch
+                  checked={item.isActive}
+                  onCheckedChange={() => toggleActive(item.id)}
+                />
                 <AlertDialog>
                   <AlertDialogTrigger>
                     <Trash2 className="w-4 h-4" />
@@ -94,7 +99,10 @@ export default function ComponentView() {
                 </DropdownMenu>
               </div>
             </div>
-            <AccordionContent>{item.content}</AccordionContent>
+            <AccordionContent>
+              {JSON.stringify(item.content, null, 2)}
+              <ProfileSection />
+            </AccordionContent>
           </AccordionItem>
         ))}
       </Accordion>

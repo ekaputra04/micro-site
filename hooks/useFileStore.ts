@@ -1,14 +1,13 @@
-import { AccordionContent } from "@/types/AccordionContent";
 import { create } from "zustand";
 
 interface AccordionItem {
   id: string;
   title: string;
-  content: AccordionContent;
+  content: string;
   isActive: boolean;
 }
 
-interface AccordionStore {
+interface ProfileStore {
   items: AccordionItem[];
   moveUp: (index: number) => void;
   moveDown: (index: number) => void;
@@ -19,39 +18,21 @@ interface AccordionStore {
   toggleActive: (id: string) => void;
 }
 
-const useAccordionStore = create<AccordionStore>((set) => ({
+const useProfileStore = create<ProfileStore>((set) => ({
   items: [
     {
       id: "item-1",
       title: "Profile",
-      content: {
-        type: "profile",
-        name: "John Doe",
-        backgroundColor: "blue",
-        shape: "circle",
-        description: "This is John's profile.",
-      },
+      content: "Profile Content",
       isActive: false,
     },
     {
       id: "item-2",
-      title: "Twitter",
-      content: {
-        type: "twitter",
-        name: "John's Twitter",
-        link: "https://twitter.com/johndoe",
-      },
+      title: "Settings",
+      content: "Settings Content",
       isActive: true,
     },
-    {
-      id: "item-3",
-      title: "Text",
-      content: {
-        type: "text",
-        text: "This is a simple text content.",
-      },
-      isActive: true,
-    },
+    { id: "item-3", title: "Help", content: "Help Content", isActive: true },
   ],
   moveUp: (index) =>
     set((state) => {
@@ -96,4 +77,4 @@ const useAccordionStore = create<AccordionStore>((set) => ({
     })),
 }));
 
-export default useAccordionStore;
+export default useProfileStore;
