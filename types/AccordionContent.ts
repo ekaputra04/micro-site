@@ -1,9 +1,21 @@
-type ProfileContent = {
+export type ProfileContent = {
   type: "profile";
-  name: string;
+  name: {
+    title: string;
+    style: "bold" | "italic" | "underline";
+    size: "normal" | "large" | "small";
+    color: string;
+  };
+  description: {
+    title: string;
+    style: "bold" | "italic" | "underline";
+    size: "normal" | "large" | "small";
+    color: string;
+  };
   backgroundColor: string;
-  shape: string;
-  description: string;
+  headerImage: string;
+  profileImage: string;
+  shape: "square" | "rounded" | "circle";
 };
 
 type TwitterContent = {

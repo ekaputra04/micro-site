@@ -1,9 +1,10 @@
 import { AccordionContent } from "@/types/AccordionContent";
 import { create } from "zustand";
 
-interface AccordionItem {
+export interface AccordionItem {
   id: string;
   title: string;
+  // content: Partial<AccordionContent>;
   content: AccordionContent;
   isActive: boolean;
 }
@@ -26,10 +27,22 @@ const useAccordionStore = create<AccordionStore>((set) => ({
       title: "Profile",
       content: {
         type: "profile",
-        name: "John Doe",
-        backgroundColor: "blue",
+        name: {
+          title: "Profile",
+          style: "bold",
+          size: "normal",
+          color: "#000000",
+        },
+        description: {
+          title: "This is John's profile.",
+          style: "bold",
+          size: "normal",
+          color: "#000000",
+        },
+        backgroundColor: "#f0f0f0",
+        headerImage: "/images/background.png",
+        profileImage: "/images/profile.png",
         shape: "circle",
-        description: "This is John's profile.",
       },
       isActive: false,
     },

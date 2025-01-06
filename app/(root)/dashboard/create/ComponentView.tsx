@@ -38,6 +38,7 @@ export default function ComponentView() {
 
   return (
     <>
+      {JSON.stringify(items, null, 2)}
       <Button className="flex items-center gap-2 mb-4">
         <Plus className="w-4 h-4" />
         <p>Add new component</p>
@@ -100,8 +101,7 @@ export default function ComponentView() {
               </div>
             </div>
             <AccordionContent>
-              {JSON.stringify(item.content, null, 2)}
-              <ProfileSection />
+              {item.title == "Profile" ? <ProfileSection item={item} /> : null}
             </AccordionContent>
           </AccordionItem>
         ))}
