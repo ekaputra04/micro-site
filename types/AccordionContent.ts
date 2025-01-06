@@ -2,13 +2,21 @@ export type ProfileContent = {
   type: "profile";
   name: {
     title: string;
-    style: "bold" | "italic" | "underline";
+    style: {
+      bold: boolean;
+      italic: boolean;
+      underline: boolean;
+    };
     size: "normal" | "large" | "small";
     color: string;
   };
   description: {
     title: string;
-    style: "bold" | "italic" | "underline";
+    style: {
+      bold: boolean;
+      italic: boolean;
+      underline: boolean;
+    };
     size: "normal" | "large" | "small";
     color: string;
   };

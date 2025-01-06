@@ -4,7 +4,6 @@ import { create } from "zustand";
 export interface AccordionItem {
   id: string;
   title: string;
-  // content: Partial<AccordionContent>;
   content: AccordionContent;
   isActive: boolean;
 }
@@ -29,13 +28,21 @@ const useAccordionStore = create<AccordionStore>((set) => ({
         type: "profile",
         name: {
           title: "Profile",
-          style: "bold",
+          style: {
+            bold: true,
+            italic: false,
+            underline: true,
+          },
           size: "normal",
           color: "#000000",
         },
         description: {
           title: "This is John's profile.",
-          style: "bold",
+          style: {
+            bold: false,
+            italic: false,
+            underline: false,
+          },
           size: "normal",
           color: "#000000",
         },
