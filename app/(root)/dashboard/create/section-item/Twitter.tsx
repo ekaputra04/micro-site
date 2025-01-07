@@ -126,7 +126,7 @@ export default function TwitterSection({ item }: TwitterSectionProps) {
   return (
     <>
       {JSON.stringify(item, null, 2)}
-      {item.content.type === "phone" && (
+      {item.content.type === "twitter" && (
         <div className="p-2">
           <div className="space-y-2 py-2">
             <p className="font-semibold">Name</p>
@@ -208,10 +208,9 @@ export default function TwitterSection({ item }: TwitterSectionProps) {
             />
           </div>
           <div className="space-y-2 py-2">
-            <p className="font-semibold">Phone Number</p>
+            <p className="font-semibold">UserName</p>
             <Input
-              placeholder="Input phone number here..."
-              type="number"
+              placeholder="Input username here..."
               onChange={(e) => handleUpdateLink(e.target.value)}
             />
           </div>

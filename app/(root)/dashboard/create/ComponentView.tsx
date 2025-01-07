@@ -32,6 +32,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import ProfileSection from "./section-item/Profile";
 import ContactUsSection from "./section-item/ContactUs";
+import TwitterSection from "./section-item/Twitter";
 
 export default function ComponentView() {
   const { items, moveUp, moveDown, removeItem, toggleActive } =
@@ -104,10 +105,12 @@ export default function ComponentView() {
               </div>
             </div>
             <AccordionContent>
-              {item.title == "Profile" ? (
+              {item.content.type == "profile" ? (
                 <ProfileSection item={item} />
-              ) : item.title == "Contact Us" ? (
+              ) : item.content.type == "phone" ? (
                 <ContactUsSection item={item} />
+              ) : item.content.type == "twitter" ? (
+                <TwitterSection item={item} />
               ) : null}
             </AccordionContent>
           </AccordionItem>

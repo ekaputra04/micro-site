@@ -129,7 +129,7 @@ export default function ContactUsSection({ item }: ContactUsSectionProps) {
 
   return (
     <>
-      {JSON.stringify(item, null, 2)}
+      {/* {JSON.stringify(item, null, 2)} */}
       {item.content.type === "phone" && (
         <div className="p-2">
           <div className="space-y-2 py-2">

@@ -3,6 +3,7 @@ import ProfileView from "./dashboard/create/section-item/ProfileView";
 import { Button } from "@/components/ui/button";
 import ContactUsView from "./dashboard/create/section-item/ContactUsView";
 import useAccordionStore from "@/hooks/useAccordionStore";
+import TwitterView from "./dashboard/create/section-item/TwitterView";
 
 export default function PublicView() {
   const { items } = useAccordionStore();
@@ -10,20 +11,22 @@ export default function PublicView() {
     <>
       {/* <p className="text-white">{JSON.stringify(items, null, 2)}</p> */}
 
-      <div className="top-0 right-0 left-0 sticky rounded-xl h-96">
+      <div className="top-16 right-0 left-0 sticky rounded-xl">
         <div className="flex justify-between items-center bg-slate-800 p-4">
           <p className="text-white">Link disini</p>
           <Button className="h-8">
             <Monitor className="w-4 h-4 text-white" />
           </Button>
         </div>
-        <div className="bg-white overflow-y-scroll">
-          {items.map((items) => (
-            <div className="" key={items.id}>
-              {items.title == "Profile" ? (
+        <div className="bg-white h-96 overflow-y-scroll">
+          {items.map((item) => (
+            <div className="" key={item.id}>
+              {item.content.type == "profile" ? (
                 <ProfileView />
-              ) : items.title == "Contact Us" ? (
+              ) : item.content.type == "phone" ? (
                 <ContactUsView />
+              ) : item.content.type == "twitter" ? (
+                <TwitterView />
               ) : null}
             </div>
           ))}

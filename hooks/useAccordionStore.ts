@@ -75,7 +75,7 @@ const useAccordionStore = create<AccordionStore>((set) => ({
       content: {
         type: "twitter",
         name: {
-          title: "Contact Us",
+          title: "Twitter",
           style: {
             bold: false,
             italic: false,
