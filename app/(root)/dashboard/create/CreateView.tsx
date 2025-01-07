@@ -38,7 +38,7 @@ export default function CreateView() {
           </TabsContent>
         </Tabs>
 
-        <div className="top-0 bg-slate-900 p-8 w-full">
+        <div className="relative top-0 bg-slate-900 p-8 w-full">
           <PublicView />
         </div>
       </div>

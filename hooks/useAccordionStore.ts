@@ -1,12 +1,6 @@
 import { AccordionContent } from "@/types/AccordionContent";
+import { AccordionItem } from "@/types/AccordionItem";
 import { create } from "zustand";
-
-export interface AccordionItem {
-  id: string;
-  title: string;
-  content: AccordionContent;
-  isActive: boolean;
-}
 
 interface AccordionStore {
   items: AccordionItem[];
@@ -55,11 +49,22 @@ const useAccordionStore = create<AccordionStore>((set) => ({
     },
     {
       id: "item-2",
-      title: "Twitter",
+      title: "Contact Us",
       content: {
-        type: "twitter",
-        name: "John's Twitter",
-        link: "https://twitter.com/johndoe",
+        type: "phone",
+        name: {
+          title: "Contact Us",
+          style: {
+            bold: false,
+            italic: false,
+            underline: false,
+          },
+          size: "normal",
+          color: "#000000",
+        },
+        phoneNumber: "08123456",
+        backgroundColor: "#f0f0f0",
+        shape: "rounded",
       },
       isActive: true,
     },

@@ -31,6 +31,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import ProfileSection from "./section-item/Profile";
+import ContactUsSection from "./section-item/ContactUs";
 
 export default function ComponentView() {
   const { items, moveUp, moveDown, removeItem, toggleActive } =
@@ -38,10 +39,13 @@ export default function ComponentView() {
 
   return (
     <>
-      <Button className="flex items-center gap-2 mb-4">
-        <Plus className="w-4 h-4" />
-        <p>Add new component</p>
-      </Button>
+      <div className="flex justify-between">
+        <Button className="flex items-center gap-2 mb-4">
+          <Plus className="w-4 h-4" />
+          <p>Add new component</p>
+        </Button>
+        <Button className="bg-green-500">Save</Button>
+      </div>
 
       <Accordion type="single" collapsible>
         {items.map((item, index) => (
@@ -100,7 +104,11 @@ export default function ComponentView() {
               </div>
             </div>
             <AccordionContent>
-              {item.title == "Profile" ? <ProfileSection item={item} /> : null}
+              {item.title == "Profile" ? (
+                <ProfileSection item={item} />
+              ) : item.title == "Contact Us" ? (
+                <ContactUsSection item={item} />
+              ) : null}
             </AccordionContent>
           </AccordionItem>
         ))}

@@ -5,7 +5,7 @@ import { Pencil, Plus, Trash } from "lucide-react";
 import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import useAccordionStore, { AccordionItem } from "@/hooks/useAccordionStore";
+import useAccordionStore from "@/hooks/useAccordionStore";
 import {
   Select,
   SelectContent,
@@ -14,10 +14,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { getShapeClassname } from "@/utils/classNameUtils";
-import { Bold, Italic, Underline } from "lucide-react";
-
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Checkbox } from "@/components/ui/checkbox";
+import { AccordionItem } from "@/types/AccordionItem";
 
 interface ProfileSectionProps {
   item: AccordionItem;
@@ -30,10 +28,7 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
     console.log(files);
   };
 
-  const { items, moveUp, moveDown, removeItem, toggleActive, updateItem } =
-    useAccordionStore();
-
-  const [shapeClassname, setShapeClassname] = useState<string>();
+  const { updateItem } = useAccordionStore();
 
   const handleUpdateBackgroundColor = (backgroundColor: string = "#f0f0f0") => {
     if (item?.content?.type === "profile") {
@@ -48,7 +43,7 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
 
   const handleUpdateNameColor = (color: string = "#000000") => {
     if (item?.content?.type === "profile") {
-      useAccordionStore.getState().updateItem(item.id, {
+      updateItem(item.id, {
         content: {
           ...item.content,
           name: {
@@ -62,7 +57,7 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
 
   const handleUpdateDescriptionColor = (color: string = "#000000") => {
     if (item?.content?.type === "profile") {
-      useAccordionStore.getState().updateItem(item.id, {
+      updateItem(item.id, {
         content: {
           ...item.content,
           description: {
@@ -76,7 +71,7 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
 
   const handleUpdateNameTitle = (title: string = "Profile") => {
     if (item?.content?.type === "profile") {
-      useAccordionStore.getState().updateItem(item.id, {
+      updateItem(item.id, {
         content: {
           ...item.content,
           name: {
@@ -90,7 +85,7 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
 
   const handleUpdateDescriptionTitle = (title: string = "Profile") => {
     if (item?.content?.type === "profile") {
-      useAccordionStore.getState().updateItem(item.id, {
+      updateItem(item.id, {
         content: {
           ...item.content,
           description: {
@@ -196,7 +191,6 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
 
   return (
     <>
-      {JSON.stringify(item, null, 2)}
       {item.content.type === "profile" && (
         <div className="p-2">
           <div className="relative w-full h-48">
@@ -242,47 +236,8 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
             </div>
           )}
 
-          <div className="flex justify-between gap-4 pt-8 pb-4">
-            <div className="">
-              <p className="pb-2 font-semibold">Background Color</p>
-              <div className="flex items-center gap-2">
-                <Input
-                  type="color"
-                  name="profile-color"
-                  id="backgroundColor"
-                  className="w-16"
-                  value={item.content.backgroundColor}
-                  onChange={(e) => handleUpdateBackgroundColor(e.target.value)}
-                />
-                <Button
-                  onClick={() => handleUpdateBackgroundColor()}
-                  variant={"ghost"}
-                >
-                  Reset
-                </Button>
-              </div>
-            </div>
-            <div className="">
-              <Select
-                defaultValue={item.content.shape}
-                onValueChange={(value) =>
-                  updateShape(value as "square" | "rounded" | "circle")
-                }
-              >
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Shape" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="square">Square</SelectItem>
-                  <SelectItem value="rounded">Rounded</SelectItem>
-                  <SelectItem value="circle">Circle</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-
           <div className="space-y-2 py-2">
-            <p className="pb-2 font-semibold">Name</p>
+            <p className="font-semibold">Name</p>
             <div className="flex items-center gap-2">
               <div className="flex items-center gap-1">
                 <Checkbox
@@ -361,7 +316,7 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
           </div>
 
           <div className="space-y-2 py-2">
-            <p className="pb-2 font-semibold">Description</p>
+            <p className="font-semibold">Description</p>
             <div className="flex items-center gap-2">
               <div className="flex items-center gap-1">
                 <Checkbox
@@ -437,6 +392,47 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
               placeholder="Input description here..."
               onChange={(e) => handleUpdateDescriptionTitle(e.target.value)}
             />
+          </div>
+
+          <div className="flex justify-between gap-4 pt-4">
+            <div className="space-y-2">
+              <p className="font-semibold">Background Color</p>
+              <div className="flex items-center gap-2">
+                <Input
+                  type="color"
+                  name="profile-color"
+                  id="backgroundColor"
+                  className="w-16"
+                  value={item.content.backgroundColor}
+                  onChange={(e) => handleUpdateBackgroundColor(e.target.value)}
+                />
+                <Button
+                  onClick={() => handleUpdateBackgroundColor()}
+                  variant={"ghost"}
+                >
+                  Reset
+                </Button>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <p className="font-semibold">Shape</p>
+              <Select
+                defaultValue={item.content.shape}
+                onValueChange={(value) =>
+                  updateShape(value as "square" | "rounded" | "circle")
+                }
+              >
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="Shape" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="square">Square</SelectItem>
+                  <SelectItem value="rounded">Rounded</SelectItem>
+                  <SelectItem value="circle">Circle</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         </div>
       )}

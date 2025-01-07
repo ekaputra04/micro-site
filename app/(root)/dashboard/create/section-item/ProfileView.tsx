@@ -4,6 +4,7 @@ import useAccordionStore from "@/hooks/useAccordionStore";
 import {
   getFontSizeClassname,
   getFontStyleClassname,
+  getIsActiveClassname,
   getShapeClassname,
 } from "@/utils/classNameUtils";
 
@@ -15,7 +16,7 @@ export default function ProfileView() {
   return (
     <>
       {itemProfile?.content.type == "profile" && (
-        <>
+        <div className={`${getIsActiveClassname(itemProfile.isActive)}`}>
           <div className="w-full h-48">
             <img
               src={itemProfile.content.headerImage}
@@ -32,7 +33,7 @@ export default function ProfileView() {
               className={`object-cover`}
             />
           </div>
-          <div className="space-y-4 py-8">
+          <div className="space-y-1 py-6">
             <h1
               className={`${getFontStyleClassname(itemProfile.content.name.style)} ${getFontSizeClassname(itemProfile.content.name.size)} text-center`}
               style={{ color: itemProfile.content.name.color }}
@@ -46,7 +47,7 @@ export default function ProfileView() {
               {itemProfile.content.description.title}
             </h1>
           </div>
-        </>
+        </div>
       )}
     </>
   );

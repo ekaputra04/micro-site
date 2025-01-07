@@ -26,6 +26,10 @@ export const getFontSizeClassname = (
   }
 };
 
+export const getIsActiveClassname = (isActive: boolean) => {
+  return isActive ? "" : "hidden";
+};
+
 export const getFontStyleClassname = (style: {
   bold?: boolean;
   italic?: boolean;
@@ -38,4 +42,20 @@ export const getFontStyleClassname = (style: {
   if (style.underline) classNames.push("underline");
 
   return classNames.join(" ");
+};
+
+export const lightenColorWithOpacity = (hexColor: string): string => {
+  if (!/^#([0-9A-F]{3}|[0-9A-F]{6})$/i.test(hexColor)) {
+    throw new Error("Invalid hex color format");
+  }
+
+  if (hexColor.length === 4) {
+    hexColor = `#${hexColor[1]}${hexColor[1]}${hexColor[2]}${hexColor[2]}${hexColor[3]}${hexColor[3]}`;
+  }
+
+  const r = parseInt(hexColor.slice(1, 3), 16);
+  const g = parseInt(hexColor.slice(3, 5), 16);
+  const b = parseInt(hexColor.slice(5, 7), 16);
+
+  return `rgba(${r}, ${g}, ${b}, 0.1)`;
 };
