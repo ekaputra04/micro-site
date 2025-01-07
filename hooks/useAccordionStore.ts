@@ -1,5 +1,6 @@
 import { AccordionContent } from "@/types/AccordionContent";
 import { AccordionItem } from "@/types/AccordionItem";
+import { COLOR } from "@/types/Consts";
 import { create } from "zustand";
 
 interface AccordionStore {
@@ -28,7 +29,7 @@ const useAccordionStore = create<AccordionStore>((set) => ({
             underline: false,
           },
           size: "normal",
-          color: "#000000",
+          color: COLOR.PRIMARY,
         },
         description: {
           title: "This is John's profile.",
@@ -38,9 +39,9 @@ const useAccordionStore = create<AccordionStore>((set) => ({
             underline: false,
           },
           size: "normal",
-          color: "#000000",
+          color: COLOR.PRIMARY,
         },
-        backgroundColor: "#f0f0f0",
+        backgroundColor: COLOR.BACKGROUND,
         headerImage: "/images/background.png",
         profileImage: "/images/profile.png",
         shape: "circle",
@@ -60,20 +61,32 @@ const useAccordionStore = create<AccordionStore>((set) => ({
             underline: false,
           },
           size: "normal",
-          color: "#000000",
+          color: COLOR.PRIMARY,
         },
         phoneNumber: "08123456",
-        backgroundColor: "#f0f0f0",
+        backgroundColor: COLOR.BACKGROUND,
         shape: "rounded",
       },
       isActive: true,
     },
     {
       id: "item-3",
-      title: "Text",
+      title: "Twitter X",
       content: {
-        type: "text",
-        text: "This is a simple text content.",
+        type: "twitter",
+        name: {
+          title: "Contact Us",
+          style: {
+            bold: false,
+            italic: false,
+            underline: false,
+          },
+          size: "normal",
+          color: COLOR.PRIMARY,
+        },
+        link: "ebikcool",
+        backgroundColor: COLOR.BACKGROUND,
+        shape: "rounded",
       },
       isActive: true,
     },

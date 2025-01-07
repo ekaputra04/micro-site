@@ -44,7 +44,7 @@ export default function ComponentView() {
           <Plus className="w-4 h-4" />
           <p>Add new component</p>
         </Button>
-        <Button className="bg-green-500">Save</Button>
+        <Button className="bg-green-500 hover:bg-green-600">Save</Button>
       </div>
 
       <Accordion type="single" collapsible>

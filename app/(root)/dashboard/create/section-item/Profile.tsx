@@ -16,6 +16,7 @@ import {
 import { getShapeClassname } from "@/utils/classNameUtils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { AccordionItem } from "@/types/AccordionItem";
+import { COLOR } from "@/types/Consts";
 
 interface ProfileSectionProps {
   item: AccordionItem;
@@ -30,7 +31,9 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
 
   const { updateItem } = useAccordionStore();
 
-  const handleUpdateBackgroundColor = (backgroundColor: string = "#f0f0f0") => {
+  const handleUpdateBackgroundColor = (
+    backgroundColor: string = COLOR.BACKGROUND
+  ) => {
     if (item?.content?.type === "profile") {
       updateItem(item.id, {
         content: {
@@ -41,7 +44,7 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
     }
   };
 
-  const handleUpdateNameColor = (color: string = "#000000") => {
+  const handleUpdateNameColor = (color: string = COLOR.PRIMARY) => {
     if (item?.content?.type === "profile") {
       updateItem(item.id, {
         content: {
@@ -55,7 +58,7 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
     }
   };
 
-  const handleUpdateDescriptionColor = (color: string = "#000000") => {
+  const handleUpdateDescriptionColor = (color: string = COLOR.PRIMARY) => {
     if (item?.content?.type === "profile") {
       updateItem(item.id, {
         content: {

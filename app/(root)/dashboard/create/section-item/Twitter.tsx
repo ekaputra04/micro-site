@@ -14,18 +14,18 @@ import useAccordionStore from "@/hooks/useAccordionStore";
 import { AccordionItem } from "@/types/AccordionItem";
 import { COLOR } from "@/types/Consts";
 
-interface ContactUsSectionProps {
+interface TwitterSectionProps {
   item: AccordionItem;
 }
 
-export default function ContactUsSection({ item }: ContactUsSectionProps) {
+export default function TwitterSection({ item }: TwitterSectionProps) {
   const { updateItem } = useAccordionStore();
 
   const updateNameStyle = (
     type: "bold" | "italic" | "underline",
     value: boolean
   ) => {
-    if (item.content.type === "phone") {
+    if (item.content.type === "twitter") {
       updateItem(item.id, {
         content: {
           ...item.content,
@@ -47,7 +47,7 @@ export default function ContactUsSection({ item }: ContactUsSectionProps) {
   };
 
   const handleUpdateNameColor = (color: string = COLOR.PRIMARY) => {
-    if (item?.content?.type === "phone") {
+    if (item?.content?.type === "twitter") {
       updateItem(item.id, {
         content: {
           ...item.content,
@@ -60,8 +60,8 @@ export default function ContactUsSection({ item }: ContactUsSectionProps) {
     }
   };
 
-  const handleUpdateNameTitle = (title: string = "Contact Us") => {
-    if (item?.content?.type === "phone") {
+  const handleUpdateNameTitle = (title: string = "Twitter X") => {
+    if (item?.content?.type === "twitter") {
       updateItem(item.id, {
         content: {
           ...item.content,
@@ -74,23 +74,19 @@ export default function ContactUsSection({ item }: ContactUsSectionProps) {
     }
   };
 
-  const handleUpdatePhoneNumber = (phoneNumber: string) => {
-    if (item?.content?.type === "phone") {
-      const formattedPhoneNumber = phoneNumber.startsWith("0")
-        ? "+62" + phoneNumber.slice(1)
-        : phoneNumber;
-
+  const handleUpdateLink = (link: string) => {
+    if (item?.content?.type === "twitter") {
       updateItem(item.id, {
         content: {
           ...item.content,
-          phoneNumber: formattedPhoneNumber,
+          link: link,
         },
       });
     }
   };
 
   const updateNameSize = (size: "normal" | "large" | "small") => {
-    if (item.content.type === "phone") {
+    if (item.content.type === "twitter") {
       updateItem(item.id, {
         content: {
           ...item.content,
@@ -106,7 +102,7 @@ export default function ContactUsSection({ item }: ContactUsSectionProps) {
   const handleUpdateBackgroundColor = (
     backgroundColor: string = COLOR.BACKGROUND
   ) => {
-    if (item?.content?.type === "phone") {
+    if (item?.content?.type === "twitter") {
       updateItem(item.id, {
         content: {
           ...item.content,
@@ -117,7 +113,7 @@ export default function ContactUsSection({ item }: ContactUsSectionProps) {
   };
 
   const updateShape = (shape: "square" | "rounded" | "circle") => {
-    if (item.content.type === "phone") {
+    if (item.content.type === "twitter") {
       updateItem(item.id, {
         content: {
           ...item.content,
@@ -216,7 +212,7 @@ export default function ContactUsSection({ item }: ContactUsSectionProps) {
             <Input
               placeholder="Input phone number here..."
               type="number"
-              onChange={(e) => handleUpdatePhoneNumber(e.target.value)}
+              onChange={(e) => handleUpdateLink(e.target.value)}
             />
           </div>
 

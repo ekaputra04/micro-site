@@ -52,8 +52,19 @@ type PhoneContent = {
 
 type TwitterContent = {
   type: "twitter";
-  name: string;
+  name: {
+    title: string;
+    style: {
+      bold: boolean;
+      italic: boolean;
+      underline: boolean;
+    };
+    size: "normal" | "large" | "small";
+    color: string;
+  };
   link: string;
+  backgroundColor: string;
+  shape: "square" | "rounded" | "circle";
 };
 
 type TextContent = {
