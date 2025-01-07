@@ -4,13 +4,12 @@ import { Button } from "@/components/ui/button";
 import ContactUsView from "./dashboard/create/section-item/ContactUsView";
 import useAccordionStore from "@/hooks/useAccordionStore";
 import TwitterView from "./dashboard/create/section-item/TwitterView";
+import WhatsAppView from "./dashboard/create/section-item/WhatsAppView";
 
 export default function PublicView() {
   const { items } = useAccordionStore();
   return (
     <>
-      {/* <p className="text-white">{JSON.stringify(items, null, 2)}</p> */}
-
       <div className="top-16 right-0 left-0 sticky rounded-xl">
         <div className="flex justify-between items-center bg-slate-800 p-4">
           <p className="text-white">Link disini</p>
@@ -27,6 +26,8 @@ export default function PublicView() {
                 <ContactUsView />
               ) : item.content.type == "twitter" ? (
                 <TwitterView />
+              ) : item.content.type == "whatsapp" ? (
+                <WhatsAppView />
               ) : null}
             </div>
           ))}

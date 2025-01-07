@@ -67,6 +67,23 @@ type TwitterContent = {
   shape: "square" | "rounded" | "circle";
 };
 
+type WhatsAppContent = {
+  type: "whatsapp";
+  name: {
+    title: string;
+    style: {
+      bold: boolean;
+      italic: boolean;
+      underline: boolean;
+    };
+    size: "normal" | "large" | "small";
+    color: string;
+  };
+  phoneNumber: string;
+  backgroundColor: string;
+  shape: "square" | "rounded" | "circle";
+};
+
 type TextContent = {
   type: "text";
   text: string;
@@ -76,4 +93,5 @@ export type AccordionContent =
   | ProfileContent
   | PhoneContent
   | TwitterContent
+  | WhatsAppContent
   | TextContent;

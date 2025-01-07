@@ -90,6 +90,27 @@ const useAccordionStore = create<AccordionStore>((set) => ({
       },
       isActive: true,
     },
+    {
+      id: "item-4",
+      title: "WhatsApp",
+      content: {
+        type: "whatsapp",
+        name: {
+          title: "WhatsApp",
+          style: {
+            bold: false,
+            italic: false,
+            underline: false,
+          },
+          size: "normal",
+          color: COLOR.PRIMARY,
+        },
+        phoneNumber: "081246504468",
+        backgroundColor: COLOR.BACKGROUND,
+        shape: "rounded",
+      },
+      isActive: true,
+    },
   ],
   moveUp: (index) =>
     set((state) => {

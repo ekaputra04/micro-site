@@ -14,18 +14,18 @@ import useAccordionStore from "@/hooks/useAccordionStore";
 import { AccordionItem } from "@/types/AccordionItem";
 import { COLOR } from "@/types/Consts";
 
-interface TwitterSectionProps {
+interface WhatsAppSectionProps {
   item: AccordionItem;
 }
 
-export default function TwitterSection({ item }: TwitterSectionProps) {
+export default function WhatsAppSection({ item }: WhatsAppSectionProps) {
   const { updateItem } = useAccordionStore();
 
   const updateNameStyle = (
     type: "bold" | "italic" | "underline",
     value: boolean
   ) => {
-    if (item.content.type === "twitter") {
+    if (item.content.type === "whatsapp") {
       updateItem(item.id, {
         content: {
           ...item.content,
@@ -47,7 +47,7 @@ export default function TwitterSection({ item }: TwitterSectionProps) {
   };
 
   const handleUpdateNameColor = (color: string = COLOR.PRIMARY) => {
-    if (item?.content?.type === "twitter") {
+    if (item?.content?.type === "whatsapp") {
       updateItem(item.id, {
         content: {
           ...item.content,
@@ -60,8 +60,8 @@ export default function TwitterSection({ item }: TwitterSectionProps) {
     }
   };
 
-  const handleUpdateNameTitle = (title: string = "Twitter X") => {
-    if (item?.content?.type === "twitter") {
+  const handleUpdateNameTitle = (title: string = "Contact Us") => {
+    if (item?.content?.type === "whatsapp") {
       updateItem(item.id, {
         content: {
           ...item.content,
@@ -74,19 +74,23 @@ export default function TwitterSection({ item }: TwitterSectionProps) {
     }
   };
 
-  const handleUpdateLink = (link: string) => {
-    if (item?.content?.type === "twitter") {
+  const handleUpdatePhoneNumber = (phoneNumber: string) => {
+    if (item?.content?.type === "whatsapp") {
+      const formattedPhoneNumber = phoneNumber.startsWith("0")
+        ? "+62" + phoneNumber.slice(1)
+        : phoneNumber;
+
       updateItem(item.id, {
         content: {
           ...item.content,
-          link: link,
+          phoneNumber: formattedPhoneNumber,
         },
       });
     }
   };
 
   const updateNameSize = (size: "normal" | "large" | "small") => {
-    if (item.content.type === "twitter") {
+    if (item.content.type === "whatsapp") {
       updateItem(item.id, {
         content: {
           ...item.content,
@@ -102,7 +106,7 @@ export default function TwitterSection({ item }: TwitterSectionProps) {
   const handleUpdateBackgroundColor = (
     backgroundColor: string = COLOR.BACKGROUND
   ) => {
-    if (item?.content?.type === "twitter") {
+    if (item?.content?.type === "whatsapp") {
       updateItem(item.id, {
         content: {
           ...item.content,
@@ -113,7 +117,7 @@ export default function TwitterSection({ item }: TwitterSectionProps) {
   };
 
   const updateShape = (shape: "square" | "rounded" | "circle") => {
-    if (item.content.type === "twitter") {
+    if (item.content.type === "whatsapp") {
       updateItem(item.id, {
         content: {
           ...item.content,
@@ -126,7 +130,7 @@ export default function TwitterSection({ item }: TwitterSectionProps) {
   return (
     <>
       {/* {JSON.stringify(item, null, 2)} */}
-      {item.content.type === "twitter" && (
+      {item.content.type === "whatsapp" && (
         <div className="p-2">
           <div className="space-y-2 py-2">
             <p className="font-semibold">Name</p>
@@ -208,10 +212,11 @@ export default function TwitterSection({ item }: TwitterSectionProps) {
             />
           </div>
           <div className="space-y-2 py-2">
-            <p className="font-semibold">UserName</p>
+            <p className="font-semibold">Phone Number</p>
             <Input
-              placeholder="Input username here..."
-              onChange={(e) => handleUpdateLink(e.target.value)}
+              placeholder="Input phone number here..."
+              type="number"
+              onChange={(e) => handleUpdatePhoneNumber(e.target.value)}
             />
           </div>
 

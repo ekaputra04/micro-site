@@ -33,6 +33,7 @@ import {
 import ProfileSection from "./section-item/Profile";
 import ContactUsSection from "./section-item/ContactUs";
 import TwitterSection from "./section-item/Twitter";
+import WhatsAppSection from "./section-item/WhatsApp";
 
 export default function ComponentView() {
   const { items, moveUp, moveDown, removeItem, toggleActive } =
@@ -111,6 +112,8 @@ export default function ComponentView() {
                 <ContactUsSection item={item} />
               ) : item.content.type == "twitter" ? (
                 <TwitterSection item={item} />
+              ) : item.content.type == "whatsapp" ? (
+                <WhatsAppSection item={item} />
               ) : null}
             </AccordionContent>
           </AccordionItem>
