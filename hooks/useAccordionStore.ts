@@ -1,4 +1,3 @@
-import { AccordionContent } from "@/types/AccordionContent";
 import { AccordionItem } from "@/types/AccordionItem";
 import { COLOR } from "@/types/Consts";
 import { create } from "zustand";
@@ -22,7 +21,7 @@ const useAccordionStore = create<AccordionStore>((set) => ({
       content: {
         type: "profile",
         name: {
-          title: "Profile",
+          title: "John Doe",
           style: {
             bold: false,
             italic: false,
@@ -111,7 +110,29 @@ const useAccordionStore = create<AccordionStore>((set) => ({
       },
       isActive: true,
     },
+    {
+      id: "item-5",
+      title: "Email",
+      content: {
+        type: "email",
+        name: {
+          title: "Email",
+          style: {
+            bold: false,
+            italic: false,
+            underline: false,
+          },
+          size: "normal",
+          color: COLOR.PRIMARY,
+        },
+        email: "ekaputrajuniawan@gmail.com",
+        backgroundColor: COLOR.BACKGROUND,
+        shape: "rounded",
+      },
+      isActive: true,
+    },
   ],
+
   moveUp: (index) =>
     set((state) => {
       if (index <= 0) return state;

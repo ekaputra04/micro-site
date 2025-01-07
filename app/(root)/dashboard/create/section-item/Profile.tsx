@@ -314,6 +314,7 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
             </div>
             <Input
               placeholder="Input name here..."
+              defaultValue={item.content.name.title}
               onChange={(e) => handleUpdateNameTitle(e.target.value)}
             />
           </div>
@@ -393,6 +394,7 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
             </div>
             <Input
               placeholder="Input description here..."
+              defaultValue={item.content.description.title}
               onChange={(e) => handleUpdateDescriptionTitle(e.target.value)}
             />
           </div>

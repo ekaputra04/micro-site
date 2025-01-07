@@ -84,6 +84,23 @@ type WhatsAppContent = {
   shape: "square" | "rounded" | "circle";
 };
 
+type EmailContent = {
+  type: "email";
+  name: {
+    title: string;
+    style: {
+      bold: boolean;
+      italic: boolean;
+      underline: boolean;
+    };
+    size: "normal" | "large" | "small";
+    color: string;
+  };
+  email: string;
+  backgroundColor: string;
+  shape: "square" | "rounded" | "circle";
+};
+
 type TextContent = {
   type: "text";
   text: string;
@@ -94,4 +111,5 @@ export type AccordionContent =
   | PhoneContent
   | TwitterContent
   | WhatsAppContent
+  | EmailContent
   | TextContent;
