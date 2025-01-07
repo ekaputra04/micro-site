@@ -38,7 +38,6 @@ export default function ComponentView() {
 
   return (
     <>
-      {JSON.stringify(items, null, 2)}
       <Button className="flex items-center gap-2 mb-4">
         <Plus className="w-4 h-4" />
         <p>Add new component</p>

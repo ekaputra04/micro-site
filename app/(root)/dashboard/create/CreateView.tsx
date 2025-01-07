@@ -14,11 +14,12 @@ import {
 import Link from "next/link";
 import ComponentView from "./ComponentView";
 import SettingView from "./SettingView";
+import PublicView from "../../PublicView";
 
 export default function CreateView() {
   return (
     <>
-      <div className="gap-4 grid grid-cols-2">
+      <div className="gap-8 grid grid-cols-2">
         <Tabs defaultValue="component" className="w-full">
           <div className="flex justify-between items-center">
             <TabsList>
@@ -37,7 +38,9 @@ export default function CreateView() {
           </TabsContent>
         </Tabs>
 
-        <div className="">tes</div>
+        <div className="top-0 bg-slate-900 p-8 w-full">
+          <PublicView />
+        </div>
       </div>
     </>
   );

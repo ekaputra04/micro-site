@@ -29,9 +29,9 @@ const useAccordionStore = create<AccordionStore>((set) => ({
         name: {
           title: "Profile",
           style: {
-            bold: true,
+            bold: false,
             italic: false,
-            underline: true,
+            underline: false,
           },
           size: "normal",
           color: "#000000",

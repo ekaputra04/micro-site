@@ -74,6 +74,34 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
     }
   };
 
+  const handleUpdateNameTitle = (title: string = "Profile") => {
+    if (item?.content?.type === "profile") {
+      useAccordionStore.getState().updateItem(item.id, {
+        content: {
+          ...item.content,
+          name: {
+            ...item.content.name,
+            title: title,
+          },
+        },
+      });
+    }
+  };
+
+  const handleUpdateDescriptionTitle = (title: string = "Profile") => {
+    if (item?.content?.type === "profile") {
+      useAccordionStore.getState().updateItem(item.id, {
+        content: {
+          ...item.content,
+          description: {
+            ...item.content.description,
+            title: title,
+          },
+        },
+      });
+    }
+  };
+
   const updateShape = (shape: "square" | "rounded" | "circle") => {
     if (item.content.type === "profile") {
       updateItem(item.id, {
@@ -99,6 +127,73 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
     }
   };
 
+  const updateDescriptionSize = (size: "normal" | "large" | "small") => {
+    if (item.content.type === "profile") {
+      updateItem(item.id, {
+        content: {
+          ...item.content,
+          description: {
+            ...item.content.description,
+            size: size,
+          },
+        },
+      });
+    }
+  };
+
+  const updateNameStyle = (
+    type: "bold" | "italic" | "underline",
+    value: boolean
+  ) => {
+    if (item.content.type === "profile") {
+      updateItem(item.id, {
+        content: {
+          ...item.content,
+          name: {
+            ...item.content.name,
+            style: {
+              bold: type === "bold" ? value : item.content.name.style.bold,
+              italic:
+                type === "italic" ? value : item.content.name.style.italic,
+              underline:
+                type === "underline"
+                  ? value
+                  : item.content.name.style.underline,
+            },
+          },
+        },
+      });
+    }
+  };
+
+  const updateDescriptionStyle = (
+    type: "bold" | "italic" | "underline",
+    value: boolean
+  ) => {
+    if (item.content.type === "profile") {
+      updateItem(item.id, {
+        content: {
+          ...item.content,
+          description: {
+            ...item.content.description,
+            style: {
+              bold:
+                type === "bold" ? value : item.content.description.style.bold,
+              italic:
+                type === "italic"
+                  ? value
+                  : item.content.description.style.italic,
+              underline:
+                type === "underline"
+                  ? value
+                  : item.content.description.style.underline,
+            },
+          },
+        },
+      });
+    }
+  };
+
   return (
     <>
       {JSON.stringify(item, null, 2)}
@@ -106,14 +201,14 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
         <div className="p-2">
           <div className="relative w-full h-48">
             <img
-              src="/images/background.png"
+              src={item.content.headerImage}
               alt="Background"
               className="w-full h-full object-cover"
             />
             <div className="top-2 right-2 absolute flex gap-2">
               <Label
                 htmlFor="background"
-                className={`block border-input bg-background hover:bg-accent p-2 border  hover:text-accent-foreground  `}
+                className={`block border-input bg-background hover:bg-accent p-2 border  hover:text-accent-foreground rounded-md hover:cursor-pointer`}
               >
                 <Pencil className="w-4 h-4" />
               </Label>
@@ -124,11 +219,15 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
             </div>
           </div>
 
-          {item.content.headerImage == "/images/background.png" ? (
+          {item.content.profileImage ? (
             <div
               className={`relative mx-auto -mt-12  w-24 h-24 overflow-hidden ${getShapeClassname(item.content.shape as "square" | "rounded" | "circle")}`}
             >
-              <img src="/images/batik.png" alt="" className={`object-cover `} />
+              <img
+                src={item.content.profileImage}
+                alt=""
+                className={`object-cover `}
+              />
             </div>
           ) : (
             <div className="relative bg-gray-200 mx-auto -mt-12 w-24 h-24 overflow-hidden">
@@ -184,31 +283,40 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
 
           <div className="space-y-2 py-2">
             <p className="pb-2 font-semibold">Name</p>
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <Checkbox id="bold" checked={item.content.name.style.bold} />
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1">
+                <Checkbox
+                  id="nameBold"
+                  onCheckedChange={(checked) =>
+                    updateNameStyle("bold", checked == true)
+                  }
+                />
                 <label
-                  htmlFor="bold"
+                  htmlFor="nameBold"
                   className="peer-disabled:opacity-70 font-medium text-sm leading-none peer-disabled:cursor-not-allowed"
                 >
                   Bold
                 </label>
                 <Checkbox
-                  id="italic"
-                  checked={item.content.name.style.italic}
+                  id="nameItalic"
+                  onCheckedChange={(checked) =>
+                    updateNameStyle("italic", checked == true)
+                  }
                 />
                 <label
-                  htmlFor="italic"
+                  htmlFor="nameItalic"
                   className="peer-disabled:opacity-70 font-medium text-sm leading-none peer-disabled:cursor-not-allowed"
                 >
                   Italic
                 </label>
                 <Checkbox
-                  id="underline"
-                  checked={item.content.name.style.underline}
+                  id="nameUnderline"
+                  onCheckedChange={(checked) =>
+                    updateNameStyle("underline", checked == true)
+                  }
                 />
                 <label
-                  htmlFor="underline"
+                  htmlFor="nameUnderline"
                   className="peer-disabled:opacity-70 font-medium text-sm leading-none peer-disabled:cursor-not-allowed"
                 >
                   Underline
@@ -240,33 +348,95 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
                 <Button
                   onClick={() => handleUpdateNameColor()}
                   variant={"ghost"}
+                  className="px-2"
                 >
                   Reset
                 </Button>
               </div>
             </div>
-            <Input placeholder="Input name here..." />
+            <Input
+              placeholder="Input name here..."
+              onChange={(e) => handleUpdateNameTitle(e.target.value)}
+            />
           </div>
 
-          <div className="py-2">
+          <div className="space-y-2 py-2">
             <p className="pb-2 font-semibold">Description</p>
-            <div className="flex justify-between gap-4">
-              <Input placeholder="Input description here..." />
-              <ToggleGroup type="multiple">
-                <ToggleGroupItem value="bold" aria-label="Toggle bold">
-                  <Bold className="w-4 h-4" />
-                </ToggleGroupItem>
-                <ToggleGroupItem value="italic" aria-label="Toggle italic">
-                  <Italic className="w-4 h-4" />
-                </ToggleGroupItem>
-                <ToggleGroupItem
-                  value="strikethrough"
-                  aria-label="Toggle strikethrough"
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1">
+                <Checkbox
+                  id="DescriptionBold"
+                  onCheckedChange={(checked) =>
+                    updateDescriptionStyle("bold", checked == true)
+                  }
+                />
+                <label
+                  htmlFor="DescriptionBold"
+                  className="peer-disabled:opacity-70 font-medium text-sm leading-none peer-disabled:cursor-not-allowed"
                 >
-                  <Underline className="w-4 h-4" />
-                </ToggleGroupItem>
-              </ToggleGroup>
+                  Bold
+                </label>
+                <Checkbox
+                  id="DescriptionItalic"
+                  onCheckedChange={(checked) =>
+                    updateDescriptionStyle("italic", checked == true)
+                  }
+                />
+                <label
+                  htmlFor="DescriptionItalic"
+                  className="peer-disabled:opacity-70 font-medium text-sm leading-none peer-disabled:cursor-not-allowed"
+                >
+                  Italic
+                </label>
+                <Checkbox
+                  id="DescriptionUnderline"
+                  onCheckedChange={(checked) =>
+                    updateDescriptionStyle("underline", checked == true)
+                  }
+                />
+                <label
+                  htmlFor="DescriptionUnderline"
+                  className="peer-disabled:opacity-70 font-medium text-sm leading-none peer-disabled:cursor-not-allowed"
+                >
+                  Underline
+                </label>
+              </div>
+
+              <Select
+                defaultValue={item.content.name.size}
+                onValueChange={(value) =>
+                  updateDescriptionSize(value as "normal" | "large" | "small")
+                }
+              >
+                <SelectTrigger className="w-[120px]">
+                  <SelectValue placeholder="Shape" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="normal">Normal</SelectItem>
+                  <SelectItem value="large">Large</SelectItem>
+                  <SelectItem value="small">Small</SelectItem>
+                </SelectContent>
+              </Select>
+              <div className="flex items-center gap-2">
+                <Input
+                  className="w-16"
+                  type="color"
+                  onChange={(e) => handleUpdateDescriptionColor(e.target.value)}
+                  value={item.content.name.color}
+                />
+                <Button
+                  onClick={() => handleUpdateDescriptionColor()}
+                  variant={"ghost"}
+                  className="px-2"
+                >
+                  Reset
+                </Button>
+              </div>
             </div>
+            <Input
+              placeholder="Input description here..."
+              onChange={(e) => handleUpdateDescriptionTitle(e.target.value)}
+            />
           </div>
         </div>
       )}
