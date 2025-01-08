@@ -90,7 +90,7 @@ export default function ContactUsSection({ item }: ContactUsSectionProps) {
     }
   };
 
-  const updateNameSize = (size: Size) => {
+  const handleUpdateNameSize = (size: Size) => {
     if (item.content.type === "phone") {
       updateItem(item.id, {
         content: {
@@ -117,7 +117,7 @@ export default function ContactUsSection({ item }: ContactUsSectionProps) {
     }
   };
 
-  const updateShape = (shape: Shape) => {
+  const handleUpdateShape = (shape: Shape) => {
     if (item.content.type === "phone") {
       updateItem(item.id, {
         content: {
@@ -177,7 +177,7 @@ export default function ContactUsSection({ item }: ContactUsSectionProps) {
 
               <Select
                 defaultValue={item.content.name.size}
-                onValueChange={(value) => updateNameSize(value as Size)}
+                onValueChange={(value) => handleUpdateNameSize(value as Size)}
               >
                 <SelectTrigger className="w-[120px]">
                   <SelectValue placeholder="Shape" />
@@ -244,7 +244,7 @@ export default function ContactUsSection({ item }: ContactUsSectionProps) {
               <p className="font-semibold">Shape</p>
               <Select
                 defaultValue={item.content.shape}
-                onValueChange={(value) => updateShape(value as Shape)}
+                onValueChange={(value) => handleUpdateShape(value as Shape)}
               >
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder="Shape" />

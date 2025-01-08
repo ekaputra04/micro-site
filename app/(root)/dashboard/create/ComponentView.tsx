@@ -38,6 +38,7 @@ import EmailSection from "./section-item/Email";
 import LinkedInSection from "./section-item/LinkedIn";
 import TelegramSection from "./section-item/Telegram";
 import InstagramSection from "./section-item/Instagram";
+import SpaceSection from "./section-item/Space";
 
 export default function ComponentView() {
   const { items, moveUp, moveDown, removeItem, toggleActive } =
@@ -126,6 +127,8 @@ export default function ComponentView() {
                 <TelegramSection item={item} />
               ) : item.content.type == "instagram" ? (
                 <InstagramSection item={item} />
+              ) : item.content.type == "space" ? (
+                <SpaceSection item={item} />
               ) : null}
             </AccordionContent>
           </AccordionItem>

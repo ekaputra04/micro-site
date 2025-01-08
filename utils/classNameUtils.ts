@@ -59,3 +59,48 @@ export const lightenColorWithOpacity = (hexColor: string): string => {
 
   return `rgba(${r}, ${g}, ${b}, 0.1)`;
 };
+
+export const getSpaceStyleClassname = (style: "default" | "border") => {
+  switch (style) {
+    case "default":
+      return "";
+    case "border":
+      return "border-b";
+    default:
+      return "";
+  }
+};
+
+export const getSpaceSizeClassname = (size: 1 | 2 | 3 | 4 | 5) => {
+  switch (size) {
+    case 1:
+      return "h-2";
+    case 2:
+      return "h-4";
+    case 3:
+      return "h-6";
+    case 4:
+      return "h-8";
+    case 5:
+      return "h-10";
+    default:
+      return "";
+  }
+};
+
+export const getSpaceSizeBorderClassname = (size: 1 | 2 | 3 | 4 | 5) => {
+  switch (size) {
+    case 1:
+      return "h-1";
+    case 2:
+      return "h-2";
+    case 3:
+      return "h-3";
+    case 4:
+      return "h-4";
+    case 5:
+      return "h-5";
+    default:
+      return "";
+  }
+};

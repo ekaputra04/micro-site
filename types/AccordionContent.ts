@@ -1,25 +1,22 @@
 export type Size = "normal" | "large" | "small";
 export type Shape = "square" | "rounded" | "circle";
+export type Style = {
+  bold: boolean;
+  italic: boolean;
+  underline: boolean;
+};
 
 export type ProfileContent = {
   type: "profile";
   name: {
     title: string;
-    style: {
-      bold: boolean;
-      italic: boolean;
-      underline: boolean;
-    };
+    style: Style;
     size: Size;
     color: string;
   };
   description: {
     title: string;
-    style: {
-      bold: boolean;
-      italic: boolean;
-      underline: boolean;
-    };
+    style: Style;
     size: Size;
     color: string;
   };
@@ -40,11 +37,7 @@ type PhoneContent = {
   type: "phone";
   name: {
     title: string;
-    style: {
-      bold: boolean;
-      italic: boolean;
-      underline: boolean;
-    };
+    style: Style;
     size: Size;
     color: string;
   };
@@ -57,11 +50,7 @@ type TwitterContent = {
   type: "twitter";
   name: {
     title: string;
-    style: {
-      bold: boolean;
-      italic: boolean;
-      underline: boolean;
-    };
+    style: Style;
     size: Size;
     color: string;
   };
@@ -74,11 +63,7 @@ type WhatsAppContent = {
   type: "whatsapp";
   name: {
     title: string;
-    style: {
-      bold: boolean;
-      italic: boolean;
-      underline: boolean;
-    };
+    style: Style;
     size: Size;
     color: string;
   };
@@ -91,11 +76,7 @@ type EmailContent = {
   type: "email";
   name: {
     title: string;
-    style: {
-      bold: boolean;
-      italic: boolean;
-      underline: boolean;
-    };
+    style: Style;
     size: Size;
     color: string;
   };
@@ -108,11 +89,7 @@ type LinkedInContent = {
   type: "linkedIn";
   name: {
     title: string;
-    style: {
-      bold: boolean;
-      italic: boolean;
-      underline: boolean;
-    };
+    style: Style;
     size: Size;
     color: string;
   };
@@ -125,11 +102,7 @@ type TelegramContent = {
   type: "telegram";
   name: {
     title: string;
-    style: {
-      bold: boolean;
-      italic: boolean;
-      underline: boolean;
-    };
+    style: Style;
     size: Size;
     color: string;
   };
@@ -142,11 +115,7 @@ type InstagramContent = {
   type: "instagram";
   name: {
     title: string;
-    style: {
-      bold: boolean;
-      italic: boolean;
-      underline: boolean;
-    };
+    style: Style;
     size: Size;
     color: string;
   };
@@ -160,6 +129,12 @@ type TextContent = {
   text: string;
 };
 
+type SpaceContent = {
+  type: "space";
+  size: 1 | 2 | 3 | 4 | 5;
+  style: "default" | "border";
+};
+
 export type AccordionContent =
   | ProfileContent
   | PhoneContent
@@ -169,4 +144,5 @@ export type AccordionContent =
   | LinkedInContent
   | TelegramContent
   | InstagramContent
-  | TextContent;
+  | TextContent
+  | SpaceContent;

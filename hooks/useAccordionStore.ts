@@ -16,7 +16,7 @@ interface AccordionStore {
 const useAccordionStore = create<AccordionStore>((set) => ({
   items: [
     {
-      id: "item-1",
+      id: "1",
       title: "Profile",
       content: {
         type: "profile",
@@ -48,7 +48,7 @@ const useAccordionStore = create<AccordionStore>((set) => ({
       isActive: false,
     },
     {
-      id: "item-2",
+      id: "2",
       title: "Contact Us",
       content: {
         type: "phone",
@@ -69,7 +69,17 @@ const useAccordionStore = create<AccordionStore>((set) => ({
       isActive: true,
     },
     {
-      id: "item-3",
+      id: "3",
+      title: "Space",
+      content: {
+        type: "space",
+        size: 3,
+        style: "border",
+      },
+      isActive: true,
+    },
+    {
+      id: "4",
       title: "Twitter X",
       content: {
         type: "twitter",
@@ -90,7 +100,7 @@ const useAccordionStore = create<AccordionStore>((set) => ({
       isActive: true,
     },
     {
-      id: "item-4",
+      id: "5",
       title: "WhatsApp",
       content: {
         type: "whatsapp",
@@ -111,7 +121,7 @@ const useAccordionStore = create<AccordionStore>((set) => ({
       isActive: true,
     },
     {
-      id: "item-5",
+      id: "6",
       title: "Email",
       content: {
         type: "email",
@@ -132,7 +142,7 @@ const useAccordionStore = create<AccordionStore>((set) => ({
       isActive: true,
     },
     {
-      id: "item-6",
+      id: "7",
       title: "LinkedIn",
       content: {
         type: "linkedIn",
@@ -153,7 +163,7 @@ const useAccordionStore = create<AccordionStore>((set) => ({
       isActive: true,
     },
     {
-      id: "item-7",
+      id: "8",
       title: "Instagram",
       content: {
         type: "instagram",
@@ -174,7 +184,7 @@ const useAccordionStore = create<AccordionStore>((set) => ({
       isActive: true,
     },
     {
-      id: "item-8",
+      id: "9",
       title: "Telegram",
       content: {
         type: "telegram",
