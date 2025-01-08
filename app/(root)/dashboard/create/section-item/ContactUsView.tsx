@@ -8,7 +8,6 @@ import {
   getShapeClassname,
   lightenColorWithOpacity,
 } from "@/utils/classNameUtils";
-import { color } from "framer-motion";
 import { Phone } from "lucide-react";
 import Link from "next/link";
 

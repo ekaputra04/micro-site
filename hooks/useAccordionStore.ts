@@ -131,6 +131,27 @@ const useAccordionStore = create<AccordionStore>((set) => ({
       },
       isActive: true,
     },
+    {
+      id: "item-6",
+      title: "LinkedIn",
+      content: {
+        type: "linkedIn",
+        name: {
+          title: "LinkedIn",
+          style: {
+            bold: false,
+            italic: false,
+            underline: false,
+          },
+          size: "normal",
+          color: COLOR.PRIMARY,
+        },
+        link: "https://www.linkedin.com/in/i-putu-eka-putra-juniawan",
+        backgroundColor: COLOR.BACKGROUND,
+        shape: "rounded",
+      },
+      isActive: true,
+    },
   ],
 
   moveUp: (index) =>

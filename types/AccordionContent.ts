@@ -1,3 +1,6 @@
+export type Size = "normal" | "large" | "small";
+export type Shape = "square" | "rounded" | "circle";
+
 export type ProfileContent = {
   type: "profile";
   name: {
@@ -7,7 +10,7 @@ export type ProfileContent = {
       italic: boolean;
       underline: boolean;
     };
-    size: "normal" | "large" | "small";
+    size: Size;
     color: string;
   };
   description: {
@@ -17,13 +20,13 @@ export type ProfileContent = {
       italic: boolean;
       underline: boolean;
     };
-    size: "normal" | "large" | "small";
+    size: Size;
     color: string;
   };
   backgroundColor: string;
   headerImage: string;
   profileImage: string;
-  shape: "square" | "rounded" | "circle";
+  shape: Shape;
 };
 
 // To Do
@@ -42,12 +45,12 @@ type PhoneContent = {
       italic: boolean;
       underline: boolean;
     };
-    size: "normal" | "large" | "small";
+    size: Size;
     color: string;
   };
   phoneNumber: string;
   backgroundColor: string;
-  shape: "square" | "rounded" | "circle";
+  shape: Shape;
 };
 
 type TwitterContent = {
@@ -59,12 +62,12 @@ type TwitterContent = {
       italic: boolean;
       underline: boolean;
     };
-    size: "normal" | "large" | "small";
+    size: Size;
     color: string;
   };
   link: string;
   backgroundColor: string;
-  shape: "square" | "rounded" | "circle";
+  shape: Shape;
 };
 
 type WhatsAppContent = {
@@ -76,12 +79,12 @@ type WhatsAppContent = {
       italic: boolean;
       underline: boolean;
     };
-    size: "normal" | "large" | "small";
+    size: Size;
     color: string;
   };
   phoneNumber: string;
   backgroundColor: string;
-  shape: "square" | "rounded" | "circle";
+  shape: Shape;
 };
 
 type EmailContent = {
@@ -93,12 +96,29 @@ type EmailContent = {
       italic: boolean;
       underline: boolean;
     };
-    size: "normal" | "large" | "small";
+    size: Size;
     color: string;
   };
   email: string;
   backgroundColor: string;
-  shape: "square" | "rounded" | "circle";
+  shape: Shape;
+};
+
+type LinkedInContent = {
+  type: "linkedIn";
+  name: {
+    title: string;
+    style: {
+      bold: boolean;
+      italic: boolean;
+      underline: boolean;
+    };
+    size: Size;
+    color: string;
+  };
+  link: string;
+  backgroundColor: string;
+  shape: Shape;
 };
 
 type TextContent = {
@@ -112,4 +132,5 @@ export type AccordionContent =
   | TwitterContent
   | WhatsAppContent
   | EmailContent
+  | LinkedInContent
   | TextContent;

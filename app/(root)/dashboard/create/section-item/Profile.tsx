@@ -17,6 +17,7 @@ import { getShapeClassname } from "@/utils/classNameUtils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { AccordionItem } from "@/types/AccordionItem";
 import { COLOR } from "@/types/Consts";
+import { Shape, Size } from "@/types/AccordionContent";
 
 interface ProfileSectionProps {
   item: AccordionItem;
@@ -100,7 +101,7 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
     }
   };
 
-  const updateShape = (shape: "square" | "rounded" | "circle") => {
+  const updateShape = (shape: Shape) => {
     if (item.content.type === "profile") {
       updateItem(item.id, {
         content: {
@@ -111,7 +112,7 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
     }
   };
 
-  const updateNameSize = (size: "normal" | "large" | "small") => {
+  const updateNameSize = (size: Size) => {
     if (item.content.type === "profile") {
       updateItem(item.id, {
         content: {
@@ -125,7 +126,7 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
     }
   };
 
-  const updateDescriptionSize = (size: "normal" | "large" | "small") => {
+  const updateDescriptionSize = (size: Size) => {
     if (item.content.type === "profile") {
       updateItem(item.id, {
         content: {
@@ -218,7 +219,7 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
 
           {item.content.profileImage ? (
             <div
-              className={`relative mx-auto -mt-12  w-24 h-24 overflow-hidden ${getShapeClassname(item.content.shape as "square" | "rounded" | "circle")}`}
+              className={`relative mx-auto -mt-12  w-24 h-24 overflow-hidden ${getShapeClassname(item.content.shape as Shape)}`}
             >
               <img
                 src={item.content.profileImage}
@@ -230,7 +231,7 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
             <div className="relative bg-gray-200 mx-auto -mt-12 w-24 h-24 overflow-hidden">
               <Label
                 htmlFor="profile"
-                className={`flex flex-col justify-center items-center gap-2 border h-full hover:cursor-pointer ${getShapeClassname(item.content.shape as "square" | "rounded" | "circle")}`}
+                className={`flex flex-col justify-center items-center gap-2 border h-full hover:cursor-pointer ${getShapeClassname(item.content.shape as Shape)}`}
               >
                 <Plus className="text-black" />
                 <p className="text-black">Add Photo</p>
@@ -283,9 +284,7 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
 
               <Select
                 defaultValue={item.content.name.size}
-                onValueChange={(value) =>
-                  updateNameSize(value as "normal" | "large" | "small")
-                }
+                onValueChange={(value) => updateNameSize(value as Size)}
               >
                 <SelectTrigger className="w-[120px]">
                   <SelectValue placeholder="Shape" />
@@ -363,9 +362,7 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
 
               <Select
                 defaultValue={item.content.name.size}
-                onValueChange={(value) =>
-                  updateDescriptionSize(value as "normal" | "large" | "small")
-                }
+                onValueChange={(value) => updateDescriptionSize(value as Size)}
               >
                 <SelectTrigger className="w-[120px]">
                   <SelectValue placeholder="Shape" />
@@ -424,9 +421,7 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
               <p className="font-semibold">Shape</p>
               <Select
                 defaultValue={item.content.shape}
-                onValueChange={(value) =>
-                  updateShape(value as "square" | "rounded" | "circle")
-                }
+                onValueChange={(value) => updateShape(value as Shape)}
               >
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder="Shape" />

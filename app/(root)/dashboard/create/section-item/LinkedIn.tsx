@@ -15,18 +15,18 @@ import { Shape, Size } from "@/types/AccordionContent";
 import { AccordionItem } from "@/types/AccordionItem";
 import { COLOR } from "@/types/Consts";
 
-interface ContactUsSectionProps {
+interface LinkedInSectionProps {
   item: AccordionItem;
 }
 
-export default function ContactUsSection({ item }: ContactUsSectionProps) {
+export default function LinkedInSection({ item }: LinkedInSectionProps) {
   const { updateItem } = useAccordionStore();
 
   const updateNameStyle = (
     type: "bold" | "italic" | "underline",
     value: boolean
   ) => {
-    if (item.content.type === "phone") {
+    if (item.content.type === "linkedIn") {
       updateItem(item.id, {
         content: {
           ...item.content,
@@ -48,7 +48,7 @@ export default function ContactUsSection({ item }: ContactUsSectionProps) {
   };
 
   const handleUpdateNameColor = (color: string = COLOR.PRIMARY) => {
-    if (item?.content?.type === "phone") {
+    if (item?.content?.type === "linkedIn") {
       updateItem(item.id, {
         content: {
           ...item.content,
@@ -61,8 +61,8 @@ export default function ContactUsSection({ item }: ContactUsSectionProps) {
     }
   };
 
-  const handleUpdateNameTitle = (title: string = "Contact Us") => {
-    if (item?.content?.type === "phone") {
+  const handleUpdateNameTitle = (title: string = "LinkedIn") => {
+    if (item?.content?.type === "linkedIn") {
       updateItem(item.id, {
         content: {
           ...item.content,
@@ -75,23 +75,19 @@ export default function ContactUsSection({ item }: ContactUsSectionProps) {
     }
   };
 
-  const handleUpdatePhoneNumber = (phoneNumber: string) => {
-    if (item?.content?.type === "phone") {
-      const formattedPhoneNumber = phoneNumber.startsWith("0")
-        ? "+62" + phoneNumber.slice(1)
-        : phoneNumber;
-
+  const handleUpdateLink = (link: string) => {
+    if (item?.content?.type === "linkedIn") {
       updateItem(item.id, {
         content: {
           ...item.content,
-          phoneNumber: formattedPhoneNumber,
+          link: link,
         },
       });
     }
   };
 
   const updateNameSize = (size: Size) => {
-    if (item.content.type === "phone") {
+    if (item.content.type === "linkedIn") {
       updateItem(item.id, {
         content: {
           ...item.content,
@@ -107,7 +103,7 @@ export default function ContactUsSection({ item }: ContactUsSectionProps) {
   const handleUpdateBackgroundColor = (
     backgroundColor: string = COLOR.BACKGROUND
   ) => {
-    if (item?.content?.type === "phone") {
+    if (item?.content?.type === "linkedIn") {
       updateItem(item.id, {
         content: {
           ...item.content,
@@ -118,7 +114,7 @@ export default function ContactUsSection({ item }: ContactUsSectionProps) {
   };
 
   const updateShape = (shape: Shape) => {
-    if (item.content.type === "phone") {
+    if (item.content.type === "linkedIn") {
       updateItem(item.id, {
         content: {
           ...item.content,
@@ -131,7 +127,7 @@ export default function ContactUsSection({ item }: ContactUsSectionProps) {
   return (
     <>
       {/* {JSON.stringify(item, null, 2)} */}
-      {item.content.type === "phone" && (
+      {item.content.type === "linkedIn" && (
         <div className="p-2">
           <div className="space-y-2 py-2">
             <p className="font-semibold">Name</p>
@@ -211,11 +207,10 @@ export default function ContactUsSection({ item }: ContactUsSectionProps) {
             />
           </div>
           <div className="space-y-2 py-2">
-            <p className="font-semibold">Phone Number</p>
+            <p className="font-semibold">UserName</p>
             <Input
-              placeholder="Input phone number here..."
-              type="number"
-              onChange={(e) => handleUpdatePhoneNumber(e.target.value)}
+              placeholder="Input username here..."
+              onChange={(e) => handleUpdateLink(e.target.value)}
             />
           </div>
 

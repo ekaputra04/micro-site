@@ -1,4 +1,6 @@
-export const getShapeClassname = (shape: "square" | "rounded" | "circle") => {
+import { Shape, Size } from "@/types/AccordionContent";
+
+export const getShapeClassname = (shape: Shape) => {
   switch (shape) {
     case "square":
       return "rounded-none";
@@ -11,9 +13,7 @@ export const getShapeClassname = (shape: "square" | "rounded" | "circle") => {
   }
 };
 
-export const getFontSizeClassname = (
-  fontSize: "normal" | "large" | "small"
-) => {
+export const getFontSizeClassname = (fontSize: Size) => {
   switch (fontSize) {
     case "normal":
       return "text-lg";

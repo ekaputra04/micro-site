@@ -11,6 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import useAccordionStore from "@/hooks/useAccordionStore";
+import { Shape, Size } from "@/types/AccordionContent";
 import { AccordionItem } from "@/types/AccordionItem";
 import { COLOR } from "@/types/Consts";
 
@@ -85,7 +86,7 @@ export default function EmailSection({ item }: EmailSectionProps) {
     }
   };
 
-  const updateNameSize = (size: "normal" | "large" | "small") => {
+  const updateNameSize = (size: Size) => {
     if (item.content.type === "email") {
       updateItem(item.id, {
         content: {
@@ -112,7 +113,7 @@ export default function EmailSection({ item }: EmailSectionProps) {
     }
   };
 
-  const updateShape = (shape: "square" | "rounded" | "circle") => {
+  const updateShape = (shape: Shape) => {
     if (item.content.type === "email") {
       updateItem(item.id, {
         content: {
@@ -172,9 +173,7 @@ export default function EmailSection({ item }: EmailSectionProps) {
 
               <Select
                 defaultValue={item.content.name.size}
-                onValueChange={(value) =>
-                  updateNameSize(value as "normal" | "large" | "small")
-                }
+                onValueChange={(value) => updateNameSize(value as Size)}
               >
                 <SelectTrigger className="w-[120px]">
                   <SelectValue placeholder="Shape" />
@@ -240,9 +239,7 @@ export default function EmailSection({ item }: EmailSectionProps) {
               <p className="font-semibold">Shape</p>
               <Select
                 defaultValue={item.content.shape}
-                onValueChange={(value) =>
-                  updateShape(value as "square" | "rounded" | "circle")
-                }
+                onValueChange={(value) => updateShape(value as Shape)}
               >
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder="Shape" />
