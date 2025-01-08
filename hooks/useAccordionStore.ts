@@ -204,6 +204,24 @@ const useAccordionStore = create<AccordionStore>((set) => ({
       },
       isActive: true,
     },
+    {
+      id: "10",
+      title: "Text",
+      content: {
+        type: "text",
+        text: {
+          title: "Text",
+          style: {
+            bold: false,
+            italic: false,
+            underline: false,
+          },
+          size: "normal",
+          color: COLOR.PRIMARY,
+        },
+      },
+      isActive: true,
+    },
   ],
 
   moveUp: (index) =>

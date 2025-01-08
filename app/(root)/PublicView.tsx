@@ -10,6 +10,7 @@ import LinkedInView from "./dashboard/create/section-item/LinkedInView";
 import TelegramView from "./dashboard/create/section-item/TelegramView";
 import InstagramView from "./dashboard/create/section-item/InstagramView";
 import SpaceView from "./dashboard/create/section-item/SpaceView";
+import TextView from "./dashboard/create/section-item/TextView";
 
 export default function PublicView() {
   const { items } = useAccordionStore();
@@ -43,9 +44,21 @@ export default function PublicView() {
                 <InstagramView />
               ) : item.content.type == "space" ? (
                 <SpaceView />
+              ) : item.content.type == "text" ? (
+                <TextView />
               ) : null}
             </div>
           ))}
+          <div className="flex justify-center py-16">
+            <div className="flex justify-center items-center gap-2 p-4 rounded-full animate-bounce">
+              <p>Inspired by</p>
+              <img
+                src="/images/sid.png"
+                alt="Logo"
+                className="h-4 object-cover"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </>

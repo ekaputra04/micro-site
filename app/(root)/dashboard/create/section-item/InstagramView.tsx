@@ -8,7 +8,7 @@ import {
   getShapeClassname,
   lightenColorWithOpacity,
 } from "@/utils/classNameUtils";
-import { IconBrandTelegram } from "@tabler/icons-react";
+import { IconBrandInstagram } from "@tabler/icons-react";
 import Link from "next/link";
 
 export default function InstagramView() {
@@ -39,7 +39,7 @@ export default function InstagramView() {
                   borderColor: itemInstagram.content.name.color,
                 }}
               >
-                <IconBrandTelegram className="w-4 h-4" />
+                <IconBrandInstagram className="w-4 h-4" />
               </span>
               <p
                 className={`w-full text-center ${getFontStyleClassname(itemInstagram.content.name.style)} ${getFontSizeClassname(itemInstagram.content.name.size)} `}

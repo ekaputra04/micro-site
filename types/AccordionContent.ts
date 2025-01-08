@@ -126,7 +126,12 @@ type InstagramContent = {
 
 type TextContent = {
   type: "text";
-  text: string;
+  text: {
+    title: string;
+    style: Style;
+    size: Size;
+    color: string;
+  };
 };
 
 type SpaceContent = {
