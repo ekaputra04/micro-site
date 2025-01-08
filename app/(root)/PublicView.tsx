@@ -8,6 +8,7 @@ import WhatsAppView from "./dashboard/create/section-item/WhatsAppView";
 import EmailView from "./dashboard/create/section-item/EmailView";
 import LinkedInView from "./dashboard/create/section-item/LinkedInView";
 import TelegramView from "./dashboard/create/section-item/TelegramView";
+import InstagramView from "./dashboard/create/section-item/InstagramView";
 
 export default function PublicView() {
   const { items } = useAccordionStore();
@@ -37,6 +38,8 @@ export default function PublicView() {
                 <LinkedInView />
               ) : item.content.type == "telegram" ? (
                 <TelegramView />
+              ) : item.content.type == "instagram" ? (
+                <InstagramView />
               ) : null}
             </div>
           ))}

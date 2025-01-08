@@ -15,18 +15,18 @@ import { Shape, Size } from "@/types/AccordionContent";
 import { AccordionItem } from "@/types/AccordionItem";
 import { COLOR } from "@/types/Consts";
 
-interface TelegramSectionProps {
+interface InstagramSectionProps {
   item: AccordionItem;
 }
 
-export default function TelegramSection({ item }: TelegramSectionProps) {
+export default function InstagramSection({ item }: InstagramSectionProps) {
   const { updateItem } = useAccordionStore();
 
   const updateNameStyle = (
     type: "bold" | "italic" | "underline",
     value: boolean
   ) => {
-    if (item.content.type === "telegram") {
+    if (item.content.type === "instagram") {
       updateItem(item.id, {
         content: {
           ...item.content,
@@ -48,7 +48,7 @@ export default function TelegramSection({ item }: TelegramSectionProps) {
   };
 
   const handleUpdateNameColor = (color: string = COLOR.PRIMARY) => {
-    if (item?.content?.type === "telegram") {
+    if (item?.content?.type === "instagram") {
       updateItem(item.id, {
         content: {
           ...item.content,
@@ -61,8 +61,8 @@ export default function TelegramSection({ item }: TelegramSectionProps) {
     }
   };
 
-  const handleUpdateNameTitle = (title: string = "Telegram") => {
-    if (item?.content?.type === "telegram") {
+  const handleUpdateNameTitle = (title: string = "Instagram") => {
+    if (item?.content?.type === "instagram") {
       updateItem(item.id, {
         content: {
           ...item.content,
@@ -76,7 +76,7 @@ export default function TelegramSection({ item }: TelegramSectionProps) {
   };
 
   const handleUpdateLink = (username: string) => {
-    if (item?.content?.type === "telegram") {
+    if (item?.content?.type === "instagram") {
       updateItem(item.id, {
         content: {
           ...item.content,
@@ -87,7 +87,7 @@ export default function TelegramSection({ item }: TelegramSectionProps) {
   };
 
   const updateNameSize = (size: Size) => {
-    if (item.content.type === "telegram") {
+    if (item.content.type === "instagram") {
       updateItem(item.id, {
         content: {
           ...item.content,
@@ -103,7 +103,7 @@ export default function TelegramSection({ item }: TelegramSectionProps) {
   const handleUpdateBackgroundColor = (
     backgroundColor: string = COLOR.BACKGROUND
   ) => {
-    if (item?.content?.type === "telegram") {
+    if (item?.content?.type === "instagram") {
       updateItem(item.id, {
         content: {
           ...item.content,
@@ -114,7 +114,7 @@ export default function TelegramSection({ item }: TelegramSectionProps) {
   };
 
   const updateShape = (shape: Shape) => {
-    if (item.content.type === "telegram") {
+    if (item.content.type === "instagram") {
       updateItem(item.id, {
         content: {
           ...item.content,
@@ -127,7 +127,7 @@ export default function TelegramSection({ item }: TelegramSectionProps) {
   return (
     <>
       {/* {JSON.stringify(item, null, 2)} */}
-      {item.content.type === "telegram" && (
+      {item.content.type === "instagram" && (
         <div className="p-2">
           <div className="space-y-2 py-2">
             <p className="font-semibold">Name</p>

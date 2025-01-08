@@ -14,38 +14,38 @@ import Link from "next/link";
 export default function TelegramView() {
   const { items } = useAccordionStore();
 
-  const itemLinkedIn = items.find((item) => item.content.type === "telegram");
+  const itemTelegram = items.find((item) => item.content.type === "telegram");
   return (
     <>
-      {itemLinkedIn?.content.type == "telegram" && (
+      {itemTelegram?.content.type == "telegram" && (
         <div
-          className={`${getIsActiveClassname(itemLinkedIn.isActive)} p-4 hover:scale-95 animate-in animate-out`}
+          className={`${getIsActiveClassname(itemTelegram.isActive)} p-4 hover:scale-95 animate-in animate-out`}
         >
           <Link
-            href={`https://t.me/${itemLinkedIn.content.username}`}
+            href={`https://t.me/${itemTelegram.content.username}`}
             target="_blank"
           >
             <div
-              className={`relative flex items-center p-4 ${getShapeClassname(itemLinkedIn.content.shape)}`}
-              style={{ background: itemLinkedIn.content.backgroundColor }}
+              className={`relative flex items-center p-4 ${getShapeClassname(itemTelegram.content.shape)}`}
+              style={{ background: itemTelegram.content.backgroundColor }}
             >
               <span
-                className={`absolute p-2 border ${getShapeClassname(itemLinkedIn.content.shape)}`}
+                className={`absolute p-2 border ${getShapeClassname(itemTelegram.content.shape)}`}
                 style={{
-                  color: itemLinkedIn.content.name.color,
+                  color: itemTelegram.content.name.color,
                   background: lightenColorWithOpacity(
-                    itemLinkedIn.content.backgroundColor
+                    itemTelegram.content.backgroundColor
                   ),
-                  borderColor: itemLinkedIn.content.name.color,
+                  borderColor: itemTelegram.content.name.color,
                 }}
               >
                 <IconBrandTelegram className="w-4 h-4" />
               </span>
               <p
-                className={`w-full text-center ${getFontStyleClassname(itemLinkedIn.content.name.style)} ${getFontSizeClassname(itemLinkedIn.content.name.size)} `}
-                style={{ color: itemLinkedIn.content.name.color }}
+                className={`w-full text-center ${getFontStyleClassname(itemTelegram.content.name.style)} ${getFontSizeClassname(itemTelegram.content.name.size)} `}
+                style={{ color: itemTelegram.content.name.color }}
               >
-                {itemLinkedIn.content.name.title}
+                {itemTelegram.content.name.title}
               </p>
             </div>
           </Link>
