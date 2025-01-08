@@ -36,6 +36,7 @@ import TwitterSection from "./section-item/Twitter";
 import WhatsAppSection from "./section-item/WhatsApp";
 import EmailSection from "./section-item/Email";
 import LinkedInSection from "./section-item/LinkedIn";
+import TelegramSection from "./section-item/Telegram";
 
 export default function ComponentView() {
   const { items, moveUp, moveDown, removeItem, toggleActive } =
@@ -120,6 +121,8 @@ export default function ComponentView() {
                 <EmailSection item={item} />
               ) : item.content.type == "linkedIn" ? (
                 <LinkedInSection item={item} />
+              ) : item.content.type == "telegram" ? (
+                <TelegramSection item={item} />
               ) : null}
             </AccordionContent>
           </AccordionItem>

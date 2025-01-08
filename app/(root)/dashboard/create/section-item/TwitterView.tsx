@@ -18,7 +18,9 @@ export default function TwitterView() {
   return (
     <>
       {itemTwitter?.content.type == "twitter" && (
-        <div className={`${getIsActiveClassname(itemTwitter.isActive)} p-4`}>
+        <div
+          className={`${getIsActiveClassname(itemTwitter.isActive)} p-4 hover:scale-95 animate-in animate-out`}
+        >
           <Link
             href={`https://twitter.com/${itemTwitter.content.link}`}
             target="_blank"

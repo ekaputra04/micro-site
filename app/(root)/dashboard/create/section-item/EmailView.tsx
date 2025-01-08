@@ -18,7 +18,9 @@ export default function EmailView() {
   return (
     <>
       {itemEmail?.content.type == "email" && (
-        <div className={`${getIsActiveClassname(itemEmail.isActive)} p-4`}>
+        <div
+          className={`${getIsActiveClassname(itemEmail.isActive)} p-4 hover:scale-95 animate-in animate-out`}
+        >
           <Link href={`mailto:${itemEmail.content.email}`} target="_blank">
             <div
               className={`relative flex items-center p-4 ${getShapeClassname(itemEmail.content.shape)}`}

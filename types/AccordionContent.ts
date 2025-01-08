@@ -121,6 +121,40 @@ type LinkedInContent = {
   shape: Shape;
 };
 
+type TelegramContent = {
+  type: "telegram";
+  name: {
+    title: string;
+    style: {
+      bold: boolean;
+      italic: boolean;
+      underline: boolean;
+    };
+    size: Size;
+    color: string;
+  };
+  username: string;
+  backgroundColor: string;
+  shape: Shape;
+};
+
+type InstagramContent = {
+  type: "instagram";
+  name: {
+    title: string;
+    style: {
+      bold: boolean;
+      italic: boolean;
+      underline: boolean;
+    };
+    size: Size;
+    color: string;
+  };
+  username: string;
+  backgroundColor: string;
+  shape: Shape;
+};
+
 type TextContent = {
   type: "text";
   text: string;
@@ -133,4 +167,6 @@ export type AccordionContent =
   | WhatsAppContent
   | EmailContent
   | LinkedInContent
+  | TelegramContent
+  | InstagramContent
   | TextContent;

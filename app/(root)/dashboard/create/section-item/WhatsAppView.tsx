@@ -18,7 +18,9 @@ export default function WhatsAppView() {
   return (
     <>
       {itemContactUs?.content.type == "whatsapp" && (
-        <div className={`${getIsActiveClassname(itemContactUs.isActive)} p-4`}>
+        <div
+          className={`${getIsActiveClassname(itemContactUs.isActive)} p-4 hover:scale-95 animate-in animate-out`}
+        >
           <Link
             href={`https://wa.me/${itemContactUs.content.phoneNumber}`}
             target="_blank"

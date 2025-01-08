@@ -18,7 +18,9 @@ export default function ContactUsView() {
   return (
     <>
       {itemContactUs?.content.type == "phone" && (
-        <div className={`${getIsActiveClassname(itemContactUs.isActive)} p-4`}>
+        <div
+          className={`${getIsActiveClassname(itemContactUs.isActive)} p-4 hover:scale-95 animate-in animate-out`}
+        >
           <Link
             href={`tel:${itemContactUs.content.phoneNumber}`}
             target="_blank"

@@ -152,6 +152,48 @@ const useAccordionStore = create<AccordionStore>((set) => ({
       },
       isActive: true,
     },
+    {
+      id: "item-7",
+      title: "Instagram",
+      content: {
+        type: "instagram",
+        name: {
+          title: "Instagram",
+          style: {
+            bold: false,
+            italic: false,
+            underline: false,
+          },
+          size: "normal",
+          color: COLOR.PRIMARY,
+        },
+        username: "ptekaptra",
+        backgroundColor: COLOR.BACKGROUND,
+        shape: "rounded",
+      },
+      isActive: true,
+    },
+    {
+      id: "item-8",
+      title: "Telegram",
+      content: {
+        type: "telegram",
+        name: {
+          title: "Telegram",
+          style: {
+            bold: false,
+            italic: false,
+            underline: false,
+          },
+          size: "normal",
+          color: COLOR.PRIMARY,
+        },
+        username: "ptekaptr",
+        backgroundColor: COLOR.BACKGROUND,
+        shape: "rounded",
+      },
+      isActive: true,
+    },
   ],
 
   moveUp: (index) =>
