@@ -9,7 +9,6 @@ import {
   lightenColorWithOpacity,
 } from "@/utils/classNameUtils";
 import { IconBrandWhatsapp } from "@tabler/icons-react";
-import { Phone } from "lucide-react";
 import Link from "next/link";
 
 export default function WhatsAppView() {
@@ -20,7 +19,10 @@ export default function WhatsAppView() {
     <>
       {itemContactUs?.content.type == "whatsapp" && (
         <div className={`${getIsActiveClassname(itemContactUs.isActive)} p-4`}>
-          <Link href={`https://wa.me/${itemContactUs.content.phoneNumber}`}>
+          <Link
+            href={`https://wa.me/${itemContactUs.content.phoneNumber}`}
+            target="_blank"
+          >
             <div
               className={`relative flex items-center p-4 ${getShapeClassname(itemContactUs.content.shape)}`}
               style={{ background: itemContactUs.content.backgroundColor }}

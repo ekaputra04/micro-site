@@ -8,7 +8,7 @@ import {
   getShapeClassname,
   lightenColorWithOpacity,
 } from "@/utils/classNameUtils";
-import { Phone, Twitter, X } from "lucide-react";
+import { Twitter } from "lucide-react";
 import Link from "next/link";
 
 export default function TwitterView() {
@@ -19,7 +19,10 @@ export default function TwitterView() {
     <>
       {itemTwitter?.content.type == "twitter" && (
         <div className={`${getIsActiveClassname(itemTwitter.isActive)} p-4`}>
-          <Link href={`https://twitter.com/${itemTwitter.content.link}`}>
+          <Link
+            href={`https://twitter.com/${itemTwitter.content.link}`}
+            target="_blank"
+          >
             <div
               className={`relative flex items-center p-4 ${getShapeClassname(itemTwitter.content.shape)}`}
               style={{ background: itemTwitter.content.backgroundColor }}

@@ -19,7 +19,10 @@ export default function ContactUsView() {
     <>
       {itemContactUs?.content.type == "phone" && (
         <div className={`${getIsActiveClassname(itemContactUs.isActive)} p-4`}>
-          <Link href={`tel:${itemContactUs.content.phoneNumber}`}>
+          <Link
+            href={`tel:${itemContactUs.content.phoneNumber}`}
+            target="_blank"
+          >
             <div
               className={`relative flex items-center p-4 ${getShapeClassname(itemContactUs.content.shape)}`}
               style={{ background: itemContactUs.content.backgroundColor }}

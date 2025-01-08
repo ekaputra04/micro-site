@@ -207,9 +207,9 @@ export default function LinkedInSection({ item }: LinkedInSectionProps) {
             />
           </div>
           <div className="space-y-2 py-2">
-            <p className="font-semibold">UserName</p>
+            <p className="font-semibold">Link</p>
             <Input
-              placeholder="Input username here..."
+              placeholder="Input link here..."
               onChange={(e) => handleUpdateLink(e.target.value)}
             />
           </div>

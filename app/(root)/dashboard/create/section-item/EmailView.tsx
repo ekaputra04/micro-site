@@ -8,7 +8,7 @@ import {
   getShapeClassname,
   lightenColorWithOpacity,
 } from "@/utils/classNameUtils";
-import { Mail, Phone, Twitter, X } from "lucide-react";
+import { Mail } from "lucide-react";
 import Link from "next/link";
 
 export default function EmailView() {
@@ -19,7 +19,7 @@ export default function EmailView() {
     <>
       {itemEmail?.content.type == "email" && (
         <div className={`${getIsActiveClassname(itemEmail.isActive)} p-4`}>
-          <Link href={`mailto:${itemEmail.content.email}`}>
+          <Link href={`mailto:${itemEmail.content.email}`} target="_blank">
             <div
               className={`relative flex items-center p-4 ${getShapeClassname(itemEmail.content.shape)}`}
               style={{ background: itemEmail.content.backgroundColor }}
