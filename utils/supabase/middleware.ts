@@ -1,5 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
+import { getUserBySlug } from "../userUtils";
 
 export const updateSession = async (request: NextRequest) => {
   // This `try/catch` block is only here for the interactive tutorial.
@@ -38,13 +39,35 @@ export const updateSession = async (request: NextRequest) => {
     // This will refresh session if expired - required for Server Components
     // https://supabase.com/docs/guides/auth/server-side/nextjs
     const user = await supabase.auth.getUser();
+    const pathname = request.nextUrl.pathname;
+
+    if (!user) {
+      if (pathname === "/" || pathname.startsWith("/public")) {
+        return response;
+      }
+
+      if (pathname.startsWith("/dashboard")) {
+        return NextResponse.redirect(new URL("/sign-in", request.url));
+      }
+    }
+
+    if (user) {
+      const userData = await getUserBySlug(user.data.user?.id as string);
+
+      if (pathname === "/sign-in" || pathname === "/sign-up") {
+        return NextResponse.redirect(new URL("/", request.url));
+      }
+
+      response.headers.set("x-user-slug", user.data.user?.id as string);
+      response.headers.set("x-user-id", userData?.id.toString() as string);
+    }
 
     // protected routes
-    if (request.nextUrl.pathname.startsWith("/protected") && user.error) {
+    if (pathname.startsWith("/protected") && user.error) {
       return NextResponse.redirect(new URL("/sign-in", request.url));
     }
 
-    // if (request.nextUrl.pathname === "/" && !user.error) {
+    // if (pathname === "/" && !user.error) {
     //   return NextResponse.redirect(new URL("/protected", request.url));
     // }
 

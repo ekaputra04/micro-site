@@ -1,6 +1,6 @@
 "use server";
 
-import { AccordionItem } from "@/hooks/useAccordionStore";
+import { AccordionItem } from "@/types/AccordionItem";
 import { Post, PrismaClient } from "@prisma/client";
 import { revalidateTag, unstable_cache } from "next/cache";
 
