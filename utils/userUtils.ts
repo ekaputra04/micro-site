@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 
 export const getUserBySlug = unstable_cache(
   async (slug: string) => {
-    return await prisma.post.findFirst({
+    return await prisma.user.findFirst({
       where: { slug: slug },
     });
   },

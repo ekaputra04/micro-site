@@ -7,6 +7,7 @@ export const updateSession = async (request: NextRequest) => {
   // Feel free to remove once you have Supabase connected.
   try {
     // Create an unmodified response
+
     let response = NextResponse.next({
       request: {
         headers: request.headers,
@@ -38,7 +39,11 @@ export const updateSession = async (request: NextRequest) => {
 
     // This will refresh session if expired - required for Server Components
     // https://supabase.com/docs/guides/auth/server-side/nextjs
-    const user = await supabase.auth.getUser();
+    const {
+      data: { user },
+      error,
+    } = await supabase.auth.getUser();
+
     const pathname = request.nextUrl.pathname;
 
     if (!user) {
@@ -52,18 +57,19 @@ export const updateSession = async (request: NextRequest) => {
     }
 
     if (user) {
-      const userData = await getUserBySlug(user.data.user?.id as string);
+      const userData = await getUserBySlug(user.id as string);
 
       if (pathname === "/sign-in" || pathname === "/sign-up") {
         return NextResponse.redirect(new URL("/", request.url));
       }
 
-      response.headers.set("x-user-slug", user.data.user?.id as string);
+      response.headers.set("x-user-slug", user.id as string);
+      response.cookies.set("x-user-slug", user.id as string);
       response.headers.set("x-user-id", userData?.id.toString() as string);
     }
 
     // protected routes
-    if (pathname.startsWith("/protected") && user.error) {
+    if (pathname.startsWith("/protected") && error) {
       return NextResponse.redirect(new URL("/sign-in", request.url));
     }
 

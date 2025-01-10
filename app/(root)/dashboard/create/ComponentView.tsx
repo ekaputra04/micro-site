@@ -8,8 +8,22 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import useAccordionStore from "@/hooks/useAccordionStore";
-import { EllipsisVertical, MoveDown, MoveUp, Plus, Trash2 } from "lucide-react";
-import React from "react";
+import {
+  CaseUpper,
+  EllipsisVertical,
+  Instagram,
+  Linkedin,
+  Mail,
+  MoveDown,
+  MoveUp,
+  Phone,
+  Plus,
+  Space,
+  Trash2,
+  Twitter,
+  User,
+} from "lucide-react";
+import React, { useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -40,10 +54,34 @@ import TelegramSection from "./section-item/Telegram";
 import InstagramSection from "./section-item/Instagram";
 import SpaceSection from "./section-item/Space";
 import TextSection from "./section-item/Text";
+import { createPost } from "@/utils/postUtils";
+import {
+  IconBrandTelegram,
+  IconBrandTiktok,
+  IconBrandWhatsapp,
+} from "@tabler/icons-react";
 
 export default function ComponentView() {
   const { items, moveUp, moveDown, removeItem, toggleActive } =
     useAccordionStore();
+  const [isLoading, setIsLoading] = useState(false);
+
+  async function onSubmit() {
+    setIsLoading(true);
+    try {
+      const post = await createPost(
+        "6cd2d5ed-8ecc-4081-b622-ae96318d4ac2",
+        "test",
+        "test",
+        items
+      );
+      console.log(JSON.stringify(post));
+    } catch (error) {
+      console.error("Error creating post:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   return (
     <>
@@ -52,14 +90,26 @@ export default function ComponentView() {
           <Plus className="w-4 h-4" />
           <p>Add new component</p>
         </Button>
-        <Button className="bg-green-500 hover:bg-green-600">Save</Button>
+        <Button
+          className="bg-green-500 hover:bg-green-600"
+          onClick={() => {
+            onSubmit();
+          }}
+          disabled={isLoading}
+        >
+          {isLoading ? "Saving..." : "Save"}
+        </Button>
       </div>
 
       <Accordion type="single" collapsible>
         {items.map((item, index) => (
           <AccordionItem key={item.id} value={item.id}>
             <div className="flex justify-between items-center">
-              <AccordionTrigger>{item.title}</AccordionTrigger>
+              <AccordionTrigger>
+                <div className="flex items-center gap-4">
+                  {getAccordionIcon(item.title)} {item.title}
+                </div>
+              </AccordionTrigger>
               <div className="flex items-center gap-4">
                 <Switch
                   checked={item.isActive}
@@ -139,4 +189,30 @@ export default function ComponentView() {
       </Accordion>
     </>
   );
+}
+
+function getAccordionIcon(title: string) {
+  return title == "Profile" ? (
+    <User className="w-5 h-5" />
+  ) : title == "Contact Us" ? (
+    <Phone className="w-5 h-5" />
+  ) : title == "Space" ? (
+    <Space className="w-5 h-5" />
+  ) : title == "Twitter X" ? (
+    <Twitter className="w-5 h-5" />
+  ) : title == "WhatsApp" ? (
+    <IconBrandWhatsapp className="w-5 h-5" />
+  ) : title == "Email" ? (
+    <Mail className="w-5 h-5" />
+  ) : title == "LinkedIn" ? (
+    <Linkedin className="w-5 h-5" />
+  ) : title == "Instagram" ? (
+    <Instagram className="w-5 h-5" />
+  ) : title == "Telegram" ? (
+    <IconBrandTelegram className="w-5 h-5" />
+  ) : title == "Text" ? (
+    <CaseUpper className="w-5 h-5" />
+  ) : title == "Tiktok" ? (
+    <IconBrandTiktok className="w-5 h-5" />
+  ) : null;
 }

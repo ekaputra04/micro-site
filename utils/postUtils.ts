@@ -7,19 +7,19 @@ import { revalidateTag, unstable_cache } from "next/cache";
 const prisma = new PrismaClient();
 
 export const createPost = async (
-  userId: number,
-  postData: {
-    title: string;
-    content: AccordionItem[];
-  }
+  userId: string,
+  slug: string,
+  title: string,
+  content: AccordionItem[]
 ): Promise<Post> => {
-  const contentData = JSON.stringify(postData.content);
+  const contentData = JSON.stringify(content);
   try {
     const post = await prisma.post.create({
       data: {
-        ...postData,
-        content: contentData,
+        title: title,
         authorId: userId,
+        slug: slug,
+        content: contentData,
       },
     });
 
@@ -32,8 +32,8 @@ export const createPost = async (
   }
 };
 
-export const getPostsByUser = unstable_cache(
-  async (userId: number) => {
+export const getPostsByUserId = unstable_cache(
+  async (userId: string) => {
     return await prisma.post.findMany({
       where: { authorId: userId },
       orderBy: { createdAt: "desc" },
