@@ -1,13 +1,32 @@
-export default function ButtonTheme() {
+"use client";
+
+import useMainInformationStore from "@/hooks/useMainInformationStore";
+import { ThemeDataType } from "@/types/themeData";
+
+export default function ButtonTheme({ theme }: { theme: ThemeDataType }) {
+  const { items, setItems } = useMainInformationStore();
+
+  function handleClickButtonTheme(url: string) {
+    setItems({
+      ...items,
+      backgroundImage: url,
+    });
+  }
+
   return (
     <>
-      <button className="p-1 border rounded-md">
-        <img
-          src="/images/batik.png"
-          alt="Image"
-          className="aspect-4/5 object-cover"
-        />
-        <p>Batik</p>
+      <button
+        className={`flex flex-col p-1 border rounded-md ${items.backgroundImage == theme.url ? "bg-green-200 border-green-500" : ""}`}
+        onClick={() => handleClickButtonTheme(theme.url)}
+      >
+        <div className="w-full h-24">
+          <img
+            src={theme.url}
+            alt="Image"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <p className="mx-auto text-sm">{theme.name}</p>
       </button>
     </>
   );
