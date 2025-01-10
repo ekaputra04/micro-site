@@ -6,7 +6,6 @@ import { useState } from "react";
 import ButtonTheme from "./ButtonTheme";
 import { Button } from "@/components/ui/button";
 import { Pencil, Trash } from "lucide-react";
-import Link from "next/link";
 import { themeData } from "@/types/themeData";
 import useMainInformationStore from "@/hooks/useMainInformationStore";
 
@@ -17,25 +16,38 @@ export default function SettingView() {
     console.log(files);
   };
 
-  const { items, setItems } = useMainInformationStore();
+  const { mainInformation, setItems } = useMainInformationStore();
 
   function handleChangeTitle(title: string) {
     setItems({
-      ...items,
+      ...mainInformation,
       title,
     });
   }
 
   function handleChangeLink(link: string) {
     setItems({
-      ...items,
+      ...mainInformation,
       link,
+    });
+  }
+
+  function handleupdateBackgroundColor(color: string) {
+    setItems({
+      ...mainInformation,
+      backgroundColor: color,
+    });
+  }
+
+  function handleDeleteBackgroundImage() {
+    setItems({
+      ...mainInformation,
+      backgroundImage: "",
     });
   }
 
   return (
     <>
-      {JSON.stringify(items)}
       <div className="space-y-4">
         <h2 className="font-bold text-2xl">📝 Main Information</h2>
         <div className="">
@@ -68,22 +80,29 @@ export default function SettingView() {
         <h4 className="font-semibold text-lg">Background Image</h4>
 
         <div className="relative bg-slate-200 w-full h-48 group">
-          {items.backgroundImage ? (
+          {mainInformation.backgroundImage ? (
             <img
-              src={items.backgroundImage}
+              src={mainInformation.backgroundImage}
               alt=""
               className="relative mx-auto w-fit h-48 aspect-4/5 object-cover"
             />
           ) : null}
           <div className="group-hover:block right-2 bottom-2 absolute space-x-2 hidden animate-in animate-out">
-            <Button variant={"outline"}>
-              <Trash className="w-4 h-4" />
-            </Button>
-            <Link href={"/"}>
-              <Button variant={"outline"}>
-                <Pencil className="w-4 h-4" />
+            <div className="flex gap-2">
+              <Button
+                variant={"outline"}
+                onClick={() => handleDeleteBackgroundImage()}
+              >
+                <Trash className="w-4 h-4" />
               </Button>
-            </Link>
+              <Label
+                htmlFor="backgroundImage"
+                className={`border-input bg-background hover:bg-accent py-2 px-4 border  hover:text-accent-foreground rounded-md hover:cursor-pointer items-center flex`}
+              >
+                <Pencil className="w-4 h-4" />
+              </Label>
+              <Input id="backgroundImage" type="file" className="hidden" />
+            </div>
           </div>
         </div>
 
@@ -91,11 +110,9 @@ export default function SettingView() {
 
         <input
           type="color"
-          onChange={(event) => {
-            console.log(event.target.value);
-          }}
+          defaultValue={mainInformation.backgroundColor}
+          onChange={(event) => handleupdateBackgroundColor(event.target.value)}
         />
-        <h4 className="font-semibold text-lg">Background Dark</h4>
       </div>
     </>
   );

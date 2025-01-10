@@ -1,10 +1,16 @@
+import { createClient } from "@/utils/supabase/server";
 import CreateView from "./CreateView";
 
-export default function CreatePage() {
+export default async function CreatePage() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   return (
     <>
       <div className="">
-        <CreateView />
+        <CreateView userId={user?.id as string} />
       </div>
     </>
   );

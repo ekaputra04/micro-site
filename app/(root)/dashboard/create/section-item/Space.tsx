@@ -42,7 +42,6 @@ export default function SpaceSection({ item }: SpaceSectionProps) {
 
   return (
     <>
-      {JSON.stringify(item, null, 2)}
       {item.content.type === "space" && (
         <div className="flex gap-4 p-2">
           <div className="space-y-2 w-1/2">

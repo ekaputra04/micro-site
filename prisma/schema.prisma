@@ -15,16 +15,18 @@ datasource db {
 }
 
 model Post {
-  id        Int      @id @default(autoincrement())
-  title     String
-  slug      String   @unique
-  content   Json?
-  published Boolean  @default(true)
-  isStarred Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-  author    User?    @relation(fields: [authorId], references: [id])
-  authorId  String?
+  id              Int      @id @default(autoincrement())
+  title           String
+  slug            String   @unique
+  backgroundColor String
+  backgroundImage String
+  content         Json?
+  published       Boolean  @default(true)
+  isStarred       Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @default(now())
+  author          User?    @relation(fields: [authorId], references: [id])
+  authorId        String?
 }
 
 model User {

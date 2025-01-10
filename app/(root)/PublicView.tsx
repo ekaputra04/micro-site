@@ -11,9 +11,12 @@ import TelegramView from "./dashboard/create/section-item/TelegramView";
 import InstagramView from "./dashboard/create/section-item/InstagramView";
 import SpaceView from "./dashboard/create/section-item/SpaceView";
 import TextView from "./dashboard/create/section-item/TextView";
+import useMainInformationStore from "@/hooks/useMainInformationStore";
 
 export default function PublicView() {
   const { items } = useAccordionStore();
+  const { mainInformation } = useMainInformationStore();
+
   return (
     <>
       <div className="top-16 right-0 left-0 sticky rounded-xl">
@@ -23,7 +26,17 @@ export default function PublicView() {
             <Monitor className="w-4 h-4 text-white" />
           </Button>
         </div>
-        <div className="bg-white h-96 overflow-y-scroll">
+        <div
+          className={`relative h-96 overflow-y-scroll ${
+            mainInformation.backgroundImage ? "bg-cover bg-center" : "bg-white"
+          }`}
+          style={{
+            backgroundImage: mainInformation.backgroundImage
+              ? `url(${mainInformation.backgroundImage})`
+              : undefined,
+            backgroundColor: mainInformation.backgroundColor,
+          }}
+        >
           {items.map((item) => (
             <div className="" key={item.id}>
               {item.content.type == "profile" ? (

@@ -91,7 +91,6 @@ export default function TextSection({ item }: TextSectionProps) {
 
   return (
     <>
-      {JSON.stringify(item, null, 2)}
       {item.content.type === "text" && (
         <div className="p-2">
           <div className="space-y-2 py-2">

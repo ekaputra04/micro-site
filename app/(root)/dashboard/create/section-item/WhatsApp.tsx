@@ -130,7 +130,6 @@ export default function WhatsAppSection({ item }: WhatsAppSectionProps) {
 
   return (
     <>
-      {/* {JSON.stringify(item, null, 2)} */}
       {item.content.type === "whatsapp" && (
         <div className="p-2">
           <div className="space-y-2 py-2">

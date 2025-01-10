@@ -54,7 +54,6 @@ import TelegramSection from "./section-item/Telegram";
 import InstagramSection from "./section-item/Instagram";
 import SpaceSection from "./section-item/Space";
 import TextSection from "./section-item/Text";
-import { createPost } from "@/utils/postUtils";
 import {
   IconBrandTelegram,
   IconBrandTiktok,
@@ -64,24 +63,6 @@ import {
 export default function ComponentView() {
   const { items, moveUp, moveDown, removeItem, toggleActive } =
     useAccordionStore();
-  const [isLoading, setIsLoading] = useState(false);
-
-  async function onSubmit() {
-    setIsLoading(true);
-    try {
-      const post = await createPost(
-        "6cd2d5ed-8ecc-4081-b622-ae96318d4ac2",
-        "test",
-        "test",
-        items
-      );
-      console.log(JSON.stringify(post));
-    } catch (error) {
-      console.error("Error creating post:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  }
 
   return (
     <>
@@ -89,15 +70,6 @@ export default function ComponentView() {
         <Button className="flex items-center gap-2 mb-4">
           <Plus className="w-4 h-4" />
           <p>Add new component</p>
-        </Button>
-        <Button
-          className="bg-green-500 hover:bg-green-600"
-          onClick={() => {
-            onSubmit();
-          }}
-          disabled={isLoading}
-        >
-          {isLoading ? "Saving..." : "Save"}
         </Button>
       </div>
 

@@ -126,7 +126,6 @@ export default function EmailSection({ item }: EmailSectionProps) {
 
   return (
     <>
-      {/* {JSON.stringify(item, null, 2)} */}
       {item.content.type === "email" && (
         <div className="p-2">
           <div className="space-y-2 py-2">

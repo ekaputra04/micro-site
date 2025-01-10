@@ -10,6 +10,8 @@ export const createPost = async (
   userId: string,
   slug: string,
   title: string,
+  backgroundColor: string,
+  backgroundImage: string,
   content: AccordionItem[]
 ): Promise<Post> => {
   const contentData = JSON.stringify(content);
@@ -19,6 +21,8 @@ export const createPost = async (
         title: title,
         authorId: userId,
         slug: slug,
+        backgroundColor: backgroundColor,
+        backgroundImage: backgroundImage,
         content: contentData,
       },
     });

@@ -8,18 +8,18 @@ type MainInformationType = {
 };
 
 interface MainInformationStore {
-  items: MainInformationType;
+  mainInformation: MainInformationType;
   setItems: (newItems: MainInformationType) => void;
 }
 
 const useMainInformationStore = create<MainInformationStore>((set) => ({
-  items: {
+  mainInformation: {
     title: "",
     link: "",
-    backgroundColor: "",
+    backgroundColor: "#ffffff",
     backgroundImage: "",
   },
-  setItems: (newItems) => set({ items: newItems }),
+  setItems: (newItem) => set({ mainInformation: newItem }),
 }));
 
 export default useMainInformationStore;

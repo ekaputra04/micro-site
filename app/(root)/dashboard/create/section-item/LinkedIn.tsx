@@ -126,7 +126,6 @@ export default function LinkedInSection({ item }: LinkedInSectionProps) {
 
   return (
     <>
-      {/* {JSON.stringify(item, null, 2)} */}
       {item.content.type === "linkedIn" && (
         <div className="p-2">
           <div className="space-y-2 py-2">

@@ -126,7 +126,6 @@ export default function TelegramSection({ item }: TelegramSectionProps) {
 
   return (
     <>
-      {/* {JSON.stringify(item, null, 2)} */}
       {item.content.type === "telegram" && (
         <div className="p-2">
           <div className="space-y-2 py-2">
