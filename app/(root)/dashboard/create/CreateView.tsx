@@ -11,7 +11,7 @@ import { createPost } from "@/utils/postUtils";
 import useAccordionStore from "@/hooks/useAccordionStore";
 import useMainInformationStore from "@/hooks/useMainInformationStore";
 import { toast } from "sonner";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import useFileStore from "@/hooks/useFileStore";
 import { uploadFile } from "@/utils/imageUtils";
 
@@ -20,6 +20,8 @@ export default function CreateView({ userId }: { userId: string }) {
   const { items, setItems } = useAccordionStore();
   const { mainInformation } = useMainInformationStore();
   const { itemsFile } = useFileStore();
+
+  const router = useRouter();
 
   async function onSubmit() {
     setIsLoading(true);
@@ -98,11 +100,10 @@ export default function CreateView({ userId }: { userId: string }) {
 
       if (post) {
         toast.success(`${post.title} has been created.`);
-        redirect("/dashboard");
+        router.push("/dashboard");
       }
     } catch (error) {
       console.error("Error creating post:", error);
-      toast.error("Unable to create post");
     } finally {
       setIsLoading(false);
     }

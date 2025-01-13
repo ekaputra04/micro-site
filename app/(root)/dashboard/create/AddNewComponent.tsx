@@ -11,12 +11,15 @@ interface AddNewComponentProps {
   title: string;
   description: string;
   content: AccordionContent;
+  disabled: boolean;
 }
+
 export default function AddNewComponent({
   icon,
   title,
   description,
   content,
+  disabled = false,
 }: AddNewComponentProps) {
   const { addItem } = useAccordionStore();
 
@@ -26,8 +29,6 @@ export default function AddNewComponent({
       content: content,
       isActive: true,
     };
-    console.log(newComponent);
-
     addItem(newComponent as AccordionItem);
   };
 
@@ -41,7 +42,11 @@ export default function AddNewComponent({
             <p className="text-gray-600 text-sm">{description}</p>
           </div>
         </div>
-        <Button className="justify-end px-2" onClick={handleAddComponent}>
+        <Button
+          className="justify-end px-2"
+          onClick={handleAddComponent}
+          disabled={disabled}
+        >
           <Plus className="w-4 h-4" />
         </Button>
       </div>

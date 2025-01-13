@@ -261,16 +261,22 @@ export default function ComponentView() {
       <div
         className={`gap-4 grid grid-cols-2 mt-8 animate-accordion-up ${addComponentActive ? "" : "hidden"}`}
       >
-        {newComponentItems.map((item, index) => (
-          <div className="" key={index}>
-            <AddNewComponent
-              icon={getIconFromTitle(item.title as ElementType)}
-              title={item.title}
-              description={item.description}
-              content={item.content}
-            />
-          </div>
-        ))}
+        {newComponentItems.map((item, index) => {
+          const isItemExists =
+            !["Text", "Space"].includes(item.title) &&
+            items.some((existingItem) => existingItem.title === item.title);
+          return (
+            <div className="" key={index}>
+              <AddNewComponent
+                icon={getIconFromTitle(item.title as ElementType)}
+                title={item.title}
+                description={item.description}
+                content={item.content}
+                disabled={isItemExists}
+              />
+            </div>
+          );
+        })}
       </div>
 
       <Accordion
