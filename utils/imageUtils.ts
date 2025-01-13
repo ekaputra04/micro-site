@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import { v4 as uuidv4 } from "uuid";
 
 const projectUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const projectAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -6,10 +7,12 @@ const projectAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 const supabase = createClient(projectUrl as string, projectAnonKey as string);
 
 export async function uploadFile(file: File) {
-  const filePath = `${file.name}`;
+  const fileExtension = file.name.split(".").pop();
+  const uniqueFileName = `${uuidv4()}.${fileExtension}`;
+
   const { data, error } = await supabase.storage
     .from("images")
-    .upload(filePath, file, {
+    .upload(uniqueFileName, file, {
       upsert: true,
     });
 

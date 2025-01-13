@@ -12,31 +12,92 @@ import useAccordionStore from "@/hooks/useAccordionStore";
 import useMainInformationStore from "@/hooks/useMainInformationStore";
 import { toast } from "sonner";
 import { redirect } from "next/navigation";
+import useFileStore from "@/hooks/useFileStore";
+import { uploadFile } from "@/utils/imageUtils";
 
 export default function CreateView({ userId }: { userId: string }) {
   const [isLoading, setIsLoading] = useState(false);
-  const { items } = useAccordionStore();
+  const { items, setItems } = useAccordionStore();
   const { mainInformation } = useMainInformationStore();
+  const { itemsFile } = useFileStore();
 
   async function onSubmit() {
     setIsLoading(true);
 
     try {
-      if (mainInformation.link == "" || mainInformation.title == "null") {
+      if (mainInformation.link === "" || mainInformation.title === "") {
         toast.error("Please fill in all the fields.");
         return;
       }
+
+      let profilePublicUrl: string | null = null;
+      let headerPublicUrl: string | null = null;
+      let backgroundPublicUrl: string | null = mainInformation.backgroundImage;
+
+      const profileFile = itemsFile.find(
+        (item) => item.type === "profileImage"
+      )?.File;
+      const headerFile = itemsFile.find(
+        (item) => item.type === "headerImage"
+      )?.File;
+      const backgroundFile = itemsFile.find(
+        (item) => item.type === "backgroundImage"
+      )?.File;
+
+      if (profileFile) {
+        const profileUploadResult = await uploadFile(profileFile);
+        if (profileUploadResult.success) {
+          profilePublicUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/${profileUploadResult.data?.path}`;
+        } else {
+          throw new Error("Failed to upload profile image");
+        }
+      }
+
+      if (headerFile) {
+        const headerUploadResult = await uploadFile(headerFile);
+        if (headerUploadResult.success) {
+          headerPublicUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/${headerUploadResult.data?.path}`;
+        } else {
+          throw new Error("Failed to upload header image");
+        }
+      }
+
+      if (backgroundFile) {
+        const backgroundUploadResult = await uploadFile(backgroundFile);
+        if (backgroundUploadResult.success) {
+          backgroundPublicUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/${backgroundUploadResult.data?.path}`;
+        } else {
+          throw new Error("Failed to upload background image");
+        }
+      }
+
+      const updatedItems = useAccordionStore.getState().items.map((item) => {
+        if (item.content.type === "profile") {
+          return {
+            ...item,
+            content: {
+              ...item.content,
+              profileImage: profilePublicUrl || item.content.profileImage,
+              headerImage: headerPublicUrl || item.content.headerImage,
+            },
+          };
+        }
+        return item;
+      });
+
+      setItems(updatedItems);
 
       const post = await createPost(
         userId,
         mainInformation.link,
         mainInformation.title,
         mainInformation.backgroundColor,
-        mainInformation.backgroundImage,
-        items
+        backgroundPublicUrl,
+        updatedItems
       );
+
       if (post) {
-        toast.success(post.title + " has been created.");
+        toast.success(`${post.title} has been created.`);
         redirect("/dashboard");
       }
     } catch (error) {
