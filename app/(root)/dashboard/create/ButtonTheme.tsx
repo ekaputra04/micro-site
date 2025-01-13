@@ -1,16 +1,24 @@
 "use client";
 
+import useFileStore from "@/hooks/useFileStore";
 import useMainInformationStore from "@/hooks/useMainInformationStore";
 import { ThemeDataType } from "@/types/themeData";
 
 export default function ButtonTheme({ theme }: { theme: ThemeDataType }) {
   const { mainInformation, setItems } = useMainInformationStore();
+  const { itemsFile, setItemsFile } = useFileStore();
 
   function handleClickButtonTheme(url: string) {
     setItems({
       ...mainInformation,
       backgroundImage: url,
     });
+    const updatedItems = itemsFile.map((item) =>
+      item.type === "backgroundImage"
+        ? { ...item, File: null, url: null }
+        : item
+    );
+    setItemsFile(updatedItems);
   }
 
   return (

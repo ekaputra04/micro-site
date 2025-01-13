@@ -12,10 +12,12 @@ import InstagramView from "./dashboard/create/section-item/InstagramView";
 import SpaceView from "./dashboard/create/section-item/SpaceView";
 import TextView from "./dashboard/create/section-item/TextView";
 import useMainInformationStore from "@/hooks/useMainInformationStore";
+import useFileStore from "@/hooks/useFileStore";
 
 export default function PublicView() {
   const { items } = useAccordionStore();
   const { mainInformation } = useMainInformationStore();
+  const { itemsFile } = useFileStore();
 
   return (
     <>
@@ -27,14 +29,17 @@ export default function PublicView() {
           </Button>
         </div>
         <div
-          className={`relative h-96 overflow-y-scroll ${
+          className={`relative h-96 w-full overflow-y-scroll ${
             mainInformation.backgroundImage ? "bg-cover bg-center" : "bg-white"
           }`}
           style={{
-            backgroundImage: mainInformation.backgroundImage
-              ? `url(${mainInformation.backgroundImage})`
-              : undefined,
+            backgroundImage:
+              itemsFile.find((item) => item.type === "backgroundImage")?.url ||
+              mainInformation.backgroundImage
+                ? `url(${itemsFile.find((item) => item.type === "backgroundImage")?.url || mainInformation.backgroundImage})`
+                : undefined,
             backgroundColor: mainInformation.backgroundColor,
+            objectFit: "cover",
           }}
         >
           {items.map((item) => (

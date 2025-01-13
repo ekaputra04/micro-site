@@ -1,6 +1,7 @@
 "use client";
 
 import useAccordionStore from "@/hooks/useAccordionStore";
+import useFileStore from "@/hooks/useFileStore";
 import {
   getFontSizeClassname,
   getFontStyleClassname,
@@ -10,6 +11,7 @@ import {
 
 export default function ProfileView() {
   const { items } = useAccordionStore();
+  const { itemsFile } = useFileStore();
 
   const itemProfile = items.find((item) => item.content.type === "profile");
 
@@ -19,7 +21,10 @@ export default function ProfileView() {
         <div className={`${getIsActiveClassname(itemProfile.isActive)}`}>
           <div className="w-full h-48">
             <img
-              src={itemProfile.content.headerImage}
+              src={
+                itemsFile.find((item) => item.type === "headerImage")?.url ??
+                itemProfile.content.headerImage
+              }
               alt="Background"
               className="w-full h-full object-cover"
             />
@@ -28,7 +33,10 @@ export default function ProfileView() {
             className={`relative mx-auto -mt-12  w-24 h-24 overflow-hidden ${getShapeClassname(itemProfile.content.shape)}`}
           >
             <img
-              src={itemProfile.content.profileImage}
+              src={
+                itemsFile.find((item) => item.type === "profileImage")?.url ??
+                itemProfile.content.profileImage
+              }
               alt=""
               className={`object-cover`}
             />

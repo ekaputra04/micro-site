@@ -2,21 +2,44 @@
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useState } from "react";
 import ButtonTheme from "./ButtonTheme";
 import { Button } from "@/components/ui/button";
 import { Pencil, Trash } from "lucide-react";
 import { themeData } from "@/types/themeData";
 import useMainInformationStore from "@/hooks/useMainInformationStore";
+import useFileStore from "@/hooks/useFileStore";
+import { toast } from "sonner";
 
 export default function SettingView() {
-  const [files, setFiles] = useState<File[]>([]);
-  const handleFileUpload = (files: File[]) => {
-    setFiles(files);
-    console.log(files);
-  };
-
+  const { itemsFile, setItemsFile } = useFileStore();
   const { mainInformation, setItems } = useMainInformationStore();
+  const URL = process.env.NEXT_PUBLIC_URL;
+
+  const handleFileChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    type: "profileImage" | "backgroundImage" | "headerImage"
+  ) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 1048576) {
+        toast.error("Ukuran file maksimal adalah 1 MB.");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        const updatedItems = itemsFile.map((item) =>
+          item.type === type
+            ? { ...item, File: file, url: reader.result as string }
+            : item
+        );
+        setItemsFile(updatedItems);
+        e.target.value = "";
+        setItems({ ...mainInformation, backgroundImage: "" });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   function handleChangeTitle(title: string) {
     setItems({
@@ -39,11 +62,17 @@ export default function SettingView() {
     });
   }
 
-  function handleDeleteBackgroundImage() {
+  function handleDeleteBackgroundImage(
+    type: "profileImage" | "backgroundImage" | "headerImage"
+  ) {
     setItems({
       ...mainInformation,
       backgroundImage: "",
     });
+    const updatedItems = itemsFile.map((item) =>
+      item.type === type ? { ...item, File: null, url: null } : item
+    );
+    setItemsFile(updatedItems);
   }
 
   return (
@@ -64,7 +93,7 @@ export default function SettingView() {
           <Input
             type="link"
             id="link"
-            placeholder="Insert link here..."
+            placeholder={`${URL}/{your-link}`}
             onChange={(e) => handleChangeLink(e.target.value)}
           />
         </div>
@@ -80,28 +109,40 @@ export default function SettingView() {
         <h4 className="font-semibold text-lg">Background Image</h4>
 
         <div className="relative bg-slate-200 w-full h-48 group">
-          {mainInformation.backgroundImage ? (
+          {itemsFile.find((item) => item.type === "backgroundImage")?.url ||
+          mainInformation.backgroundImage ? (
             <img
-              src={mainInformation.backgroundImage}
-              alt=""
+              src={
+                itemsFile.find((item) => item.type === "backgroundImage")
+                  ?.url ?? mainInformation.backgroundImage
+              }
+              alt="Image"
               className="relative mx-auto w-fit h-48 aspect-4/5 object-cover"
             />
           ) : null}
           <div className="group-hover:block right-2 bottom-2 absolute space-x-2 hidden animate-in animate-out">
             <div className="flex gap-2">
-              <Button
-                variant={"outline"}
-                onClick={() => handleDeleteBackgroundImage()}
-              >
-                <Trash className="w-4 h-4" />
-              </Button>
               <Label
                 htmlFor="backgroundImage"
-                className={`border-input bg-background hover:bg-accent py-2 px-4 border  hover:text-accent-foreground rounded-md hover:cursor-pointer items-center flex`}
+                className={`flex items-center border-input px-4 bg-background hover:bg-accent py-2  border  hover:text-accent-foreground rounded-md hover:cursor-pointer`}
               >
                 <Pencil className="w-4 h-4" />
               </Label>
-              <Input id="backgroundImage" type="file" className="hidden" />
+              <Input
+                id="backgroundImage"
+                name="backgroundImage"
+                type="file"
+                className="hidden"
+                accept="image/*"
+                onChange={(e) => handleFileChange(e, "backgroundImage")}
+              />
+
+              <Button
+                variant={"outline"}
+                onClick={() => handleDeleteBackgroundImage("backgroundImage")}
+              >
+                <Trash className="w-4 h-4" />
+              </Button>
             </div>
           </div>
         </div>
@@ -113,6 +154,7 @@ export default function SettingView() {
           defaultValue={mainInformation.backgroundColor}
           onChange={(event) => handleupdateBackgroundColor(event.target.value)}
         />
+        <p>{JSON.stringify(itemsFile, null, 2)}</p>
       </div>
     </>
   );

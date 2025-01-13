@@ -18,19 +18,50 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { AccordionItem } from "@/types/AccordionItem";
 import { COLOR } from "@/types/Consts";
 import { Shape, Size } from "@/types/AccordionContent";
+import useFileStore from "@/hooks/useFileStore";
+import { toast } from "sonner";
 
 interface ProfileSectionProps {
   item: AccordionItem;
 }
 
 export default function ProfileSection({ item }: ProfileSectionProps) {
-  const [files, setFiles] = useState<File[]>([]);
-  const handleFileUpload = (files: File[]) => {
-    setFiles(files);
-    console.log(files);
+  const { updateItem } = useAccordionStore();
+  const { itemsFile, setItemsFile } = useFileStore();
+
+  const handleFileChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    type: "profileImage" | "backgroundImage" | "headerImage"
+  ) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 1048576) {
+        toast.error("Ukuran file maksimal adalah 1 MB.");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        const updatedItems = itemsFile.map((item) =>
+          item.type === type
+            ? { ...item, File: file, url: reader.result as string }
+            : item
+        );
+        setItemsFile(updatedItems);
+        e.target.value = "";
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
-  const { updateItem } = useAccordionStore();
+  const handleDeleteFile = (
+    type: "profileImage" | "backgroundImage" | "headerImage"
+  ) => {
+    const updatedItems = itemsFile.map((item) =>
+      item.type === type ? { ...item, File: null, url: null } : item
+    );
+    setItemsFile(updatedItems);
+  };
 
   const handleUpdateBackgroundColor = (
     backgroundColor: string = COLOR.BACKGROUND
@@ -199,7 +230,10 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
         <div className="p-2">
           <div className="relative w-full h-48">
             <img
-              src={item.content.headerImage}
+              src={
+                itemsFile.find((item) => item.type === "headerImage")?.url ??
+                item.content.headerImage
+              }
               alt="Background"
               className="w-full h-full object-cover"
             />
@@ -210,35 +244,57 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
               >
                 <Pencil className="w-4 h-4" />
               </Label>
-              <Input id="background" type="file" className="hidden" />
-              <Button className="px-2 h-fit">
+              <Input
+                id="background"
+                type="file"
+                className="hidden"
+                accept="image/*"
+                onChange={(e) => handleFileChange(e, "headerImage")}
+              />
+              <Button
+                className="px-2 h-fit"
+                onClick={() => handleDeleteFile("headerImage")}
+              >
                 <Trash className="w-4 h-4" />
               </Button>
             </div>
           </div>
 
-          {item.content.profileImage ? (
-            <div
-              className={`relative mx-auto -mt-12  w-24 h-24 overflow-hidden ${getShapeClassname(item.content.shape as Shape)}`}
+          <div
+            className={`relative overflow-hidden mx-auto -mt-12  w-24 h-24  ${getShapeClassname(item.content.shape as Shape)}`}
+          >
+            <img
+              src={
+                itemsFile.find((item) => item.type === "profileImage")?.url ??
+                item.content.profileImage
+              }
+              alt="Image"
+              className={`object-cover `}
+            />
+          </div>
+
+          <div className="flex justify-center gap-2 mx-auto mt-4">
+            <Label
+              htmlFor="profileImage"
+              className={`block border-input bg-background hover:bg-accent p-2 border  hover:text-accent-foreground rounded-md hover:cursor-pointer`}
             >
-              <img
-                src={item.content.profileImage}
-                alt=""
-                className={`object-cover `}
-              />
-            </div>
-          ) : (
-            <div className="relative bg-gray-200 mx-auto -mt-12 w-24 h-24 overflow-hidden">
-              <Label
-                htmlFor="profile"
-                className={`flex flex-col justify-center items-center gap-2 border h-full hover:cursor-pointer ${getShapeClassname(item.content.shape as Shape)}`}
-              >
-                <Plus className="text-black" />
-                <p className="text-black">Add Photo</p>
-              </Label>
-              <Input id="profile" type="file" className="hidden" />
-            </div>
-          )}
+              <Pencil className="w-4 h-4" />
+            </Label>
+            <Input
+              id="profileImage"
+              name="profileImage"
+              type="file"
+              className="hidden"
+              accept="image/*"
+              onChange={(e) => handleFileChange(e, "profileImage")}
+            />
+            <Button
+              className="px-2 h-fit"
+              onClick={() => handleDeleteFile("profileImage")}
+            >
+              <Trash className="w-4 h-4" />
+            </Button>
+          </div>
 
           <div className="space-y-2 py-2">
             <p className="font-semibold">Name</p>
