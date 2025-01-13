@@ -9,19 +9,11 @@ import {
 import { Button } from "@/components/ui/button";
 import useAccordionStore from "@/hooks/useAccordionStore";
 import {
-  CaseUpper,
   EllipsisVertical,
-  Instagram,
-  Linkedin,
-  Mail,
   MoveDown,
   MoveUp,
-  Phone,
   Plus,
-  Space,
   Trash2,
-  Twitter,
-  User,
   X,
 } from "lucide-react";
 import React, { useState } from "react";
@@ -55,11 +47,6 @@ import TelegramSection from "./section-item/Telegram";
 import InstagramSection from "./section-item/Instagram";
 import SpaceSection from "./section-item/Space";
 import TextSection from "./section-item/Text";
-import {
-  IconBrandTelegram,
-  IconBrandTiktok,
-  IconBrandWhatsapp,
-} from "@tabler/icons-react";
 import AddNewComponent from "./AddNewComponent";
 import { ElementType } from "@/types/types";
 import { getIconFromTitle } from "@/utils/iconUtils";
@@ -278,8 +265,9 @@ export default function ComponentView() {
           <div className="" key={index}>
             <AddNewComponent
               icon={getIconFromTitle(item.title as ElementType)}
-              name={item.title}
+              title={item.title}
               description={item.description}
+              content={item.content}
             />
           </div>
         ))}
