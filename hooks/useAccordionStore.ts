@@ -7,16 +7,16 @@ interface AccordionStore {
   moveUp: (index: number) => void;
   moveDown: (index: number) => void;
   setItems: (newItems: AccordionItem[]) => void;
-  updateItem: (id: string, updatedData: Partial<AccordionItem>) => void;
+  updateItem: (id: number, updatedData: Partial<AccordionItem>) => void;
   addItem: (newItem: AccordionItem) => void;
-  removeItem: (id: string) => void;
-  toggleActive: (id: string) => void;
+  removeItem: (id: number) => void;
+  toggleActive: (id: number) => void;
 }
 
 const useAccordionStore = create<AccordionStore>((set) => ({
   items: [
     {
-      id: "1",
+      id: 1,
       title: "Profile",
       content: {
         type: "profile",
@@ -45,10 +45,10 @@ const useAccordionStore = create<AccordionStore>((set) => ({
         profileImage: "/images/profile.png",
         shape: "circle",
       },
-      isActive: false,
+      isActive: true,
     },
     {
-      id: "2",
+      id: 2,
       title: "Contact Us",
       content: {
         type: "phone",
@@ -69,7 +69,7 @@ const useAccordionStore = create<AccordionStore>((set) => ({
       isActive: true,
     },
     {
-      id: "3",
+      id: 3,
       title: "Space",
       content: {
         type: "space",
@@ -79,133 +79,7 @@ const useAccordionStore = create<AccordionStore>((set) => ({
       isActive: true,
     },
     {
-      id: "4",
-      title: "Twitter X",
-      content: {
-        type: "twitter",
-        name: {
-          title: "Twitter",
-          style: {
-            bold: false,
-            italic: false,
-            underline: false,
-          },
-          size: "normal",
-          color: COLOR.PRIMARY,
-        },
-        link: "ebikcool",
-        backgroundColor: COLOR.BACKGROUND,
-        shape: "rounded",
-      },
-      isActive: true,
-    },
-    {
-      id: "5",
-      title: "WhatsApp",
-      content: {
-        type: "whatsapp",
-        name: {
-          title: "WhatsApp",
-          style: {
-            bold: false,
-            italic: false,
-            underline: false,
-          },
-          size: "normal",
-          color: COLOR.PRIMARY,
-        },
-        phoneNumber: "081246504468",
-        backgroundColor: COLOR.BACKGROUND,
-        shape: "rounded",
-      },
-      isActive: true,
-    },
-    {
-      id: "6",
-      title: "Email",
-      content: {
-        type: "email",
-        name: {
-          title: "Email",
-          style: {
-            bold: false,
-            italic: false,
-            underline: false,
-          },
-          size: "normal",
-          color: COLOR.PRIMARY,
-        },
-        email: "ekaputrajuniawan@gmail.com",
-        backgroundColor: COLOR.BACKGROUND,
-        shape: "rounded",
-      },
-      isActive: true,
-    },
-    {
-      id: "7",
-      title: "LinkedIn",
-      content: {
-        type: "linkedIn",
-        name: {
-          title: "LinkedIn",
-          style: {
-            bold: false,
-            italic: false,
-            underline: false,
-          },
-          size: "normal",
-          color: COLOR.PRIMARY,
-        },
-        link: "https://www.linkedin.com/in/i-putu-eka-putra-juniawan",
-        backgroundColor: COLOR.BACKGROUND,
-        shape: "rounded",
-      },
-      isActive: true,
-    },
-    {
-      id: "8",
-      title: "Instagram",
-      content: {
-        type: "instagram",
-        name: {
-          title: "Instagram",
-          style: {
-            bold: false,
-            italic: false,
-            underline: false,
-          },
-          size: "normal",
-          color: COLOR.PRIMARY,
-        },
-        username: "ptekaptra",
-        backgroundColor: COLOR.BACKGROUND,
-        shape: "rounded",
-      },
-      isActive: true,
-    },
-    {
-      id: "9",
-      title: "Telegram",
-      content: {
-        type: "telegram",
-        name: {
-          title: "Telegram",
-          style: {
-            bold: false,
-            italic: false,
-            underline: false,
-          },
-          size: "normal",
-          color: COLOR.PRIMARY,
-        },
-        username: "ptekaptr",
-        backgroundColor: COLOR.BACKGROUND,
-        shape: "rounded",
-      },
-      isActive: true,
-    },
-    {
-      id: "10",
+      id: 4,
       title: "Text",
       content: {
         type: "text",
@@ -222,6 +96,132 @@ const useAccordionStore = create<AccordionStore>((set) => ({
       },
       isActive: true,
     },
+    // {
+    //   id: 4,
+    //   title: "Twitter X",
+    //   content: {
+    //     type: "twitter",
+    //     name: {
+    //       title: "Twitter",
+    //       style: {
+    //         bold: false,
+    //         italic: false,
+    //         underline: false,
+    //       },
+    //       size: "normal",
+    //       color: COLOR.PRIMARY,
+    //     },
+    //     link: "ebikcool",
+    //     backgroundColor: COLOR.BACKGROUND,
+    //     shape: "rounded",
+    //   },
+    //   isActive: true,
+    // },
+    // {
+    //   id: 5,
+    //   title: "WhatsApp",
+    //   content: {
+    //     type: "whatsapp",
+    //     name: {
+    //       title: "WhatsApp",
+    //       style: {
+    //         bold: false,
+    //         italic: false,
+    //         underline: false,
+    //       },
+    //       size: "normal",
+    //       color: COLOR.PRIMARY,
+    //     },
+    //     phoneNumber: "081246504468",
+    //     backgroundColor: COLOR.BACKGROUND,
+    //     shape: "rounded",
+    //   },
+    //   isActive: true,
+    // },
+    // {
+    //   id: 6,
+    //   title: "Email",
+    //   content: {
+    //     type: "email",
+    //     name: {
+    //       title: "Email",
+    //       style: {
+    //         bold: false,
+    //         italic: false,
+    //         underline: false,
+    //       },
+    //       size: "normal",
+    //       color: COLOR.PRIMARY,
+    //     },
+    //     email: "ekaputrajuniawan@gmail.com",
+    //     backgroundColor: COLOR.BACKGROUND,
+    //     shape: "rounded",
+    //   },
+    //   isActive: true,
+    // },
+    // {
+    //   id: 7,
+    //   title: "LinkedIn",
+    //   content: {
+    //     type: "linkedIn",
+    //     name: {
+    //       title: "LinkedIn",
+    //       style: {
+    //         bold: false,
+    //         italic: false,
+    //         underline: false,
+    //       },
+    //       size: "normal",
+    //       color: COLOR.PRIMARY,
+    //     },
+    //     link: "https://www.linkedin.com/",
+    //     backgroundColor: COLOR.BACKGROUND,
+    //     shape: "rounded",
+    //   },
+    //   isActive: true,
+    // },
+    // {
+    //   id: 8,
+    //   title: "Instagram",
+    //   content: {
+    //     type: "instagram",
+    //     name: {
+    //       title: "Instagram",
+    //       style: {
+    //         bold: false,
+    //         italic: false,
+    //         underline: false,
+    //       },
+    //       size: "normal",
+    //       color: COLOR.PRIMARY,
+    //     },
+    //     username: "ptekaptra",
+    //     backgroundColor: COLOR.BACKGROUND,
+    //     shape: "rounded",
+    //   },
+    //   isActive: true,
+    // },
+    // {
+    //   id: 9,
+    //   title: "Telegram",
+    //   content: {
+    //     type: "telegram",
+    //     name: {
+    //       title: "Telegram",
+    //       style: {
+    //         bold: false,
+    //         italic: false,
+    //         underline: false,
+    //       },
+    //       size: "normal",
+    //       color: COLOR.PRIMARY,
+    //     },
+    //     username: "ptekaptr",
+    //     backgroundColor: COLOR.BACKGROUND,
+    //     shape: "rounded",
+    //   },
+    //   isActive: true,
+    // },
   ],
 
   moveUp: (index) =>
@@ -248,21 +248,28 @@ const useAccordionStore = create<AccordionStore>((set) => ({
   updateItem: (id, updatedData) =>
     set((state) => ({
       items: state.items.map((item) =>
-        item.id === id ? { ...item, ...updatedData } : item
+        item.id == id ? { ...item, ...updatedData } : item
       ),
     })),
   addItem: (newItem) =>
-    set((state) => ({
-      items: [...state.items, newItem],
-    })),
+    set((state) => {
+      const maxId = state.items.reduce(
+        (max, item) => Math.max(max, item.id),
+        0
+      );
+      const newId = maxId + 1;
+      return {
+        items: [...state.items, { ...newItem, id: newId }],
+      };
+    }),
   removeItem: (id) =>
     set((state) => ({
-      items: state.items.filter((item) => item.id !== id),
+      items: state.items.filter((item) => item.id != id),
     })),
   toggleActive: (id) =>
     set((state) => ({
       items: state.items.map((item) =>
-        item.id === id ? { ...item, isActive: !item.isActive } : item
+        item.id == id ? { ...item, isActive: !item.isActive } : item
       ),
     })),
 }));

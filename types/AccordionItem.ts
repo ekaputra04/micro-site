@@ -1,7 +1,7 @@
 import { AccordionContent } from "./AccordionContent";
 
 export interface AccordionItem {
-  id: string;
+  id: number;
   title: string;
   content: AccordionContent;
   isActive: boolean;
