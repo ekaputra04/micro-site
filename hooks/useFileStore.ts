@@ -1,10 +1,6 @@
+import { initialFiles } from "@/types/Consts";
+import { FileType } from "@/types/Types";
 import { create } from "zustand";
-
-interface FileType {
-  File: File | null;
-  url: string | null;
-  type: "profileImage" | "backgroundImage" | "headerImage";
-}
 
 interface FileStore {
   itemsFile: FileType[];
@@ -12,23 +8,7 @@ interface FileStore {
 }
 
 const useFileStore = create<FileStore>((set) => ({
-  itemsFile: [
-    {
-      File: null,
-      url: null,
-      type: "profileImage",
-    },
-    {
-      File: null,
-      url: null,
-      type: "backgroundImage",
-    },
-    {
-      File: null,
-      url: null,
-      type: "headerImage",
-    },
-  ],
+  itemsFile: initialFiles,
   setItemsFile: (newItems) => set({ itemsFile: newItems }),
 }));
 

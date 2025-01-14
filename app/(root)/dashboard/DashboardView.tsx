@@ -7,6 +7,9 @@ import { Plus } from "lucide-react";
 import LinkCard from "./LinkCard";
 import Link from "next/link";
 import { PostType } from "@/types/Types";
+import { updateStarredPost } from "@/utils/postUtils";
+import { useState } from "react";
+import { toast } from "sonner";
 
 interface DashboardViewProps {
   posts: PostType[];

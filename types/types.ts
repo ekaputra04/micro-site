@@ -26,3 +26,18 @@ export type PostType = {
   updatedAt: Date;
   authorId: string | null;
 };
+
+export type FileType = {
+  File: File | null;
+  url: string | null;
+  type: "profileImage" | "backgroundImage" | "headerImage";
+};
+
+export type MainInformationType = {
+  title: string;
+  link: string;
+  backgroundImage: string;
+  backgroundColor: string;
+  iconImage: string;
+  description: string;
+};

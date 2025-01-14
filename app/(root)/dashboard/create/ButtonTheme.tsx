@@ -5,11 +5,11 @@ import useMainInformationStore from "@/hooks/useMainInformationStore";
 import { ThemeDataType } from "@/types/ThemeData";
 
 export default function ButtonTheme({ theme }: { theme: ThemeDataType }) {
-  const { mainInformation, setItems } = useMainInformationStore();
+  const { mainInformation, setMainInformation } = useMainInformationStore();
   const { itemsFile, setItemsFile } = useFileStore();
 
   function handleClickButtonTheme(url: string) {
-    setItems({
+    setMainInformation({
       ...mainInformation,
       backgroundImage: url,
     });

@@ -5,6 +5,7 @@ import useAccordionStore from "@/hooks/useAccordionStore";
 import { AccordionContent } from "@/types/AccordionContent";
 import { AccordionItem } from "@/types/AccordionItem";
 import { Plus } from "lucide-react";
+import { toast } from "sonner";
 
 interface AddNewComponentProps {
   icon: React.ReactNode;
@@ -30,6 +31,7 @@ export default function AddNewComponent({
       isActive: true,
     };
     addItem(newComponent as AccordionItem);
+    toast.success(title + " added successfully");
   };
 
   return (

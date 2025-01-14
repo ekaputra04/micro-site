@@ -13,7 +13,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 export default function SettingView() {
   const { itemsFile, setItemsFile } = useFileStore();
-  const { mainInformation, setItems } = useMainInformationStore();
+  const { mainInformation, setMainInformation } = useMainInformationStore();
   const URL = process.env.NEXT_PUBLIC_URL;
 
   const handleFileChange = (
@@ -38,9 +38,9 @@ export default function SettingView() {
         setItemsFile(updatedItems);
         e.target.value = "";
         if (type === "backgroundImage") {
-          setItems({ ...mainInformation, backgroundImage: "" });
+          setMainInformation({ ...mainInformation, backgroundImage: "" });
         } else if (type === "iconImage") {
-          setItems({ ...mainInformation, iconImage: "" });
+          setMainInformation({ ...mainInformation, iconImage: "" });
         }
       };
       reader.readAsDataURL(file);
@@ -48,21 +48,21 @@ export default function SettingView() {
   };
 
   function handleChangeTitle(title: string) {
-    setItems({
+    setMainInformation({
       ...mainInformation,
       title,
     });
   }
 
   function handleChangeLink(link: string) {
-    setItems({
+    setMainInformation({
       ...mainInformation,
       link,
     });
   }
 
   function handleupdateBackgroundColor(color: string = "#ffffff") {
-    setItems({
+    setMainInformation({
       ...mainInformation,
       backgroundColor: color,
     });
@@ -71,7 +71,7 @@ export default function SettingView() {
   function handleDeleteBackgroundImage(
     type: "profileImage" | "backgroundImage" | "headerImage"
   ) {
-    setItems({
+    setMainInformation({
       ...mainInformation,
       backgroundImage: "",
     });
@@ -90,6 +90,7 @@ export default function SettingView() {
           <Input
             type="title"
             id="title"
+            defaultValue={mainInformation.title}
             placeholder="Insert title here..."
             onChange={(e) => handleChangeTitle(e.target.value)}
           />
@@ -99,6 +100,7 @@ export default function SettingView() {
           <Input
             type="link"
             id="link"
+            defaultValue={mainInformation.link}
             placeholder={`${URL}/{your-link}`}
             onChange={(e) => handleChangeLink(e.target.value)}
           />

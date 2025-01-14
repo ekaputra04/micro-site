@@ -36,6 +36,64 @@ export const createPost = async (
   }
 };
 
+export const updateStarredPost = async (id: number) => {
+  try {
+    const selectedPost = await prisma.post.findFirst({
+      where: {
+        id: id,
+      },
+    });
+
+    if (!selectedPost) {
+      throw new Error("Post not found");
+    }
+
+    const post = await prisma.post.update({
+      where: {
+        id: id,
+      },
+      data: {
+        isStarred: !selectedPost.isStarred,
+        updatedAt: new Date(),
+      },
+    });
+
+    revalidateTag("posts");
+
+    return post;
+  } catch (error) {
+    console.error("Error updating post:", error);
+    throw new Error("Unable to update post");
+  }
+};
+
+export const deletePost = async (id: number) => {
+  try {
+    const selectedPost = await prisma.post.findFirst({
+      where: {
+        id: id,
+      },
+    });
+
+    if (!selectedPost) {
+      throw new Error("Post not found");
+    }
+
+    const post = prisma.post.delete({
+      where: {
+        id: id,
+      },
+    });
+
+    revalidateTag("posts");
+
+    return post;
+  } catch (error) {
+    console.error("Error deleting post:", error);
+    throw new Error("Unable to delete post");
+  }
+};
+
 export const getPostsByUserId = unstable_cache(
   async (userId: string) => {
     return await prisma.post.findMany({

@@ -1,29 +1,15 @@
+import { initialMainInformation } from "@/types/Consts";
+import { MainInformationType } from "@/types/Types";
 import { create } from "zustand";
-
-type MainInformationType = {
-  title: string;
-  link: string;
-  backgroundImage: string;
-  backgroundColor: string;
-  iconImage: string;
-  description: string;
-};
 
 interface MainInformationStore {
   mainInformation: MainInformationType;
-  setItems: (newItems: MainInformationType) => void;
+  setMainInformation: (newItems: MainInformationType) => void;
 }
 
 const useMainInformationStore = create<MainInformationStore>((set) => ({
-  mainInformation: {
-    title: "",
-    link: "",
-    backgroundColor: "#ffffff",
-    backgroundImage: "",
-    iconImage: "",
-    description: "",
-  },
-  setItems: (newItem) => set({ mainInformation: newItem }),
+  mainInformation: initialMainInformation,
+  setMainInformation: (newItem) => set({ mainInformation: newItem }),
 }));
 
 export default useMainInformationStore;

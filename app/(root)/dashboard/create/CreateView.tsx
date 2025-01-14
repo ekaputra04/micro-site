@@ -14,12 +14,17 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import useFileStore from "@/hooks/useFileStore";
 import { uploadFile } from "@/utils/imageUtils";
+import {
+  initialFiles,
+  initialItems,
+  initialMainInformation,
+} from "@/types/Consts";
 
 export default function CreateView({ userId }: { userId: string }) {
   const [isLoading, setIsLoading] = useState(false);
-  const { items, setItems } = useAccordionStore();
-  const { mainInformation } = useMainInformationStore();
-  const { itemsFile } = useFileStore();
+  const { setItems } = useAccordionStore();
+  const { mainInformation, setMainInformation } = useMainInformationStore();
+  const { itemsFile, setItemsFile } = useFileStore();
 
   const router = useRouter();
 
@@ -99,6 +104,9 @@ export default function CreateView({ userId }: { userId: string }) {
       );
 
       if (post) {
+        setItems(initialItems);
+        setItemsFile(initialFiles);
+        setMainInformation(initialMainInformation);
         toast.success(`${post.title} has been created.`);
         router.push("/dashboard");
       }
