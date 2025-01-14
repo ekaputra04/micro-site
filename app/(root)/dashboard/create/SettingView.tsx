@@ -4,11 +4,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import ButtonTheme from "./ButtonTheme";
 import { Button } from "@/components/ui/button";
-import { Pencil, Trash } from "lucide-react";
+import { Image, Pencil, Trash } from "lucide-react";
 import { themeData } from "@/types/ThemeData";
 import useMainInformationStore from "@/hooks/useMainInformationStore";
 import useFileStore from "@/hooks/useFileStore";
 import { toast } from "sonner";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function SettingView() {
   const { itemsFile, setItemsFile } = useFileStore();
@@ -17,7 +18,7 @@ export default function SettingView() {
 
   const handleFileChange = (
     e: React.ChangeEvent<HTMLInputElement>,
-    type: "profileImage" | "backgroundImage" | "headerImage"
+    type: "backgroundImage" | "iconImage"
   ) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -33,9 +34,14 @@ export default function SettingView() {
             ? { ...item, File: file, url: reader.result as string }
             : item
         );
+
         setItemsFile(updatedItems);
         e.target.value = "";
-        setItems({ ...mainInformation, backgroundImage: "" });
+        if (type === "backgroundImage") {
+          setItems({ ...mainInformation, backgroundImage: "" });
+        } else if (type === "iconImage") {
+          setItems({ ...mainInformation, iconImage: "" });
+        }
       };
       reader.readAsDataURL(file);
     }
@@ -55,7 +61,7 @@ export default function SettingView() {
     });
   }
 
-  function handleupdateBackgroundColor(color: string) {
+  function handleupdateBackgroundColor(color: string = "#ffffff") {
     setItems({
       ...mainInformation,
       backgroundColor: color,
@@ -148,13 +154,54 @@ export default function SettingView() {
         </div>
 
         <h4 className="font-semibold text-lg">Background Color</h4>
+        <div className="flex items-center gap-2">
+          <input
+            type="color"
+            value={mainInformation.backgroundColor}
+            onChange={(event) =>
+              handleupdateBackgroundColor(event.target.value)
+            }
+          />
+          <Button
+            onClick={() => handleupdateBackgroundColor()}
+            variant={"ghost"}
+            className="px-2"
+          >
+            Reset
+          </Button>
+        </div>
 
-        <input
-          type="color"
-          defaultValue={mainInformation.backgroundColor}
-          onChange={(event) => handleupdateBackgroundColor(event.target.value)}
-        />
-        <p>{JSON.stringify(itemsFile, null, 2)}</p>
+        <hr />
+
+        <h3 className="font-bold text-xl">⚙️ Setting</h3>
+        <h4 className="font-semibold text-lg">
+          Meta Image & Description (Optional)
+        </h4>
+        <p className="text-sm">
+          Meta Image & Description are used to enhance the appearance of your
+          microsite when shared on various platforms.
+        </p>
+        <div className="gap-4 grid grid-cols-3">
+          <Input
+            type="file"
+            id="iconImage"
+            className="hidden"
+            accept="image/*"
+            onChange={(e) => handleFileChange(e, "iconImage")}
+          />
+          <Label
+            htmlFor="iconImage"
+            className="flex justify-center items-center bg-gray-200 rounded-md cursor-pointer"
+          >
+            <div className="flex flex-col justify-center items-center gap-2">
+              <Image className="w-4 h-4" />
+              <p>Input Icon</p>
+            </div>
+          </Label>
+          <div className="col-span-2">
+            <Textarea placeholder="Description..." />
+          </div>
+        </div>
       </div>
     </>
   );

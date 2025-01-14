@@ -16,17 +16,7 @@ export default async function Home() {
       <Link href={"/dashboard"}>
         <Button>Dashboard</Button>
       </Link>
-      <div className="">
-        <p>User: {JSON.stringify(user, null, 2)}</p>
-      </div>
       <h1>Home Page</h1>
-      {posts.map((post, index) => (
-        <div className="" key={index}>
-          <p>{post.title}</p>
-          <p>{post.content?.toString()}</p>
-          {/* {JSON.parse(post.content as string)} */}
-        </div>
-      ))}
     </>
   );
 }

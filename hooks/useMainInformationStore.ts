@@ -5,6 +5,8 @@ type MainInformationType = {
   link: string;
   backgroundImage: string;
   backgroundColor: string;
+  iconImage: string;
+  description: string;
 };
 
 interface MainInformationStore {
@@ -18,6 +20,8 @@ const useMainInformationStore = create<MainInformationStore>((set) => ({
     link: "",
     backgroundColor: "#ffffff",
     backgroundImage: "",
+    iconImage: "",
+    description: "",
   },
   setItems: (newItem) => set({ mainInformation: newItem }),
 }));

@@ -24,10 +24,10 @@ export default function DashboardView({ posts }: DashboardViewProps) {
           </Link>
           <Input placeholder="Search here..." className="w-48" />
         </div>
-        <div className="flex flex-col gap-2">
+        {/* <div className="flex flex-col gap-2">
           <Slider defaultValue={[2]} max={5} step={1} disabled />
           <p>Microsite Quota: 2 out of 5 this month</p>
-        </div>
+        </div> */}
       </div>
 
       <div className="space-y-4 mt-8">

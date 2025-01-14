@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { PostType } from "@/types/Types";
+import { formatRelativeTime } from "@/utils/timeUtils";
 import { Clock3, SquarePen, Star, Trash } from "lucide-react";
 import Link from "next/link";
 
@@ -44,7 +45,7 @@ export default function LinkCard({ post }: LinkCardProps) {
           </div>
           <div className="flex justify-end items-center gap-2">
             <Clock3 className="w-4 h-4" />
-            <p className="">2 days ago</p>
+            <p className="">{formatRelativeTime(post.createdAt)}</p>
           </div>
         </div>
       </div>
