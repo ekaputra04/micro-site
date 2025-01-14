@@ -20,6 +20,7 @@ model Post {
   slug            String   @unique
   backgroundColor String
   backgroundImage String
+  iconImage       String?
   content         Json?
   published       Boolean  @default(true)
   isStarred       Boolean  @default(false)

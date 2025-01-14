@@ -1,27 +1,35 @@
 import { Button } from "@/components/ui/button";
+import { PostType } from "@/types/Types";
 import { Clock3, SquarePen, Star, Trash } from "lucide-react";
 import Link from "next/link";
 
-export default function LinkCard() {
+interface LinkCardProps {
+  post: PostType;
+}
+
+export default function LinkCard({ post }: LinkCardProps) {
   return (
     <>
       <div className="flex justify-between gap-4 p-4 border rounded-lg">
         <div className="flex gap-4">
           <img
-            src="https://nwqvfawximjelnlolzei.supabase.co/storage/v1/object/public/images/Group%2093.png?t=2025-01-04T06%3A43%3A14.270Z"
-            alt=""
+            src="/images/batik.png"
+            alt="Image"
             className="rounded-md w-16 h-16 object-cover"
           />
           <div className="space-y-2">
-            <h2 className="font-semibold text-xl">Portofolio</h2>
-            <p>Link</p>
+            <h2 className="font-semibold text-xl">{post.title}</h2>
+            <p>{post.slug}</p>
           </div>
         </div>
         <div className="space-y-4">
           <div className="flex items-center gap-4">
-            <Button className="flex gap-2" variant={"outline"}>
+            <Button
+              className={`flex gap-2 ${post.isStarred ? "bg-yellow-500 hover:bg-yellow-600" : ""}`}
+              variant={"outline"}
+            >
               <Star className="w-4 h-4" />
-              <p>Star</p>
+              {post.isStarred ? <p>Starred</p> : <p>Star</p>}
             </Button>
             <Link href={"/"}>
               <Button className="flex gap-2" variant={"outline"}>

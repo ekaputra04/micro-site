@@ -1,4 +1,4 @@
-import { ElementType } from "@/types/types";
+import { ElementType } from "@/types/Types";
 import {
   IconBrandTelegram,
   IconBrandTiktok,

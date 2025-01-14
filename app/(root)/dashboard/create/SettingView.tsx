@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import ButtonTheme from "./ButtonTheme";
 import { Button } from "@/components/ui/button";
 import { Pencil, Trash } from "lucide-react";
-import { themeData } from "@/types/themeData";
+import { themeData } from "@/types/ThemeData";
 import useMainInformationStore from "@/hooks/useMainInformationStore";
 import useFileStore from "@/hooks/useFileStore";
 import { toast } from "sonner";

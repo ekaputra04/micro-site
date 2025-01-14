@@ -1,6 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
-import { getUserBySlug } from "../userUtils";
+// import { getUserBySlug } from "../userUtils";
 
 export const updateSession = async (request: NextRequest) => {
   // This `try/catch` block is only here for the interactive tutorial.
@@ -57,7 +57,7 @@ export const updateSession = async (request: NextRequest) => {
     }
 
     if (user) {
-      const userData = await getUserBySlug(user.id as string);
+      // const userData = await getUserBySlug(user.id as string);
 
       if (pathname === "/sign-in" || pathname === "/sign-up") {
         return NextResponse.redirect(new URL("/", request.url));
@@ -65,7 +65,7 @@ export const updateSession = async (request: NextRequest) => {
 
       response.headers.set("x-user-slug", user.id as string);
       response.cookies.set("x-user-slug", user.id as string);
-      response.headers.set("x-user-id", userData?.id.toString() as string);
+      // response.headers.set("x-user-id", userData?.id.toString() as string);
     }
 
     // protected routes

@@ -1,5 +1,7 @@
+import { Button } from "@/components/ui/button";
 import { getPostsByUserId } from "@/utils/postUtils";
 import { createClient } from "@/utils/supabase/server";
+import Link from "next/link";
 
 export default async function Home() {
   const supabase = await createClient();
@@ -11,6 +13,9 @@ export default async function Home() {
 
   return (
     <>
+      <Link href={"/dashboard"}>
+        <Button>Dashboard</Button>
+      </Link>
       <div className="">
         <p>User: {JSON.stringify(user, null, 2)}</p>
       </div>

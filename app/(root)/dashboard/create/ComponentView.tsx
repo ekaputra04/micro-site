@@ -48,7 +48,7 @@ import InstagramSection from "./section-item/Instagram";
 import SpaceSection from "./section-item/Space";
 import TextSection from "./section-item/Text";
 import AddNewComponent from "./AddNewComponent";
-import { ElementType } from "@/types/types";
+import { ElementType } from "@/types/Types";
 import { getIconFromTitle } from "@/utils/iconUtils";
 import { AccordionContent as ContentElement } from "@/types/AccordionContent";
 import { COLOR } from "@/types/Consts";

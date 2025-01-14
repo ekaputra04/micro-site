@@ -2,7 +2,7 @@
 
 import useFileStore from "@/hooks/useFileStore";
 import useMainInformationStore from "@/hooks/useMainInformationStore";
-import { ThemeDataType } from "@/types/themeData";
+import { ThemeDataType } from "@/types/ThemeData";
 
 export default function ButtonTheme({ theme }: { theme: ThemeDataType }) {
   const { mainInformation, setItems } = useMainInformationStore();

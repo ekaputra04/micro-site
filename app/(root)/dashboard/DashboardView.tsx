@@ -6,8 +6,13 @@ import { Slider } from "@/components/ui/slider";
 import { Plus } from "lucide-react";
 import LinkCard from "./LinkCard";
 import Link from "next/link";
+import { PostType } from "@/types/Types";
 
-export default function DashboardView() {
+interface DashboardViewProps {
+  posts: PostType[];
+}
+
+export default function DashboardView({ posts }: DashboardViewProps) {
   return (
     <>
       <div className="flex justify-between items-center gap-5">
@@ -26,14 +31,9 @@ export default function DashboardView() {
       </div>
 
       <div className="space-y-4 mt-8">
-        <LinkCard />
-        <LinkCard />
-        <LinkCard />
-        <LinkCard />
-        <LinkCard />
-        <LinkCard />
-        <LinkCard />
-        <LinkCard />
+        {posts.map((post, index) => (
+          <LinkCard key={index} post={post} />
+        ))}
       </div>
     </>
   );
