@@ -19,6 +19,8 @@ export type PostType = {
   slug: string;
   backgroundColor: string;
   backgroundImage: string;
+  iconImage: string;
+  description: string;
   content: JsonValue;
   published: boolean;
   isStarred: boolean;

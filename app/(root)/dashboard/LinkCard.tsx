@@ -1,6 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { PostType } from "@/types/Types";
-import { deletePost, updateStarredPost } from "@/utils/postUtils";
+import {
+  deletePost,
+  updatePublishedPost,
+  updateStarredPost,
+} from "@/utils/postUtils";
 import { formatRelativeTime } from "@/utils/timeUtils";
 import { Clock3, SquarePen, Star, Trash } from "lucide-react";
 import Link from "next/link";
@@ -17,6 +21,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 
 interface LinkCardProps {
   post: PostType;
@@ -31,7 +37,20 @@ export default function LinkCard({ post }: LinkCardProps) {
       const post = await updateStarredPost(id);
       toast.success("Post updated successfully");
     } catch (e) {
-      console.error("Error creating post:", e);
+      console.error("Error updating post:", e);
+      throw new Error("Unable to update post");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleUpdatePublishedPost = async (id: number) => {
+    setIsLoading(true);
+    try {
+      const post = await updatePublishedPost(id);
+      toast.success("Post updated successfully");
+    } catch (e) {
+      console.error("Error updating post:", e);
       throw new Error("Unable to update post");
     } finally {
       setIsLoading(false);
@@ -50,12 +69,13 @@ export default function LinkCard({ post }: LinkCardProps) {
       setIsLoading(false);
     }
   };
+
   return (
     <>
       <div className="flex justify-between gap-4 p-4 border rounded-lg">
         <div className="flex gap-4">
           <img
-            src="/images/batik.png"
+            src={`${post.iconImage ?? "/images/profile.png"}`}
             alt="Image"
             className="rounded-md w-16 h-16 object-cover"
           />
@@ -66,6 +86,17 @@ export default function LinkCard({ post }: LinkCardProps) {
         </div>
         <div className="space-y-4">
           <div className="flex items-center gap-4">
+            <div className="flex items-center space-x-2">
+              <Switch
+                id="isPublic"
+                defaultChecked={post.published}
+                onCheckedChange={() => handleUpdatePublishedPost(post.id)}
+              />
+              <Label htmlFor="isPublic">
+                {post.published ? "Public" : "Private"}
+              </Label>
+            </div>
+
             <Button
               className={`flex gap-2 ${post.isStarred ? "bg-yellow-500 hover:bg-yellow-600" : ""}`}
               variant={"outline"}

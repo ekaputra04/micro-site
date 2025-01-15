@@ -71,6 +71,37 @@ export const updateStarredPost = async (id: number) => {
   }
 };
 
+export const updatePublishedPost = async (id: number) => {
+  try {
+    const selectedPost = await prisma.post.findFirst({
+      where: {
+        id: id,
+      },
+    });
+
+    if (!selectedPost) {
+      throw new Error("Post not found");
+    }
+
+    const post = await prisma.post.update({
+      where: {
+        id: id,
+      },
+      data: {
+        published: !selectedPost.published,
+        updatedAt: new Date(),
+      },
+    });
+
+    revalidateTag("posts");
+
+    return post;
+  } catch (error) {
+    console.error("Error updating post:", error);
+    throw new Error("Unable to update post");
+  }
+};
+
 export const deletePost = async (id: number) => {
   try {
     const selectedPost = await prisma.post.findFirst({
