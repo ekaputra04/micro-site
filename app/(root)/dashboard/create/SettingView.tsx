@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import ButtonTheme from "./ButtonTheme";
 import { Button } from "@/components/ui/button";
-import { Image, Pencil, Trash } from "lucide-react";
+import { Image, ImageIcon, Pencil, Trash } from "lucide-react";
 import { themeData } from "@/types/ThemeData";
 import useMainInformationStore from "@/hooks/useMainInformationStore";
 import useFileStore from "@/hooks/useFileStore";
@@ -39,8 +39,6 @@ export default function SettingView() {
         e.target.value = "";
         if (type === "backgroundImage") {
           setMainInformation({ ...mainInformation, backgroundImage: "" });
-        } else if (type === "iconImage") {
-          setMainInformation({ ...mainInformation, iconImage: "" });
         }
       };
       reader.readAsDataURL(file);
@@ -61,6 +59,13 @@ export default function SettingView() {
     });
   }
 
+  function handleChangeDascriptionMetadata(description: string) {
+    setMainInformation({
+      ...mainInformation,
+      description,
+    });
+  }
+
   function handleupdateBackgroundColor(color: string = "#ffffff") {
     setMainInformation({
       ...mainInformation,
@@ -68,13 +73,16 @@ export default function SettingView() {
     });
   }
 
-  function handleDeleteBackgroundImage(
-    type: "profileImage" | "backgroundImage" | "headerImage"
+  function handleDeleteImage(
+    type: "profileImage" | "backgroundImage" | "headerImage" | "iconImage"
   ) {
-    setMainInformation({
-      ...mainInformation,
-      backgroundImage: "",
-    });
+    if (type == "backgroundImage") {
+      setMainInformation({
+        ...mainInformation,
+        backgroundImage: "",
+      });
+    }
+
     const updatedItems = itemsFile.map((item) =>
       item.type === type ? { ...item, File: null, url: null } : item
     );
@@ -113,9 +121,7 @@ export default function SettingView() {
             <ButtonTheme theme={theme} key={index} />
           ))}
         </div>
-
         <h4 className="font-semibold text-lg">Background Image</h4>
-
         <div className="relative bg-slate-200 w-full h-48 group">
           {itemsFile.find((item) => item.type === "backgroundImage")?.url ||
           mainInformation.backgroundImage ? (
@@ -147,14 +153,13 @@ export default function SettingView() {
 
               <Button
                 variant={"outline"}
-                onClick={() => handleDeleteBackgroundImage("backgroundImage")}
+                onClick={() => handleDeleteImage("backgroundImage")}
               >
                 <Trash className="w-4 h-4" />
               </Button>
             </div>
           </div>
         </div>
-
         <h4 className="font-semibold text-lg">Background Color</h4>
         <div className="flex items-center gap-2">
           <input
@@ -172,9 +177,7 @@ export default function SettingView() {
             Reset
           </Button>
         </div>
-
         <hr />
-
         <h3 className="font-bold text-xl">⚙️ Setting</h3>
         <h4 className="font-semibold text-lg">
           Meta Image & Description (Optional)
@@ -183,8 +186,54 @@ export default function SettingView() {
           Meta Image & Description are used to enhance the appearance of your
           microsite when shared on various platforms.
         </p>
-        <div className="gap-4 grid grid-cols-3">
-          <Input
+        <div className="gap-4 grid grid-cols-4">
+          <div className="col-span-1">
+            {itemsFile.find((item) => item.type === "iconImage")?.url ? (
+              <img
+                src={
+                  itemsFile.find((item) => item.type === "iconImage")
+                    ?.url as string
+                }
+                alt="Image"
+                className="object-contain"
+              />
+            ) : (
+              <>
+                <Label htmlFor="iconImage" className="cursor-pointer">
+                  <div className="flex justify-center items-center bg-slate-200 h-24">
+                    <div className="flex flex-col justify-center items-center">
+                      <ImageIcon className="w-4 h-4" />
+                      <p>Input Image</p>
+                    </div>
+                  </div>
+                </Label>
+              </>
+            )}
+            <div className="flex gap-2 mt-4">
+              <Label
+                htmlFor="iconImage"
+                className={`flex items-center border-input px-4 bg-background hover:bg-accent py-2  border  hover:text-accent-foreground rounded-md hover:cursor-pointer`}
+              >
+                <Pencil className="w-4 h-4" />
+              </Label>
+              <Input
+                id="iconImage"
+                name="iconImage"
+                type="file"
+                className="hidden"
+                accept="image/*"
+                onChange={(e) => handleFileChange(e, "iconImage")}
+              />
+
+              <Button
+                variant={"outline"}
+                onClick={() => handleDeleteImage("iconImage")}
+              >
+                <Trash className="w-4 h-4" />
+              </Button>
+            </div>
+          </div>
+          {/* <Input
             type="file"
             id="iconImage"
             className="hidden"
@@ -199,11 +248,16 @@ export default function SettingView() {
               <Image className="w-4 h-4" />
               <p>Input Icon</p>
             </div>
-          </Label>
-          <div className="col-span-2">
-            <Textarea placeholder="Description..." />
+          </Label> */}
+          <div className="col-span-3">
+            <Textarea
+              placeholder="Description..."
+              onChange={(e) => handleChangeDascriptionMetadata(e.target.value)}
+            />
           </div>
         </div>
+        {JSON.stringify(mainInformation, null, 2)}
+        {JSON.stringify(itemsFile, null, 2)}
       </div>
     </>
   );

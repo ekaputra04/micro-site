@@ -30,7 +30,7 @@ export type PostType = {
 export type FileType = {
   File: File | null;
   url: string | null;
-  type: "profileImage" | "backgroundImage" | "headerImage";
+  type: "profileImage" | "backgroundImage" | "headerImage" | "iconImage";
 };
 
 export type MainInformationType = {
@@ -38,6 +38,5 @@ export type MainInformationType = {
   link: string;
   backgroundImage: string;
   backgroundColor: string;
-  iconImage: string;
   description: string;
 };

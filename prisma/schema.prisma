@@ -21,6 +21,7 @@ model Post {
   backgroundColor String
   backgroundImage String
   iconImage       String?
+  description     String?
   content         Json?
   published       Boolean  @default(true)
   isStarred       Boolean  @default(false)

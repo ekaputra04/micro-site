@@ -40,6 +40,7 @@ export default function CreateView({ userId }: { userId: string }) {
       let profilePublicUrl: string | null = null;
       let headerPublicUrl: string | null = null;
       let backgroundPublicUrl: string | null = mainInformation.backgroundImage;
+      let iconPublicUrl: string | null = null;
 
       const profileFile = itemsFile.find(
         (item) => item.type === "profileImage"
@@ -49,6 +50,9 @@ export default function CreateView({ userId }: { userId: string }) {
       )?.File;
       const backgroundFile = itemsFile.find(
         (item) => item.type === "backgroundImage"
+      )?.File;
+      const iconFile = itemsFile.find(
+        (item) => item.type === "iconImage"
       )?.File;
 
       if (profileFile) {
@@ -78,6 +82,15 @@ export default function CreateView({ userId }: { userId: string }) {
         }
       }
 
+      if (iconFile) {
+        const iconUploadResult = await uploadFile(iconFile);
+        if (iconUploadResult.success) {
+          iconPublicUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/${iconUploadResult.data?.path}`;
+        } else {
+          throw new Error("Failed to upload icon image");
+        }
+      }
+
       const updatedItems = useAccordionStore.getState().items.map((item) => {
         if (item.content.type === "profile") {
           return {
@@ -100,7 +113,9 @@ export default function CreateView({ userId }: { userId: string }) {
         mainInformation.title,
         mainInformation.backgroundColor,
         backgroundPublicUrl,
-        updatedItems
+        updatedItems,
+        iconPublicUrl as string,
+        mainInformation.description
       );
 
       if (post) {

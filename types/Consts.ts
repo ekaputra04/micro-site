@@ -106,6 +106,11 @@ export const initialFiles: FileType[] = [
     url: null,
     type: "headerImage",
   },
+  {
+    File: null,
+    url: null,
+    type: "iconImage",
+  },
 ];
 
 export const initialMainInformation: MainInformationType = {
@@ -113,6 +118,5 @@ export const initialMainInformation: MainInformationType = {
   link: "",
   backgroundColor: "#ffffff",
   backgroundImage: "",
-  iconImage: "",
   description: "",
 };

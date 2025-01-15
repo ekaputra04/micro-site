@@ -12,17 +12,21 @@ export const createPost = async (
   title: string,
   backgroundColor: string,
   backgroundImage: string,
-  content: AccordionItem[]
+  content: AccordionItem[],
+  iconImage?: string,
+  description?: string
 ): Promise<Post> => {
   const contentData = JSON.stringify(content);
   try {
     const post = await prisma.post.create({
       data: {
-        title: title,
+        title,
         authorId: userId,
-        slug: slug,
-        backgroundColor: backgroundColor,
-        backgroundImage: backgroundImage,
+        slug,
+        backgroundColor,
+        backgroundImage,
+        iconImage,
+        description,
         content: contentData,
       },
     });
