@@ -1,3 +1,5 @@
+"use client";
+
 import { Monitor } from "lucide-react";
 import ProfileView from "./dashboard/create/section-item/ProfileView";
 import { Button } from "@/components/ui/button";
@@ -45,25 +47,25 @@ export default function PublicView() {
           {items.map((item) => (
             <div className="" key={item.id}>
               {item.content.type == "profile" ? (
-                <ProfileView />
+                <ProfileView item={item} />
               ) : item.content.type == "phone" ? (
-                <ContactUsView />
+                <ContactUsView item={item} />
               ) : item.content.type == "twitter" ? (
-                <TwitterView />
+                <TwitterView item={item} />
               ) : item.content.type == "whatsapp" ? (
-                <WhatsAppView />
+                <WhatsAppView item={item} />
               ) : item.content.type == "email" ? (
-                <EmailView />
+                <EmailView item={item} />
               ) : item.content.type == "linkedIn" ? (
-                <LinkedInView />
+                <LinkedInView item={item} />
               ) : item.content.type == "telegram" ? (
-                <TelegramView />
+                <TelegramView item={item} />
               ) : item.content.type == "instagram" ? (
-                <InstagramView />
+                <InstagramView item={item} />
               ) : item.content.type == "space" ? (
-                <SpaceView />
+                <SpaceView item={item} />
               ) : item.content.type == "text" ? (
-                <TextView />
+                <TextView item={item} />
               ) : null}
             </div>
           ))}

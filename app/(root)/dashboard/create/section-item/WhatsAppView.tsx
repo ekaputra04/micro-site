@@ -1,6 +1,6 @@
 "use client";
 
-import useAccordionStore from "@/hooks/useAccordionStore";
+import { AccordionItem } from "@/types/AccordionItem";
 import {
   getFontSizeClassname,
   getFontStyleClassname,
@@ -11,41 +11,42 @@ import {
 import { IconBrandWhatsapp } from "@tabler/icons-react";
 import Link from "next/link";
 
-export default function WhatsAppView() {
-  const { items } = useAccordionStore();
+interface WhatsAppViewProps {
+  item: AccordionItem;
+}
 
-  const itemContactUs = items.find((item) => item.content.type === "whatsapp");
+export default function WhatsAppView({ item }: WhatsAppViewProps) {
   return (
     <>
-      {itemContactUs?.content.type == "whatsapp" && (
+      {item?.content.type == "whatsapp" && (
         <div
-          className={`${getIsActiveClassname(itemContactUs.isActive)} p-4 hover:scale-95 animate-in animate-out`}
+          className={`${getIsActiveClassname(item.isActive)} p-4 hover:scale-95 animate-in animate-out`}
         >
           <Link
-            href={`https://wa.me/${itemContactUs.content.phoneNumber}`}
+            href={`https://wa.me/${item.content.phoneNumber}`}
             target="_blank"
           >
             <div
-              className={`relative flex items-center p-4 ${getShapeClassname(itemContactUs.content.shape)}`}
-              style={{ background: itemContactUs.content.backgroundColor }}
+              className={`relative flex items-center p-4 ${getShapeClassname(item.content.shape)}`}
+              style={{ background: item.content.backgroundColor }}
             >
               <span
-                className={`absolute p-2 border ${getShapeClassname(itemContactUs.content.shape)}`}
+                className={`absolute p-2 border ${getShapeClassname(item.content.shape)}`}
                 style={{
-                  color: itemContactUs.content.name.color,
+                  color: item.content.name.color,
                   background: lightenColorWithOpacity(
-                    itemContactUs.content.backgroundColor
+                    item.content.backgroundColor
                   ),
-                  borderColor: itemContactUs.content.name.color,
+                  borderColor: item.content.name.color,
                 }}
               >
                 <IconBrandWhatsapp className="w-4 h-4" />
               </span>
               <p
-                className={`w-full text-center ${getFontStyleClassname(itemContactUs.content.name.style)} ${getFontSizeClassname(itemContactUs.content.name.size)} `}
-                style={{ color: itemContactUs.content.name.color }}
+                className={`w-full text-center ${getFontStyleClassname(item.content.name.style)} ${getFontSizeClassname(item.content.name.size)} `}
+                style={{ color: item.content.name.color }}
               >
-                {itemContactUs.content.name.title}
+                {item.content.name.title}
               </p>
             </div>
           </Link>

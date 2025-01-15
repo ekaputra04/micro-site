@@ -1,7 +1,7 @@
 "use client";
 
-import useAccordionStore from "@/hooks/useAccordionStore";
 import useFileStore from "@/hooks/useFileStore";
+import { AccordionItem } from "@/types/AccordionItem";
 import {
   getFontSizeClassname,
   getFontStyleClassname,
@@ -9,33 +9,34 @@ import {
   getShapeClassname,
 } from "@/utils/classNameUtils";
 
-export default function ProfileView() {
-  const { items } = useAccordionStore();
-  const { itemsFile } = useFileStore();
+interface ProfileViewProps {
+  item: AccordionItem;
+}
 
-  const itemProfile = items.find((item) => item.content.type === "profile");
+export default function ProfileView({ item }: ProfileViewProps) {
+  const { itemsFile } = useFileStore();
 
   return (
     <>
-      {itemProfile?.content.type == "profile" && (
-        <div className={`${getIsActiveClassname(itemProfile.isActive)}`}>
+      {item?.content.type == "profile" && (
+        <div className={`${getIsActiveClassname(item.isActive)}`}>
           <div className="w-full h-48">
             <img
               src={
                 itemsFile.find((item) => item.type === "headerImage")?.url ??
-                itemProfile.content.headerImage
+                item.content.headerImage
               }
               alt="Background"
               className="w-full h-full object-cover"
             />
           </div>
           <div
-            className={`relative mx-auto -mt-12  w-24 h-24 overflow-hidden ${getShapeClassname(itemProfile.content.shape)}`}
+            className={`relative mx-auto -mt-12  w-24 h-24 overflow-hidden ${getShapeClassname(item.content.shape)}`}
           >
             <img
               src={
                 itemsFile.find((item) => item.type === "profileImage")?.url ??
-                itemProfile.content.profileImage
+                item.content.profileImage
               }
               alt=""
               className={`object-cover`}
@@ -43,16 +44,16 @@ export default function ProfileView() {
           </div>
           <div className="space-y-1 py-6">
             <h1
-              className={`${getFontStyleClassname(itemProfile.content.name.style)} ${getFontSizeClassname(itemProfile.content.name.size)} text-center`}
-              style={{ color: itemProfile.content.name.color }}
+              className={`${getFontStyleClassname(item.content.name.style)} ${getFontSizeClassname(item.content.name.size)} text-center`}
+              style={{ color: item.content.name.color }}
             >
-              {itemProfile.content.name.title}
+              {item.content.name.title}
             </h1>
             <h1
-              className={`${getFontStyleClassname(itemProfile.content.description.style)} ${getFontSizeClassname(itemProfile.content.description.size)} text-center`}
-              style={{ color: itemProfile.content.description.color }}
+              className={`${getFontStyleClassname(item.content.description.style)} ${getFontSizeClassname(item.content.description.size)} text-center`}
+              style={{ color: item.content.description.color }}
             >
-              {itemProfile.content.description.title}
+              {item.content.description.title}
             </h1>
           </div>
         </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import useAccordionStore from "@/hooks/useAccordionStore";
+import { AccordionItem } from "@/types/AccordionItem";
 import {
   getFontSizeClassname,
   getFontStyleClassname,
@@ -11,41 +11,42 @@ import {
 import { Twitter } from "lucide-react";
 import Link from "next/link";
 
-export default function TwitterView() {
-  const { items } = useAccordionStore();
+interface TwitterViewProps {
+  item: AccordionItem;
+}
 
-  const itemTwitter = items.find((item) => item.content.type === "twitter");
+export default function TwitterView({ item }: TwitterViewProps) {
   return (
     <>
-      {itemTwitter?.content.type == "twitter" && (
+      {item?.content.type == "twitter" && (
         <div
-          className={`${getIsActiveClassname(itemTwitter.isActive)} p-4 hover:scale-95 animate-in animate-out`}
+          className={`${getIsActiveClassname(item.isActive)} p-4 hover:scale-95 animate-in animate-out`}
         >
           <Link
-            href={`https://twitter.com/${itemTwitter.content.link}`}
+            href={`https://twitter.com/${item.content.link}`}
             target="_blank"
           >
             <div
-              className={`relative flex items-center p-4 ${getShapeClassname(itemTwitter.content.shape)}`}
-              style={{ background: itemTwitter.content.backgroundColor }}
+              className={`relative flex items-center p-4 ${getShapeClassname(item.content.shape)}`}
+              style={{ background: item.content.backgroundColor }}
             >
               <span
-                className={`absolute p-2 border ${getShapeClassname(itemTwitter.content.shape)}`}
+                className={`absolute p-2 border ${getShapeClassname(item.content.shape)}`}
                 style={{
-                  color: itemTwitter.content.name.color,
+                  color: item.content.name.color,
                   background: lightenColorWithOpacity(
-                    itemTwitter.content.backgroundColor
+                    item.content.backgroundColor
                   ),
-                  borderColor: itemTwitter.content.name.color,
+                  borderColor: item.content.name.color,
                 }}
               >
                 <Twitter className="w-4 h-4" />
               </span>
               <p
-                className={`w-full text-center ${getFontStyleClassname(itemTwitter.content.name.style)} ${getFontSizeClassname(itemTwitter.content.name.size)} `}
-                style={{ color: itemTwitter.content.name.color }}
+                className={`w-full text-center ${getFontStyleClassname(item.content.name.style)} ${getFontSizeClassname(item.content.name.size)} `}
+                style={{ color: item.content.name.color }}
               >
-                {itemTwitter.content.name.title}
+                {item.content.name.title}
               </p>
             </div>
           </Link>

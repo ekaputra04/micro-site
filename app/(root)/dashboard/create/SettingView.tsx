@@ -256,8 +256,6 @@ export default function SettingView() {
             />
           </div>
         </div>
-        {JSON.stringify(mainInformation, null, 2)}
-        {JSON.stringify(itemsFile, null, 2)}
       </div>
     </>
   );

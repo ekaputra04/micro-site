@@ -1,32 +1,33 @@
 "use client";
 
 import useAccordionStore from "@/hooks/useAccordionStore";
+import { AccordionItem } from "@/types/AccordionItem";
 import {
   getSpaceSizeBorderClassname,
   getSpaceSizeClassname,
 } from "@/utils/classNameUtils";
 
-export default function SpaceView() {
-  const { items } = useAccordionStore();
+interface SpaceViewProps {
+  item: AccordionItem;
+}
 
-  const itemSpace = items.find((item) => item.content.type === "space");
-
+export default function SpaceView({ item }: SpaceViewProps) {
   return (
     <>
-      {itemSpace?.content.type == "space" && (
+      {item?.content.type == "space" && (
         <>
-          {itemSpace.content.style == "default" ? (
+          {item.content.style == "default" ? (
             <div
-              className={`${getSpaceSizeClassname(itemSpace.content.size)}`}
+              className={`${getSpaceSizeClassname(item.content.size)}`}
             ></div>
           ) : (
             <div className="px-4">
               <div
-                className={`${getSpaceSizeBorderClassname(itemSpace.content.size)}`}
+                className={`${getSpaceSizeBorderClassname(item.content.size)}`}
               ></div>
               <hr />
               <div
-                className={`${getSpaceSizeBorderClassname(itemSpace.content.size)}`}
+                className={`${getSpaceSizeBorderClassname(item.content.size)}`}
               ></div>
             </div>
           )}

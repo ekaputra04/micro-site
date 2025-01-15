@@ -1,6 +1,6 @@
 "use client";
 
-import useAccordionStore from "@/hooks/useAccordionStore";
+import { AccordionItem } from "@/types/AccordionItem";
 import {
   getFontSizeClassname,
   getFontStyleClassname,
@@ -11,38 +11,39 @@ import {
 import { LinkedinIcon } from "lucide-react";
 import Link from "next/link";
 
-export default function LinkedInView() {
-  const { items } = useAccordionStore();
+interface LinkedInViewProps {
+  item: AccordionItem;
+}
 
-  const itemLinkedIn = items.find((item) => item.content.type === "linkedIn");
+export default function LinkedInView({ item }: LinkedInViewProps) {
   return (
     <>
-      {itemLinkedIn?.content.type == "linkedIn" && (
+      {item?.content.type == "linkedIn" && (
         <div
-          className={`${getIsActiveClassname(itemLinkedIn.isActive)} p-4 hover:scale-95 animate-in animate-out`}
+          className={`${getIsActiveClassname(item.isActive)} p-4 hover:scale-95 animate-in animate-out`}
         >
-          <Link href={`${itemLinkedIn.content.link}`} target="_blank">
+          <Link href={`${item.content.link}`} target="_blank">
             <div
-              className={`relative flex items-center p-4 ${getShapeClassname(itemLinkedIn.content.shape)}`}
-              style={{ background: itemLinkedIn.content.backgroundColor }}
+              className={`relative flex items-center p-4 ${getShapeClassname(item.content.shape)}`}
+              style={{ background: item.content.backgroundColor }}
             >
               <span
-                className={`absolute p-2 border ${getShapeClassname(itemLinkedIn.content.shape)}`}
+                className={`absolute p-2 border ${getShapeClassname(item.content.shape)}`}
                 style={{
-                  color: itemLinkedIn.content.name.color,
+                  color: item.content.name.color,
                   background: lightenColorWithOpacity(
-                    itemLinkedIn.content.backgroundColor
+                    item.content.backgroundColor
                   ),
-                  borderColor: itemLinkedIn.content.name.color,
+                  borderColor: item.content.name.color,
                 }}
               >
                 <LinkedinIcon className="w-4 h-4" />
               </span>
               <p
-                className={`w-full text-center ${getFontStyleClassname(itemLinkedIn.content.name.style)} ${getFontSizeClassname(itemLinkedIn.content.name.size)} `}
-                style={{ color: itemLinkedIn.content.name.color }}
+                className={`w-full text-center ${getFontStyleClassname(item.content.name.style)} ${getFontSizeClassname(item.content.name.size)} `}
+                style={{ color: item.content.name.color }}
               >
-                {itemLinkedIn.content.name.title}
+                {item.content.name.title}
               </p>
             </div>
           </Link>

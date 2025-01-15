@@ -1,27 +1,26 @@
 "use client";
 
-import useAccordionStore from "@/hooks/useAccordionStore";
+import { AccordionItem } from "@/types/AccordionItem";
 import {
   getFontSizeClassname,
   getFontStyleClassname,
   getIsActiveClassname,
-  getShapeClassname,
-  lightenColorWithOpacity,
 } from "@/utils/classNameUtils";
 
-export default function TextView() {
-  const { items } = useAccordionStore();
+interface TextViewProps {
+  item: AccordionItem;
+}
 
-  const itemText = items.find((item) => item.content.type === "text");
+export default function TextView({ item }: TextViewProps) {
   return (
     <>
-      {itemText?.content.type == "text" && (
-        <div className={`${getIsActiveClassname(itemText.isActive)} p-4`}>
+      {item?.content.type == "text" && (
+        <div className={`${getIsActiveClassname(item.isActive)} p-4`}>
           <p
-            className={`text-center ${getFontStyleClassname(itemText.content.text.style)} ${getFontSizeClassname(itemText.content.text.size)}`}
-            style={{ color: itemText.content.text.color }}
+            className={`text-center ${getFontStyleClassname(item.content.text.style)} ${getFontSizeClassname(item.content.text.size)}`}
+            style={{ color: item.content.text.color }}
           >
-            {itemText.content.text.title}
+            {item.content.text.title}
           </p>
         </div>
       )}

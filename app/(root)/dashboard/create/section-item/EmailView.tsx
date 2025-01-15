@@ -1,6 +1,6 @@
 "use client";
 
-import useAccordionStore from "@/hooks/useAccordionStore";
+import { AccordionItem } from "@/types/AccordionItem";
 import {
   getFontSizeClassname,
   getFontStyleClassname,
@@ -11,38 +11,39 @@ import {
 import { Mail } from "lucide-react";
 import Link from "next/link";
 
-export default function EmailView() {
-  const { items } = useAccordionStore();
+interface EmailViewProps {
+  item: AccordionItem;
+}
 
-  const itemEmail = items.find((item) => item.content.type === "email");
+export default function EmailView({ item }: EmailViewProps) {
   return (
     <>
-      {itemEmail?.content.type == "email" && (
+      {item?.content.type == "email" && (
         <div
-          className={`${getIsActiveClassname(itemEmail.isActive)} p-4 hover:scale-95 animate-in animate-out`}
+          className={`${getIsActiveClassname(item.isActive)} p-4 hover:scale-95 animate-in animate-out`}
         >
-          <Link href={`mailto:${itemEmail.content.email}`} target="_blank">
+          <Link href={`mailto:${item.content.email}`} target="_blank">
             <div
-              className={`relative flex items-center p-4 ${getShapeClassname(itemEmail.content.shape)}`}
-              style={{ background: itemEmail.content.backgroundColor }}
+              className={`relative flex items-center p-4 ${getShapeClassname(item.content.shape)}`}
+              style={{ background: item.content.backgroundColor }}
             >
               <span
-                className={`absolute p-2 border ${getShapeClassname(itemEmail.content.shape)}`}
+                className={`absolute p-2 border ${getShapeClassname(item.content.shape)}`}
                 style={{
-                  color: itemEmail.content.name.color,
+                  color: item.content.name.color,
                   background: lightenColorWithOpacity(
-                    itemEmail.content.backgroundColor
+                    item.content.backgroundColor
                   ),
-                  borderColor: itemEmail.content.name.color,
+                  borderColor: item.content.name.color,
                 }}
               >
                 <Mail className="w-4 h-4" />
               </span>
               <p
-                className={`w-full text-center ${getFontStyleClassname(itemEmail.content.name.style)} ${getFontSizeClassname(itemEmail.content.name.size)} `}
-                style={{ color: itemEmail.content.name.color }}
+                className={`w-full text-center ${getFontStyleClassname(item.content.name.style)} ${getFontSizeClassname(item.content.name.size)} `}
+                style={{ color: item.content.name.color }}
               >
-                {itemEmail.content.name.title}
+                {item.content.name.title}
               </p>
             </div>
           </Link>
