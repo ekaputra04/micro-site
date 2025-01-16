@@ -294,7 +294,7 @@ export default function ComponentView() {
               </AccordionTrigger>
               <div className="flex items-center gap-4">
                 <Switch
-                  checked={item.isActive}
+                  defaultChecked={item.isActive}
                   onCheckedChange={() => toggleActive(item.id)}
                 />
                 <AlertDialog>

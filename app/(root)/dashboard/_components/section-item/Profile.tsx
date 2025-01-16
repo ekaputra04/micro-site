@@ -302,6 +302,7 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
               <div className="flex items-center gap-1">
                 <Checkbox
                   id="nameBold"
+                  defaultChecked={item.content.name.style.bold}
                   onCheckedChange={(checked) =>
                     updateNameStyle("bold", checked == true)
                   }
@@ -314,6 +315,7 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
                 </label>
                 <Checkbox
                   id="nameItalic"
+                  defaultChecked={item.content.name.style.italic}
                   onCheckedChange={(checked) =>
                     updateNameStyle("italic", checked == true)
                   }
@@ -326,6 +328,7 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
                 </label>
                 <Checkbox
                   id="nameUnderline"
+                  defaultChecked={item.content.name.style.underline}
                   onCheckedChange={(checked) =>
                     updateNameStyle("underline", checked == true)
                   }
@@ -380,6 +383,7 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
               <div className="flex items-center gap-1">
                 <Checkbox
                   id="DescriptionBold"
+                  defaultChecked={item.content.description.style.bold}
                   onCheckedChange={(checked) =>
                     updateDescriptionStyle("bold", checked == true)
                   }
@@ -392,6 +396,7 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
                 </label>
                 <Checkbox
                   id="DescriptionItalic"
+                  defaultChecked={item.content.description.style.italic}
                   onCheckedChange={(checked) =>
                     updateDescriptionStyle("italic", checked == true)
                   }
@@ -404,6 +409,7 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
                 </label>
                 <Checkbox
                   id="DescriptionUnderline"
+                  defaultChecked={item.content.description.style.underline}
                   onCheckedChange={(checked) =>
                     updateDescriptionStyle("underline", checked == true)
                   }

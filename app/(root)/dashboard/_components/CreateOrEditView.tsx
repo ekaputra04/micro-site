@@ -7,7 +7,7 @@ import ComponentView from "./ComponentView";
 import SettingView from "./SettingView";
 import PublicView from "../../PublicView";
 import { useEffect, useState } from "react";
-import { createPost } from "@/utils/postUtils";
+import { createPost, editPost } from "@/utils/postUtils";
 import useAccordionStore from "@/hooks/useAccordionStore";
 import useMainInformationStore from "@/hooks/useMainInformationStore";
 import { toast } from "sonner";
@@ -64,7 +64,7 @@ export default function CreateOrEditView({
 
     try {
       if (mainInformation.link === "" || mainInformation.title === "") {
-        toast.error("Please fill in all the fields.");
+        toast.error("Please fill title and link fields.");
         return;
       }
 
@@ -137,24 +137,32 @@ export default function CreateOrEditView({
       });
 
       setItems(updatedItems);
+      let postData;
+      if (type == "create") {
+        postData = await createPost(
+          userId as string,
+          mainInformation.link,
+          mainInformation.title,
+          mainInformation.backgroundColor,
+          backgroundPublicUrl,
+          updatedItems,
+          iconPublicUrl as string,
+          mainInformation.description
+        );
 
-      const post = await createPost(
-        userId as string,
-        mainInformation.link,
-        mainInformation.title,
-        mainInformation.backgroundColor,
-        backgroundPublicUrl,
-        updatedItems,
-        iconPublicUrl as string,
-        mainInformation.description
-      );
+        if (post) {
+          setItems(initialItems);
+          setItemsFile(initialFiles);
+          setMainInformation(initialMainInformation);
+          toast.success(`${post.title} has been created.`);
+          router.push("/dashboard");
+        }
+      } else if (type == "edit") {
+        if (!post) {
+          throw new Error("Post is undefined");
+        }
 
-      if (post) {
-        setItems(initialItems);
-        setItemsFile(initialFiles);
-        setMainInformation(initialMainInformation);
-        toast.success(`${post.title} has been created.`);
-        router.push("/dashboard");
+        console.log(JSON.stringify(postData));
       }
     } catch (error) {
       console.error("Error creating/updating post:", error);
@@ -178,9 +186,7 @@ export default function CreateOrEditView({
               </Button>
               <Button
                 className="bg-green-500 hover:bg-green-600"
-                onClick={() => {
-                  onSubmit();
-                }}
+                onClick={() => onSubmit()}
                 disabled={isLoading}
               >
                 {isLoading ? "Saving..." : "Save"}

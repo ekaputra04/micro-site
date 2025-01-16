@@ -99,6 +99,7 @@ export default function TextSection({ item }: TextSectionProps) {
               <div className="flex items-center gap-1">
                 <Checkbox
                   id="nameBold"
+                  defaultChecked={item.content.text.style.bold}
                   onCheckedChange={(checked) =>
                     handleUpdateTextStyle("bold", checked == true)
                   }
@@ -111,6 +112,7 @@ export default function TextSection({ item }: TextSectionProps) {
                 </label>
                 <Checkbox
                   id="nameItalic"
+                  defaultChecked={item.content.text.style.italic}
                   onCheckedChange={(checked) =>
                     handleUpdateTextStyle("italic", checked == true)
                   }
@@ -123,6 +125,7 @@ export default function TextSection({ item }: TextSectionProps) {
                 </label>
                 <Checkbox
                   id="nameUnderline"
+                  defaultChecked={item.content.text.style.underline}
                   onCheckedChange={(checked) =>
                     handleUpdateTextStyle("underline", checked == true)
                   }

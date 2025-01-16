@@ -134,6 +134,7 @@ export default function TelegramSection({ item }: TelegramSectionProps) {
               <div className="flex items-center gap-1">
                 <Checkbox
                   id="nameBold"
+                  defaultChecked={item.content.name.style.bold}
                   onCheckedChange={(checked) =>
                     updateNameStyle("bold", checked == true)
                   }
@@ -146,6 +147,7 @@ export default function TelegramSection({ item }: TelegramSectionProps) {
                 </label>
                 <Checkbox
                   id="nameItalic"
+                  defaultChecked={item.content.name.style.italic}
                   onCheckedChange={(checked) =>
                     updateNameStyle("italic", checked == true)
                   }
@@ -158,6 +160,7 @@ export default function TelegramSection({ item }: TelegramSectionProps) {
                 </label>
                 <Checkbox
                   id="nameUnderline"
+                  defaultChecked={item.content.name.style.underline}
                   onCheckedChange={(checked) =>
                     updateNameStyle("underline", checked == true)
                   }

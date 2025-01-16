@@ -138,6 +138,7 @@ export default function ContactUsSection({ item }: ContactUsSectionProps) {
               <div className="flex items-center gap-1">
                 <Checkbox
                   id="nameBold"
+                  defaultChecked={item.content.name.style.bold}
                   onCheckedChange={(checked) =>
                     updateNameStyle("bold", checked == true)
                   }
@@ -150,6 +151,7 @@ export default function ContactUsSection({ item }: ContactUsSectionProps) {
                 </label>
                 <Checkbox
                   id="nameItalic"
+                  defaultChecked={item.content.name.style.italic}
                   onCheckedChange={(checked) =>
                     updateNameStyle("italic", checked == true)
                   }
@@ -162,6 +164,7 @@ export default function ContactUsSection({ item }: ContactUsSectionProps) {
                 </label>
                 <Checkbox
                   id="nameUnderline"
+                  defaultChecked={item.content.name.style.underline}
                   onCheckedChange={(checked) =>
                     updateNameStyle("underline", checked == true)
                   }
@@ -214,6 +217,7 @@ export default function ContactUsSection({ item }: ContactUsSectionProps) {
             <Input
               placeholder="Input phone number here..."
               type="number"
+              defaultValue={item.content.phoneNumber}
               onChange={(e) => handleUpdatePhoneNumber(e.target.value)}
             />
           </div>
