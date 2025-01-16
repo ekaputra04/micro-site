@@ -440,7 +440,7 @@ export default function ProfileSection({ item }: ProfileSectionProps) {
                   className="w-16"
                   type="color"
                   onChange={(e) => handleUpdateDescriptionColor(e.target.value)}
-                  value={item.content.name.color}
+                  value={item.content.description.color}
                 />
                 <Button
                   onClick={() => handleUpdateDescriptionColor()}

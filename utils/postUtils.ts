@@ -44,7 +44,6 @@ export const createPost = async (
 export const editPost = async (
   id: number,
   userId: string,
-  slug: string,
   title: string,
   backgroundColor: string,
   backgroundImage: string,
@@ -59,7 +58,7 @@ export const editPost = async (
       },
     });
 
-    if (selectedPost) {
+    if (!selectedPost) {
       throw new Error("Post not found");
     }
 
@@ -68,7 +67,6 @@ export const editPost = async (
       data: {
         title,
         authorId: userId,
-        slug,
         backgroundColor,
         backgroundImage,
         iconImage,

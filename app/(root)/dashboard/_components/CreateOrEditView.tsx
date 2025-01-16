@@ -7,7 +7,7 @@ import ComponentView from "./ComponentView";
 import SettingView from "./SettingView";
 import PublicView from "../../PublicView";
 import { useEffect, useState } from "react";
-import { createPost, editPost } from "@/utils/postUtils";
+import { createPost, editPost, getPostsBySlug } from "@/utils/postUtils";
 import useAccordionStore from "@/hooks/useAccordionStore";
 import useMainInformationStore from "@/hooks/useMainInformationStore";
 import { toast } from "sonner";
@@ -66,6 +66,15 @@ export default function CreateOrEditView({
       if (mainInformation.link === "" || mainInformation.title === "") {
         toast.error("Please fill title and link fields.");
         return;
+      }
+
+      if (type == "create") {
+        const checkSlugExist = await getPostsBySlug(mainInformation.link);
+
+        if (checkSlugExist) {
+          toast.error("Slug already exists");
+          return;
+        }
       }
 
       let profilePublicUrl: string | null = null;
@@ -137,9 +146,9 @@ export default function CreateOrEditView({
       });
 
       setItems(updatedItems);
-      let postData;
+
       if (type == "create") {
-        postData = await createPost(
+        const postCreated = await createPost(
           userId as string,
           mainInformation.link,
           mainInformation.title,
@@ -150,19 +159,37 @@ export default function CreateOrEditView({
           mainInformation.description
         );
 
-        if (post) {
+        if (postCreated) {
           setItems(initialItems);
           setItemsFile(initialFiles);
           setMainInformation(initialMainInformation);
-          toast.success(`${post.title} has been created.`);
+          toast.success(`${postCreated.title} has been created.`);
           router.push("/dashboard");
         }
+        return;
       } else if (type == "edit") {
         if (!post) {
           throw new Error("Post is undefined");
         }
 
-        console.log(JSON.stringify(postData));
+        const postEdited = await editPost(
+          post.id,
+          userId as string,
+          mainInformation.title,
+          mainInformation.backgroundColor,
+          backgroundPublicUrl,
+          updatedItems,
+          iconPublicUrl as string,
+          mainInformation.description
+        );
+        if (postEdited) {
+          setItems(initialItems);
+          setItemsFile(initialFiles);
+          setMainInformation(initialMainInformation);
+          toast.success("Post edited successfully");
+          router.push("/dashboard");
+        }
+        return;
       }
     } catch (error) {
       console.error("Error creating/updating post:", error);
@@ -197,7 +224,7 @@ export default function CreateOrEditView({
             <ComponentView />
           </TabsContent>
           <TabsContent value="setting" className="py-8">
-            <SettingView />
+            <SettingView type={type} />
           </TabsContent>
         </Tabs>
 

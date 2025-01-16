@@ -12,7 +12,11 @@ import { toast } from "sonner";
 import { Textarea } from "@/components/ui/textarea";
 import { deleteFile } from "@/utils/imageUtils";
 
-export default function SettingView() {
+interface SettingViewProps {
+  type: "create" | "edit";
+}
+
+export default function SettingView({ type }: SettingViewProps) {
   const { itemsFile, setItemsFile } = useFileStore();
   const { mainInformation, setMainInformation } = useMainInformationStore();
   const URL = process.env.NEXT_PUBLIC_URL;
@@ -113,6 +117,7 @@ export default function SettingView() {
           <Input
             type="link"
             id="link"
+            disabled={type == "edit"}
             defaultValue={mainInformation.link}
             placeholder={`${URL}/{your-link}`}
             onChange={(e) => handleChangeLink(e.target.value)}

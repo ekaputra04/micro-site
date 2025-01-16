@@ -122,7 +122,10 @@ export default function LinkCard({ post }: LinkCardProps) {
             </Link>
 
             <AlertDialog>
-              <AlertDialogTrigger className="flex justify-center items-center gap-2 bg-red-500 px-4 py-2 border rounded-md text-sm text-white">
+              <AlertDialogTrigger
+                className="flex justify-center items-center gap-2 bg-red-500 disabled:bg-red-400 px-4 py-2 border rounded-md text-sm text-white"
+                disabled={isLoading}
+              >
                 <Trash className="w-4 h-4" />
                 <p>Delete</p>
               </AlertDialogTrigger>
