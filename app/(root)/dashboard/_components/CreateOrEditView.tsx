@@ -7,7 +7,7 @@ import ComponentView from "./ComponentView";
 import SettingView from "./SettingView";
 import PublicView from "../../PublicView";
 import { useEffect, useState } from "react";
-import { createPost, editPost, getPostsBySlug } from "@/utils/postUtils";
+import { createPost, editPost, getPostBySlug } from "@/utils/postUtils";
 import useAccordionStore from "@/hooks/useAccordionStore";
 import useMainInformationStore from "@/hooks/useMainInformationStore";
 import { toast } from "sonner";
@@ -69,7 +69,7 @@ export default function CreateOrEditView({
       }
 
       if (type == "create") {
-        const checkSlugExist = await getPostsBySlug(mainInformation.link);
+        const checkSlugExist = await getPostBySlug(mainInformation.link);
 
         if (checkSlugExist) {
           toast.error("Slug already exists");
@@ -232,11 +232,6 @@ export default function CreateOrEditView({
           <PublicView />
         </div>
       </div>
-      {JSON.stringify(items, null, 2)}
-      <hr />
-      {JSON.stringify(mainInformation, null, 2)}
-      <hr />
-      {JSON.stringify(itemsFile, null, 2)}
     </>
   );
 }

@@ -72,6 +72,7 @@ export const editPost = async (
         iconImage,
         description,
         content: contentData,
+        updatedAt: new Date(),
       },
       where: {
         id,
@@ -187,7 +188,7 @@ export const getPostsByUserId = unstable_cache(
   { revalidate: 3600, tags: ["posts"] }
 );
 
-export const getPostsBySlug = unstable_cache(
+export const getPostBySlug = unstable_cache(
   async (slug: string) => {
     return await prisma.post.findFirst({
       where: { slug: slug },

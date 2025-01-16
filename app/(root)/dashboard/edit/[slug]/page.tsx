@@ -1,4 +1,4 @@
-import { getPostsBySlug } from "@/utils/postUtils";
+import { getPostBySlug } from "@/utils/postUtils";
 import CreateOrEditView from "../../_components/CreateOrEditView";
 import { PostType } from "@/types/Types";
 
@@ -8,7 +8,7 @@ export default async function EditPage({
   params: Promise<{ slug: string }>;
 }) {
   const slug = (await params).slug;
-  const post = await getPostsBySlug(slug);
+  const post = await getPostBySlug(slug);
 
   if (!post) {
     return (
@@ -20,7 +20,6 @@ export default async function EditPage({
 
   return (
     <>
-      {JSON.stringify(post, null, 2)}
       <div className="">
         <CreateOrEditView type="edit" post={post as PostType} />
       </div>
