@@ -1,5 +1,5 @@
 import { createClient } from "@/utils/supabase/server";
-import CreateView from "./CreateView";
+import CreateOrEditView from "../_components/CreateOrEditView";
 
 export default async function CreatePage() {
   const supabase = await createClient();
@@ -11,7 +11,7 @@ export default async function CreatePage() {
   return (
     <>
       <div className="">
-        <CreateView userId={user?.id as string} />
+        <CreateOrEditView userId={user?.id as string} type="create" />
       </div>
     </>
   );

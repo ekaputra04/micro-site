@@ -6,7 +6,7 @@ import { Share2 } from "lucide-react";
 import ComponentView from "./ComponentView";
 import SettingView from "./SettingView";
 import PublicView from "../../PublicView";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createPost } from "@/utils/postUtils";
 import useAccordionStore from "@/hooks/useAccordionStore";
 import useMainInformationStore from "@/hooks/useMainInformationStore";
@@ -19,14 +19,45 @@ import {
   initialItems,
   initialMainInformation,
 } from "@/types/Consts";
+import { MainInformationType, PostType } from "@/types/Types";
+import { AccordionItem } from "@/types/AccordionItem";
 
-export default function CreateView({ userId }: { userId: string }) {
+interface CreateOrEditViewProps {
+  userId?: string;
+  type: "create" | "edit";
+  post?: PostType;
+}
+
+export default function CreateOrEditView({
+  userId,
+  type,
+  post,
+}: CreateOrEditViewProps) {
   const [isLoading, setIsLoading] = useState(false);
-  const { setItems } = useAccordionStore();
+  const { items, setItems } = useAccordionStore();
   const { mainInformation, setMainInformation } = useMainInformationStore();
   const { itemsFile, setItemsFile } = useFileStore();
 
   const router = useRouter();
+
+  useEffect(() => {
+    if (type == "edit") {
+      const postContent = JSON.parse(
+        post?.content as string
+      ) as AccordionItem[];
+      setItems(postContent);
+
+      const mainInformationData: MainInformationType = {
+        title: post?.title ?? "",
+        link: post?.slug ?? "",
+        backgroundImage: post?.backgroundImage ?? "",
+        backgroundColor: post?.backgroundColor ?? "",
+        description: post?.description ?? "",
+      };
+
+      setMainInformation(mainInformationData);
+    }
+  }, []);
 
   async function onSubmit() {
     setIsLoading(true);
@@ -108,7 +139,7 @@ export default function CreateView({ userId }: { userId: string }) {
       setItems(updatedItems);
 
       const post = await createPost(
-        userId,
+        userId as string,
         mainInformation.link,
         mainInformation.title,
         mainInformation.backgroundColor,
@@ -126,7 +157,7 @@ export default function CreateView({ userId }: { userId: string }) {
         router.push("/dashboard");
       }
     } catch (error) {
-      console.error("Error creating post:", error);
+      console.error("Error creating/updating post:", error);
     } finally {
       setIsLoading(false);
     }
@@ -168,6 +199,11 @@ export default function CreateView({ userId }: { userId: string }) {
           <PublicView />
         </div>
       </div>
+      {JSON.stringify(items, null, 2)}
+      <hr />
+      {JSON.stringify(mainInformation, null, 2)}
+      <hr />
+      {JSON.stringify(itemsFile, null, 2)}
     </>
   );
 }

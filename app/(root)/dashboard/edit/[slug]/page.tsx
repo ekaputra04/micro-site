@@ -1,4 +1,6 @@
 import { getPostsBySlug } from "@/utils/postUtils";
+import CreateOrEditView from "../../_components/CreateOrEditView";
+import { PostType } from "@/types/Types";
 
 export default async function EditPage({
   params,
@@ -19,7 +21,9 @@ export default async function EditPage({
   return (
     <>
       {JSON.stringify(post, null, 2)}
-      <div className="">Edit page</div>
+      <div className="">
+        <CreateOrEditView type="edit" post={post as PostType} />
+      </div>
     </>
   );
 }

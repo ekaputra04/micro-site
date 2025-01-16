@@ -1,18 +1,18 @@
 "use client";
 
 import { Monitor } from "lucide-react";
-import ProfileView from "./dashboard/section-item/ProfileView";
+import ProfileView from "./dashboard/_components/section-item/ProfileView";
 import { Button } from "@/components/ui/button";
-import ContactUsView from "./dashboard/section-item/ContactUsView";
+import ContactUsView from "./dashboard/_components/section-item/ContactUsView";
 import useAccordionStore from "@/hooks/useAccordionStore";
-import TwitterView from "./dashboard/section-item/TwitterView";
-import WhatsAppView from "./dashboard/section-item/WhatsAppView";
-import EmailView from "./dashboard/section-item/EmailView";
-import LinkedInView from "./dashboard/section-item/LinkedInView";
-import TelegramView from "./dashboard/section-item/TelegramView";
-import InstagramView from "./dashboard/section-item/InstagramView";
-import SpaceView from "./dashboard/section-item/SpaceView";
-import TextView from "./dashboard/section-item/TextView";
+import TwitterView from "./dashboard/_components/section-item/TwitterView";
+import WhatsAppView from "./dashboard/_components/section-item/WhatsAppView";
+import EmailView from "./dashboard/_components/section-item/EmailView";
+import LinkedInView from "./dashboard/_components/section-item/LinkedInView";
+import TelegramView from "./dashboard/_components/section-item/TelegramView";
+import InstagramView from "./dashboard/_components/section-item/InstagramView";
+import SpaceView from "./dashboard/_components/section-item/SpaceView";
+import TextView from "./dashboard/_components/section-item/TextView";
 import useMainInformationStore from "@/hooks/useMainInformationStore";
 import useFileStore from "@/hooks/useFileStore";
 

@@ -206,9 +206,10 @@ export default function TwitterSection({ item }: TwitterSectionProps) {
             />
           </div>
           <div className="space-y-2 py-2">
-            <p className="font-semibold">UserName</p>
+            <p className="font-semibold">Username</p>
             <Input
               placeholder="Input username here..."
+              defaultValue={item.content.link}
               onChange={(e) => handleUpdateLink(e.target.value)}
             />
           </div>

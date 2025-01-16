@@ -2,6 +2,7 @@
 
 import { AccordionItem } from "@/types/AccordionItem";
 import { Post, PrismaClient } from "@prisma/client";
+import { data } from "autoprefixer";
 import { revalidateTag, unstable_cache } from "next/cache";
 
 const prisma = new PrismaClient();
@@ -37,6 +38,54 @@ export const createPost = async (
   } catch (error) {
     console.error("Error creating post:", error);
     throw new Error("Unable to create post");
+  }
+};
+
+export const editPost = async (
+  id: number,
+  userId: string,
+  slug: string,
+  title: string,
+  backgroundColor: string,
+  backgroundImage: string,
+  content: AccordionItem[],
+  iconImage?: string,
+  description?: string
+): Promise<Post> => {
+  try {
+    const selectedPost = await prisma.post.findFirst({
+      where: {
+        id,
+      },
+    });
+
+    if (selectedPost) {
+      throw new Error("Post not found");
+    }
+
+    const contentData = JSON.stringify(content);
+    const post = await prisma.post.update({
+      data: {
+        title,
+        authorId: userId,
+        slug,
+        backgroundColor,
+        backgroundImage,
+        iconImage,
+        description,
+        content: contentData,
+      },
+      where: {
+        id,
+      },
+    });
+
+    revalidateTag("posts");
+
+    return post;
+  } catch (error) {
+    console.error("Error updating post:", error);
+    throw new Error("Unable to update post");
   }
 };
 

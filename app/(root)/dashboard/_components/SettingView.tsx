@@ -10,6 +10,7 @@ import useMainInformationStore from "@/hooks/useMainInformationStore";
 import useFileStore from "@/hooks/useFileStore";
 import { toast } from "sonner";
 import { Textarea } from "@/components/ui/textarea";
+import { deleteFile } from "@/utils/imageUtils";
 
 export default function SettingView() {
   const { itemsFile, setItemsFile } = useFileStore();
@@ -73,10 +74,14 @@ export default function SettingView() {
     });
   }
 
-  function handleDeleteImage(
+  async function handleDeleteImage(
     type: "profileImage" | "backgroundImage" | "headerImage" | "iconImage"
   ) {
     if (type == "backgroundImage") {
+      if (mainInformation.backgroundImage.startsWith("https:")) {
+        const a = await deleteFile(mainInformation.backgroundImage);
+        console.log(a.toString);
+      }
       setMainInformation({
         ...mainInformation,
         backgroundImage: "",
@@ -233,25 +238,10 @@ export default function SettingView() {
               </Button>
             </div>
           </div>
-          {/* <Input
-            type="file"
-            id="iconImage"
-            className="hidden"
-            accept="image/*"
-            onChange={(e) => handleFileChange(e, "iconImage")}
-          />
-          <Label
-            htmlFor="iconImage"
-            className="flex justify-center items-center bg-gray-200 rounded-md cursor-pointer"
-          >
-            <div className="flex flex-col justify-center items-center gap-2">
-              <Image className="w-4 h-4" />
-              <p>Input Icon</p>
-            </div>
-          </Label> */}
           <div className="col-span-3">
             <Textarea
               placeholder="Description..."
+              defaultValue={mainInformation.description}
               onChange={(e) => handleChangeDascriptionMetadata(e.target.value)}
             />
           </div>
