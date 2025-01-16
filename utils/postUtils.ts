@@ -139,3 +139,13 @@ export const getPostsByUserId = unstable_cache(
   ["posts"],
   { revalidate: 3600, tags: ["posts"] }
 );
+
+export const getPostsBySlug = unstable_cache(
+  async (slug: string) => {
+    return await prisma.post.findFirst({
+      where: { slug: slug },
+    });
+  },
+  ["posts"],
+  { revalidate: 3600, tags: ["posts"] }
+);

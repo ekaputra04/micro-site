@@ -31,6 +31,8 @@ interface LinkCardProps {
 export default function LinkCard({ post }: LinkCardProps) {
   const [isLoading, setIsLoading] = useState(false);
 
+  const URL = process.env.NEXT_PUBLIC_URL ?? "";
+
   const handleUpdateStarredPost = async (id: number) => {
     setIsLoading(true);
     try {
@@ -81,7 +83,9 @@ export default function LinkCard({ post }: LinkCardProps) {
           />
           <div className="space-y-2">
             <h2 className="font-semibold text-xl">{post.title}</h2>
-            <p>{post.slug}</p>
+            <Link href={URL + "/" + post.slug} className="hover:underline">
+              <p>{URL + "/" + post.slug}</p>
+            </Link>
           </div>
         </div>
         <div className="space-y-4">

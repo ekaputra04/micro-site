@@ -37,16 +37,16 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import ProfileSection from "./section-item/Profile";
-import ContactUsSection from "./section-item/ContactUs";
-import TwitterSection from "./section-item/Twitter";
-import WhatsAppSection from "./section-item/WhatsApp";
-import EmailSection from "./section-item/Email";
-import LinkedInSection from "./section-item/LinkedIn";
-import TelegramSection from "./section-item/Telegram";
-import InstagramSection from "./section-item/Instagram";
-import SpaceSection from "./section-item/Space";
-import TextSection from "./section-item/Text";
+import ProfileSection from "../section-item/Profile";
+import ContactUsSection from "../section-item/ContactUs";
+import TwitterSection from "../section-item/Twitter";
+import WhatsAppSection from "../section-item/WhatsApp";
+import EmailSection from "../section-item/Email";
+import LinkedInSection from "../section-item/LinkedIn";
+import TelegramSection from "../section-item/Telegram";
+import InstagramSection from "../section-item/Instagram";
+import SpaceSection from "../section-item/Space";
+import TextSection from "../section-item/Text";
 import AddNewComponent from "./AddNewComponent";
 import { ElementType } from "@/types/Types";
 import { getIconFromTitle } from "@/utils/iconUtils";
