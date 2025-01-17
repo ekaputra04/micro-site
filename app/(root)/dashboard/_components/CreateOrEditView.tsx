@@ -21,6 +21,8 @@ import {
 } from "@/types/Consts";
 import { MainInformationType, PostType } from "@/types/Types";
 import { AccordionItem } from "@/types/AccordionItem";
+import UseLoadingStore from "@/hooks/useLoading";
+import LoadingPage from "@/app/loading";
 
 interface CreateOrEditViewProps {
   userId?: string;
@@ -37,6 +39,7 @@ export default function CreateOrEditView({
   const { items, setItems } = useAccordionStore();
   const { mainInformation, setMainInformation } = useMainInformationStore();
   const { itemsFile, setItemsFile } = useFileStore();
+  const { isLoadingGlobal, setIsLoadingGlobal } = UseLoadingStore();
 
   const router = useRouter();
 
@@ -61,6 +64,7 @@ export default function CreateOrEditView({
 
   async function onSubmit() {
     setIsLoading(true);
+    setIsLoadingGlobal(true);
 
     try {
       if (mainInformation.link === "" || mainInformation.title === "") {
@@ -100,6 +104,7 @@ export default function CreateOrEditView({
         if (profileUploadResult.success) {
           profilePublicUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/${profileUploadResult.data?.path}`;
         } else {
+          toast.error(`${profileUploadResult.message}`);
           throw new Error("Failed to upload profile image");
         }
       }
@@ -109,6 +114,7 @@ export default function CreateOrEditView({
         if (headerUploadResult.success) {
           headerPublicUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/${headerUploadResult.data?.path}`;
         } else {
+          toast.error(`${headerUploadResult.message}`);
           throw new Error("Failed to upload header image");
         }
       }
@@ -118,6 +124,7 @@ export default function CreateOrEditView({
         if (backgroundUploadResult.success) {
           backgroundPublicUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/${backgroundUploadResult.data?.path}`;
         } else {
+          toast.error(`${backgroundUploadResult.message}`);
           throw new Error("Failed to upload background image");
         }
       }
@@ -195,11 +202,13 @@ export default function CreateOrEditView({
       console.error("Error creating/updating post:", error);
     } finally {
       setIsLoading(false);
+      setIsLoadingGlobal(false);
     }
   }
 
   return (
     <>
+      {isLoadingGlobal && <LoadingPage />}
       <div className="gap-8 grid grid-cols-2">
         <Tabs defaultValue="component" className="w-full">
           <div className="flex justify-between items-center">

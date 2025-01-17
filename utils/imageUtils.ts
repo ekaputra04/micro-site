@@ -18,6 +18,7 @@ export async function uploadFile(file: File) {
 
   if (error) {
     console.error("Upload error:", error.message);
+
     return { success: false, message: error.message };
   }
 

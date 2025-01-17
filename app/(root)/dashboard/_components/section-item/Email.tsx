@@ -212,6 +212,8 @@ export default function EmailSection({ item }: EmailSectionProps) {
             <p className="font-semibold">Email</p>
             <Input
               placeholder="Input email here..."
+              defaultValue={item.content.email}
+              type="email"
               onChange={(e) => handleUpdateEmail(e.target.value)}
             />
           </div>

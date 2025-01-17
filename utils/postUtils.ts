@@ -2,8 +2,8 @@
 
 import { AccordionItem } from "@/types/AccordionItem";
 import { Post, PrismaClient } from "@prisma/client";
-import { data } from "autoprefixer";
 import { revalidateTag, unstable_cache } from "next/cache";
+import { deleteFile } from "./imageUtils";
 
 const prisma = new PrismaClient();
 
@@ -160,6 +160,10 @@ export const deletePost = async (id: number) => {
 
     if (!selectedPost) {
       throw new Error("Post not found");
+    }
+
+    if (selectedPost.backgroundImage.startsWith("https:")) {
+      const data = await deleteFile(selectedPost.backgroundImage);
     }
 
     const post = prisma.post.delete({
