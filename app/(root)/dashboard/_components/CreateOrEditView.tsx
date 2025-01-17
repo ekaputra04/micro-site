@@ -21,7 +21,7 @@ import {
 } from "@/types/Consts";
 import { MainInformationType, PostType } from "@/types/Types";
 import { AccordionItem } from "@/types/AccordionItem";
-import UseLoadingStore from "@/hooks/useLoading";
+import UseLoadingStore from "@/hooks/useLoadingStore";
 import LoadingPage from "@/app/loading";
 
 interface CreateOrEditViewProps {
