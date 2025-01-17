@@ -41,4 +41,5 @@ export type MainInformationType = {
   backgroundImage: string;
   backgroundColor: string;
   description: string;
+  iconImage: string;
 };

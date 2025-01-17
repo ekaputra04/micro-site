@@ -198,17 +198,18 @@ export default function SettingView({ type }: SettingViewProps) {
         </p>
         <div className="gap-4 grid grid-cols-4">
           <div className="col-span-1">
-            {itemsFile.find((item) => item.type === "iconImage")?.url ? (
-              <img
-                src={
-                  itemsFile.find((item) => item.type === "iconImage")
-                    ?.url as string
-                }
-                alt="Image"
-                className="object-contain"
-              />
-            ) : (
-              <>
+            {type === "edit" ? (
+              mainInformation.iconImage ||
+              itemsFile.find((item) => item.type === "iconImage")?.url ? (
+                <img
+                  src={
+                    itemsFile.find((item) => item.type === "iconImage")?.url ||
+                    (mainInformation.iconImage as string)
+                  }
+                  alt="Image"
+                  className="object-contain"
+                />
+              ) : (
                 <Label htmlFor="iconImage" className="cursor-pointer">
                   <div className="flex justify-center items-center bg-slate-200 h-24">
                     <div className="flex flex-col justify-center items-center">
@@ -217,8 +218,18 @@ export default function SettingView({ type }: SettingViewProps) {
                     </div>
                   </div>
                 </Label>
-              </>
+              )
+            ) : (
+              <Label htmlFor="iconImage" className="cursor-pointer">
+                <div className="flex justify-center items-center bg-slate-200 h-24">
+                  <div className="flex flex-col justify-center items-center">
+                    <ImageIcon className="w-4 h-4" />
+                    <p>Input Image</p>
+                  </div>
+                </div>
+              </Label>
             )}
+
             <div className="flex gap-2 mt-4">
               <Label
                 htmlFor="iconImage"

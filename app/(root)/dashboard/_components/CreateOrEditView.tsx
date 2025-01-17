@@ -56,6 +56,7 @@ export default function CreateOrEditView({
         backgroundImage: post?.backgroundImage ?? "",
         backgroundColor: post?.backgroundColor ?? "",
         description: post?.description ?? "",
+        iconImage: post?.iconImage ?? "",
       };
 
       setMainInformation(mainInformationData);
