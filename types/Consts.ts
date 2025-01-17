@@ -119,4 +119,5 @@ export const initialMainInformation: MainInformationType = {
   backgroundColor: "#ffffff",
   backgroundImage: "",
   description: "",
+  iconImage: "",
 };
