@@ -3,7 +3,7 @@ export type ThemeDataType = {
   url: string;
 };
 
-export const themeData: ThemeDataType[] = [
+export const ThemeData: ThemeDataType[] = [
   {
     name: "Abstract Flat Modern",
     url: "/images/abstract-flat-modern.png",

@@ -5,12 +5,12 @@ import { Label } from "@/components/ui/label";
 import ButtonTheme from "./ButtonTheme";
 import { Button } from "@/components/ui/button";
 import { Image, ImageIcon, Pencil, Trash } from "lucide-react";
-import { themeData } from "@/types/ThemeData";
 import useMainInformationStore from "@/hooks/useMainInformationStore";
 import useFileStore from "@/hooks/useFileStore";
 import { toast } from "sonner";
 import { Textarea } from "@/components/ui/textarea";
 import { deleteFile } from "@/utils/imageUtils";
+import { ThemeData } from "@/types/ThemeData";
 
 interface SettingViewProps {
   type: "create" | "edit";
@@ -127,7 +127,7 @@ export default function SettingView({ type }: SettingViewProps) {
         <h3 className="font-bold text-xl">🎨 Theme and Color</h3>
         <h4 className="font-semibold text-lg">Theme</h4>
         <div className="gap-2 grid xl:grid-cols-4 p-2 border rounded-md h-80 overflow-y-scroll">
-          {themeData.map((theme, index) => (
+          {ThemeData.map((theme, index) => (
             <ButtonTheme theme={theme} key={index} />
           ))}
         </div>
